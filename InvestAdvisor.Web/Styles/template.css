@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700");
 @import url(icons/font-awesome/css/font-awesome.min.css);
 @import url(icons/simple-line-icons/css/simple-line-icons.css);
 @import url(icons/weather-icons/css/weather-icons.min.css);
@@ -7,7 +6,6 @@
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/flag-icon-css/flag-icon.min.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 @import url(spinners.css);
 @import url(animate.css);
 
@@ -32,7 +30,7 @@
 
 body {
     background: #fff;
-    font-family: "Poppins", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     margin: 0;
     overflow-x: hidden;
     color: #67757c;
@@ -73,7 +71,7 @@ html body .mdi-set, html body .mdi:before {
 
 h1, h2, h3, h4, h5, h6 {
     color: #455a64;
-    font-family: "Poppins", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     font-weight: 400
 }
 
@@ -2691,7 +2689,7 @@ body .jqstooltip {
     }
 
 .c3-chart-arcs-title, .c3-legend-item {
-    font-family: "Poppins", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     fill: #67757c
 }
 
@@ -2846,7 +2844,7 @@ html body #visitor .c3-chart-arcs-title {
 }
 
 .ecomm-donute svg text {
-    font-family: "Poppins", sans-serif !important;
+    font-family: "Comfortaa", sans-serif !important;
     font-size: 12px !important;
     font-weight: 500 !important
 }
@@ -3115,7 +3113,7 @@ html body #visitor .c3-chart-arcs-title {
     padding: 10px 10px 10px 0;
     display: block;
     border: none;
-    font-family: "Poppins", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     border-radius: 0px;
     border-bottom: 1px solid rgba(120, 130, 140, 0.13)
 }
@@ -4723,7 +4721,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
     border: 1px solid rgba(120, 130, 140, 0.13);
     padding: 8px 16px;
     height: auto;
-    font-family: "Poppins", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     font-weight: 400;
     border-radius: 0
 }
