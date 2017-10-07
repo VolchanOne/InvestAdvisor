@@ -170,6 +170,7 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.sparkline.min.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sidebarmenu.js" />
     <Content Include="Scripts\sticky-kit.min.js" />
     <Content Include="Scripts\waves.js" />
