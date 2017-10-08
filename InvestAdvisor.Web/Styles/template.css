@@ -1857,7 +1857,8 @@ form label {
 
 .page-wrapper {
     background: #eef5f9;
-    padding-bottom: 60px
+    padding-bottom: 60px;
+    font-family: Segoe UI, Arial, sans-serif
 }
 
 .container-fluid {
