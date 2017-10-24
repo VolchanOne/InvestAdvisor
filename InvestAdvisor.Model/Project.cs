@@ -16,5 +16,8 @@ namespace InvestAdvisor.Model
 
         [Required]
         public string Url { get; set; }
+
+        public int? ImageId { get; set; }
+        public Image Image { get; set; }
     }
 }
