@@ -1,46 +1,58 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 
- <!-- ============================================================== -->
-<!-- Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Проекты</h3>
+    <div class="col-9 align-self-center">
+        <h3 class="text-themecolor">Новые проекты</h3>
     </div>
-    <div class="col-md-7 align-self-center">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Главная</a></li>
-            <li class="breadcrumb-item">Проекты</li>
-        </ol>
+    <div class="col-3">
+        <a href="@Url.Action("All","Projects")" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все проекты">...</a>
     </div>
+
 </div>
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- Container fluid  -->
-<!-- ============================================================== -->
+
 <div class="container-fluid">
-    <!-- ============================================================== -->
-    <!-- Start Page Content -->
-    <!-- ============================================================== -->
+
     <div class="row">
-        <div class="col-12">
-            <div class="card">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card text-center">
+                <img class="card-img-top img-responsive" src="~/Images/projectScreen.png" alt="Card image cap">
                 <div class="card-body">
-                    This is some text within a card block.
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card text-center">
+                <img class="card-img-top img-responsive" src="~/Images/projectScreen.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 hidden-sm-down">
+            <div class="card text-center">
+                <img class="card-img-top img-responsive" src="~/Images/projectScreen.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 hidden-md-down">
+            <div class="card text-center">
+                <img class="card-img-top img-responsive" src="~/Images/projectScreen.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
     </div>
 
-    
-    <!-- ============================================================== -->
-    <!-- End PAge Content -->
-    <!-- ============================================================== -->
 </div>
-<!-- ============================================================== -->
-<!-- End Container fluid  -->
-<!-- ============================================================== -->
