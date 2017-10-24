@@ -13,7 +13,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Models
 
         [Required]
         [StringLength(256)]
-        public string Legend { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public string Url { get; set; }

@@ -23,7 +23,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 ProjectId = p.ProjectId,
                 Name = p.Name,
-                Legend = p.Legend,
+                Description = p.Description,
                 Url = p.Url,
                 ImageId = p.ImageId,
                 Image = p.Image
@@ -49,7 +49,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 ProjectId = project.ProjectId,
                 Name = project.Name,
-                Legend = project.Legend,
+                Description = project.Description,
                 Url = project.Url,
                 ImageId = project.ImageId,
                 Image = project.Image
@@ -65,7 +65,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         // POST: Admin/Projects/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Name,Legend,Url")] ProjectViewModel createModel)
+        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Name,Description,Url")] ProjectViewModel createModel)
         {
             var imageUploaded = WebImage.GetImageFromRequest();
             if (imageUploaded == null)
@@ -77,7 +77,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
                 {
                     ProjectId = createModel.ProjectId,
                     Name = createModel.Name,
-                    Legend = createModel.Legend,
+                    Description = createModel.Description,
                     Url = createModel.Url
                 };
 
@@ -109,7 +109,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 ProjectId = project.ProjectId,
                 Name = project.Name,
-                Legend = project.Legend,
+                Description = project.Description,
                 Url = project.Url,
                 ImageId = project.ImageId,
                 Image = project.Image
@@ -118,7 +118,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Name,Legend,Url,ImageId")] ProjectViewModel editModel)
+        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Name,Description,Url,ImageId")] ProjectViewModel editModel)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +135,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
                 editModel.Image = project.Image;
                 project.Name = editModel.Name;
-                project.Legend = editModel.Legend;
+                project.Description = editModel.Description;
                 project.Url = editModel.Url;
                 _db.Entry(project).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
@@ -160,7 +160,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 ProjectId = project.ProjectId,
                 Name = project.Name,
-                Legend = project.Legend,
+                Description = project.Description,
                 Url = project.Url,
                 ImageId = project.ImageId,
                 Image = project.Image

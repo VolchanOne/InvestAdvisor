@@ -21,9 +21,9 @@
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Legend)
-                        @Html.EditorFor(model => model.Legend, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Legend, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Description)
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Url)
