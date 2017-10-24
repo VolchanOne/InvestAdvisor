@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using InvestAdvisor.Model;
 
-namespace InvestAdvisor.Model
+namespace InvestAdvisor.Web.Areas.Admin.Models
 {
-    public class Project
+    public class ProjectViewModel
     {
         public int ProjectId { get; set; }
 
@@ -21,7 +21,5 @@ namespace InvestAdvisor.Model
         public int? ImageId { get; set; }
 
         public Image Image { get; set; }
-
-        public DateTime CreatedAt { get; set; }
     }
 }

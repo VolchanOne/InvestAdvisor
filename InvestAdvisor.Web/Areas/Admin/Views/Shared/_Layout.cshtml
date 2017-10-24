@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InvestAdvisor - панель администратора</title>
+
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Styles/template.css" rel="stylesheet">
+    <link href="~/Styles/blue.css" rel="stylesheet">
+    <link href="~/Styles/site.css" rel="stylesheet">
+
+    <style type="text/css">
+        .jqstooltip {
+            position: absolute;
+            left: 0;
+            top: 0;
+            visibility: hidden;
+            background: rgb(0, 0, 0);
+            background-color: rgba(0,0,0,0.6);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99000000', endColorstr='#99000000');
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+            white-space: nowrap;
+            padding: 5px;
+            border: 1px solid white;
+            z-index: 10000;
+        }
+
+        .jqsfield {
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+        }
+    </style>
+
+    @*@Styles.Render("~/Content/css")*@
+</head>
+<body class="fix-header fix-sidebar logo-center card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index","Projects")">
+                        InvestAdvisor
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Projects")"><i class="mdi mdi-home"></i><span class="hide-menu">Проекты</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+
+
+            @RenderBody()
+            
+        </div>
+    </div>
+
+
+
+
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Scripts/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Scripts/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Scripts/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="~/Scripts/sticky-kit.min.js"></script>
+    <script src="~/Scripts/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Scripts/custom.min.js"></script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/plugins");*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>
