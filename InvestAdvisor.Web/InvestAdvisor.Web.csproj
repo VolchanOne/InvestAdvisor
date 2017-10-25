@@ -509,8 +509,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Projects\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Projects\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\EditDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.eot" />

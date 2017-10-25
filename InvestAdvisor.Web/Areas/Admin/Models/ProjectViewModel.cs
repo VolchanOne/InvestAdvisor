@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using InvestAdvisor.Model;
 
 namespace InvestAdvisor.Web.Areas.Admin.Models
@@ -16,8 +18,29 @@ namespace InvestAdvisor.Web.Areas.Admin.Models
 
         public string Url { get; set; }
 
-        public int? ImageId { get; set; }
+        public bool IsPaymentSystem { get; set; }
 
-        public Image Image { get; set; }
+        public bool IsInvestment { get; set; }
+
+        public string Marketing { get; set; }
+
+        public string Referral { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public decimal? Invested { get; set; }
+
+        public string Review { get; set; }
+
+        public string Domain { get; set; }
+
+        public string Hosting { get; set; }
+
+        public string Ssl { get; set; }
+
+
+        public List<Image> Images { get; set; }
+
+        public List<Project> PaymentSystems { get; set; }
     }
 }

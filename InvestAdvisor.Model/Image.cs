@@ -11,5 +11,15 @@ namespace InvestAdvisor.Model
 
         [Required]
         public byte[] Content { get; set; }
+
+        public ImageType ImageType { get; set; }
+
+        public int? ProjectId { get; set; }
+
+        #region Navigation properties
+
+        public virtual Project Project { get; set; }
+
+        #endregion
     }
 }
