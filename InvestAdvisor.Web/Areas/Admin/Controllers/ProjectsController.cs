@@ -22,11 +22,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             return View(await projects.Select(p => new ProjectViewModel
             {
                 ProjectId = p.ProjectId,
-                Name = p.Name,
-                Description = p.Description,
-                Url = p.Url,
-                ImageId = p.ImageId,
-                Image = p.Image
+                Name = p.Name
             }).ToListAsync());
         }
 
@@ -37,13 +33,13 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = await _db.Projects.FindAsync(id);
+            var project = await _db.Projects.FindAsync(id);
 
             if (project == null)
             {
                 return HttpNotFound();
             }
-            project.Image = await _db.Images.FindAsync(project.ImageId);
+            project.Image = project.ImageId != null ? await _db.Images.FindAsync(project.ImageId) : null;
 
             return View(new ProjectViewModel
             {
@@ -65,24 +61,16 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         // POST: Admin/Projects/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Name,Description,Url")] ProjectViewModel createModel)
+        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Name")] ProjectViewModel createModel)
         {
-            var imageUploaded = WebImage.GetImageFromRequest();
-            if (imageUploaded == null)
-                ModelState.AddModelError("Image", "The Image is required");
-
             if (ModelState.IsValid)
             {
                 var project = new Project
                 {
                     ProjectId = createModel.ProjectId,
                     Name = createModel.Name,
-                    Description = createModel.Description,
-                    Url = createModel.Url
+                    CreatedAt = DateTime.Now
                 };
-
-                AddImage(project, imageUploaded);
-                project.CreatedAt = DateTime.Now;
 
                 _db.Projects.Add(project);
                 await _db.SaveChangesAsync();
@@ -104,7 +92,8 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            project.Image = await _db.Images.FindAsync(project.ImageId);
+            project.Image = project.ImageId != null ? await _db.Images.FindAsync(project.ImageId) : null;
+
             return View(new ProjectViewModel
             {
                 ProjectId = project.ProjectId,
@@ -123,22 +112,37 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var project = await _db.Projects.FindAsync(editModel.ProjectId);
+                if (project == null)
+                {
+                    return HttpNotFound();
+                }
 
                 var imageUploaded = WebImage.GetImageFromRequest();
                 if (imageUploaded != null)
                 {
-                     AddImage(project, imageUploaded);
+                    if (project.Image != null)
+                    {
+                        _db.Images.Remove(project.Image);
+                    }
 
-                    var image = await _db.Images.FindAsync(editModel.ImageId);
-                    _db.Images.Remove(image);
+                    project.Image = new Image
+                    {
+                        Name = imageUploaded.FileName,
+                        Content = imageUploaded.GetBytes()
+                    };
+
+                    _db.Images.Add(project.Image);
                 }
 
-                editModel.Image = project.Image;
                 project.Name = editModel.Name;
                 project.Description = editModel.Description;
                 project.Url = editModel.Url;
+
                 _db.Entry(project).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
+
+                editModel.ImageId = project.ImageId;
+                editModel.Image = project.Image;
                 return RedirectToAction("Index");
             }
             return View(editModel);
@@ -159,11 +163,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             return View(new ProjectViewModel
             {
                 ProjectId = project.ProjectId,
-                Name = project.Name,
-                Description = project.Description,
-                Url = project.Url,
-                ImageId = project.ImageId,
-                Image = project.Image
+                Name = project.Name
             });
         }
 
@@ -173,25 +173,18 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             var project = await _db.Projects.FindAsync(id);
-            var image = await _db.Images.FindAsync(project.ImageId);
-            _db.Projects.Remove(project);
-            _db.Images.Remove(image);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
 
+            if(project.Image != null)
+                _db.Images.Remove(project.Image);
+
+            _db.Projects.Remove(project);
+            
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        private void AddImage(Project project, WebImage imageUploaded)
-        {
-            var image = new Image
-            {
-                Name = imageUploaded.FileName,
-                Content = imageUploaded.GetBytes()
-            };
-
-            _db.Images.Add(image);
-
-            project.Image = image;
         }
 
         protected override void Dispose(bool disposing)

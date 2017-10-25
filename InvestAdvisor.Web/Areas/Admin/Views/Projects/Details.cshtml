@@ -8,7 +8,6 @@
 <div class="card">
     <div class="card-body">
         <h2>Details</h2>
-
         <dl>
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
@@ -32,12 +31,20 @@
                 Image
             </dt>
             <dd>
-                <img src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" width="150"/>
+                @if (Model.Image != null)
+                {
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.Image.Content)" width="150" />
+                }
             </dd>
         </dl>
+        <p>
+            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId })
+            </button> |
+            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                @Html.ActionLink("Back to List", "Index")
+            </button>
+        </p>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
