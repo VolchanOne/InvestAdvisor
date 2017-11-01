@@ -96,7 +96,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Name,Description,Url,ImageId")] ProjectViewModel model)
+        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Name,Description,Url,IsPaymentSystem")] ProjectViewModel model)
         {
             if (ModelState.IsValid)
             {
