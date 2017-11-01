@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using InvestAdvisor.Model;
 
-namespace InvestAdvisor.Web.Areas.Admin.Models
+namespace InvestAdvosor.Entities
 {
-    public class ProjectViewModel
+    public class Project
     {
         public int ProjectId { get; set; }
 
@@ -20,7 +19,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Models
 
         public bool IsPaymentSystem { get; set; }
 
-        public bool IsInvestment { get; set; }
+        public bool IsFavorite { get; set; }
 
         public string Marketing { get; set; }
 
@@ -39,8 +38,13 @@ namespace InvestAdvisor.Web.Areas.Admin.Models
         public string Ssl { get; set; }
 
 
-        public List<Image> Images { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public List<Project> PaymentSystems { get; set; }
+
+        #region Navigation properties
+
+        public virtual List<Image> Images { get; set; }
+
+        #endregion
     }
 }

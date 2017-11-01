@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using InvestAdvisor.Common.Enums;
 
 namespace InvestAdvisor.Model
 {
-    public class Image
+    public class ImageModel
     {
         public int ImageId { get; set; }
 
@@ -13,13 +14,5 @@ namespace InvestAdvisor.Model
         public byte[] Content { get; set; }
 
         public ImageType ImageType { get; set; }
-
-        public int? ProjectId { get; set; }
-
-        #region Navigation properties
-
-        public virtual Project Project { get; set; }
-
-        #endregion
     }
 }

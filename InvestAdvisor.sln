@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Data", "Inves
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Model", "InvestAdvisor.Model\InvestAdvisor.Model.csproj", "{72156E99-5957-42E8-B52A-83CD84983787}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Services", "InvestAdvisor.Services\InvestAdvisor.Services.csproj", "{E0E77650-744B-4635-A2F2-AA0C7F4F963E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvosor.Entities", "InvestAdvosor.Entities\InvestAdvosor.Entities.csproj", "{E4747874-C719-476C-BC7D-579EB669C031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Common", "InvestAdvisor.Common\InvestAdvisor.Common.csproj", "{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{72156E99-5957-42E8-B52A-83CD84983787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72156E99-5957-42E8-B52A-83CD84983787}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72156E99-5957-42E8-B52A-83CD84983787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E77650-744B-4635-A2F2-AA0C7F4F963E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E77650-744B-4635-A2F2-AA0C7F4F963E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E77650-744B-4635-A2F2-AA0C7F4F963E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E77650-744B-4635-A2F2-AA0C7F4F963E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4747874-C719-476C-BC7D-579EB669C031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4747874-C719-476C-BC7D-579EB669C031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4747874-C719-476C-BC7D-579EB669C031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4747874-C719-476C-BC7D-579EB669C031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

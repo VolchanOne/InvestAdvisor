@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72156E99-5957-42E8-B52A-83CD84983787}</ProjectGuid>
+    <ProjectGuid>{E0E77650-744B-4635-A2F2-AA0C7F4F963E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InvestAdvisor.Model</RootNamespace>
-    <AssemblyName>InvestAdvisor.Model</AssemblyName>
+    <RootNamespace>InvestAdvisor.Services</RootNamespace>
+    <AssemblyName>InvestAdvisor.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -41,14 +47,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageModel.cs" />
-    <Compile Include="ProjectModel.cs" />
+    <Compile Include="ProjectService.cs" />
+    <Compile Include="Contracts\IProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">
       <Project>{2ec6ce46-45ba-444b-92e7-6f7286bcacff}</Project>
       <Name>InvestAdvisor.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InvestAdvisor.Data\InvestAdvisor.Data.csproj">
+      <Project>{9d2ae960-4a25-4cba-922a-0f1e907286fd}</Project>
+      <Name>InvestAdvisor.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InvestAdvisor.Model\InvestAdvisor.Model.csproj">
+      <Project>{72156e99-5957-42e8-b52a-83cd84983787}</Project>
+      <Name>InvestAdvisor.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InvestAdvosor.Entities\InvestAdvosor.Entities.csproj">
+      <Project>{e4747874-c719-476c-bc7d-579eb669c031}</Project>
+      <Name>InvestAdvosor.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

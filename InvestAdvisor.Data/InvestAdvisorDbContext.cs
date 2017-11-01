@@ -1,7 +1,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Text;
-using InvestAdvisor.Model;
+using InvestAdvosor.Entities;
 
 namespace InvestAdvisor.Data
 {

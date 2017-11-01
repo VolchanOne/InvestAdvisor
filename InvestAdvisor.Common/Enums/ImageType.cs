@@ -1,4 +1,4 @@
-﻿namespace InvestAdvisor.Model
+﻿namespace InvestAdvisor.Common.Enums
 {
     public enum ImageType
     {

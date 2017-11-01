@@ -49,8 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IImageRepository.cs" />
+    <Compile Include="Contracts\IProjectRepository.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Contracts\IGenericRepository.cs" />
+    <Compile Include="ImageRepository.cs" />
     <Compile Include="InvestAdvisorDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,10 @@
     <ProjectReference Include="..\InvestAdvisor.Model\InvestAdvisor.Model.csproj">
       <Project>{72156e99-5957-42e8-b52a-83cd84983787}</Project>
       <Name>InvestAdvisor.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InvestAdvosor.Entities\InvestAdvosor.Entities.csproj">
+      <Project>{e4747874-c719-476c-bc7d-579eb669c031}</Project>
+      <Name>InvestAdvosor.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

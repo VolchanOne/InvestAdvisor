@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InvestAdvisor.Model
 {
-    public class Project
+    public class ProjectModel
     {
         public int ProjectId { get; set; }
 
@@ -19,7 +19,7 @@ namespace InvestAdvisor.Model
 
         public bool IsPaymentSystem { get; set; }
 
-        public bool IsFavorite { get; set; }
+        public bool IsInvestment { get; set; }
 
         public string Marketing { get; set; }
 
@@ -37,16 +37,6 @@ namespace InvestAdvisor.Model
 
         public string Ssl { get; set; }
 
-
-        public DateTime CreatedAt { get; set; }
-
-
-        #region Navigation properties
-
-        public virtual List<Image> Images { get; set; }
-
-        public virtual List<Project> PaymentSystems { get; set; }
-
-        #endregion
+        public List<ImageModel> Images { get; set; }
     }
 }

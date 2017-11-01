@@ -1,12 +1,11 @@
-﻿@model InvestAdvisor.Web.Areas.Admin.Models.ProjectViewModel
+﻿@model InvestAdvisor.Model.ProjectModel
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    var isEdit = ViewBag.IsEdit ?? false;
 }
 
 <div class="card card-body">
-    <h3 class="box-title m-b-0">@(isEdit ? "Edit" : "Details") project</h3>
+    <h3 class="box-title m-b-0">Edit project</h3>
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
@@ -50,17 +49,7 @@
 
                 <div class="form-group">
                     <div>
-                        @if (isEdit)
-                        {
-                            <input type="submit" value="Save" class="btn btn-secondary" />
-                        }
-                        else
-                        {
-
-                            <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId })
-                            </button>
-                        }
+                        <input type="submit" value="Save" class="btn btn-secondary" />
                     </div>
                 </div>
             }
