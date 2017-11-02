@@ -4,59 +4,62 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card card-body">
-    <h3 class="box-title m-b-0">Edit project</h3>
-    <div class="row">
-        <div class="col-sm-12 col-xs-12">
-            @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Редактирование проекта</h4>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ProjectId)
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ProjectId)
 
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Name)
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Description)
-                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Url)
-                    @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <div class="checkbox checkbox-success">
-                        <input data-val="true" data-val-required="The IsPaymentSystem field is required." id="IsPaymentSystem" name="IsPaymentSystem" type="checkbox" value="false" onclick="checkboxClick()">
-                        <label for="IsPaymentSystem">IsPaymentSystem</label>
-                        <input name="IsPaymentSystem" type="hidden" value="true">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                     </div>
-                </div>
-
-
-
-
-                <div class="form-group">
-                    <div class="checkbox checkbox-success">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1"> Remember me </label>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
                     </div>
-                </div>
-                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
-
-                <div class="form-group">
-                    <div>
-                        <input type="submit" value="Save" class="btn btn-secondary" />
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Url)
+                        @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
                     </div>
+
+
+
+                    @*<div class="form-group">
+                            <div class="checkbox checkbox-success">
+                                <input data-val="true" data-val-required="The IsPaymentSystem field is required." id="IsPaymentSystem" name="IsPaymentSystem" type="checkbox" value="false" onclick="checkboxClick()">
+                                <label for="IsPaymentSystem">IsPaymentSystem</label>
+                                <input name="IsPaymentSystem" type="hidden" value="true">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox1" type="checkbox">
+                                <label for="checkbox1"> Remember me </label>
+                            </div>
+                        </div>*@
+
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                    </div>
+                }
+                <div>
+                    <button type="button" class="btn waves-effect waves-light btn-secondary">
+                        @Html.ActionLink("Назад к списку", "Index")
+                    </button>
                 </div>
-            }
-            <div>
-                <button type="button" class="btn waves-effect waves-light btn-secondary">
-                    @Html.ActionLink("Back to List", "Index")
-                </button>
             </div>
         </div>
     </div>

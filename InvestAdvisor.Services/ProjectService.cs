@@ -29,13 +29,12 @@ namespace InvestAdvisor.Services
                 ProjectId = p.ProjectId,
                 Name = p.Name,
                 Description = p.Description,
-                Url = p.Url,
-                Marketing = p.Marketing
+                Url = p.Url
             }).ToList();
             return projectModels;
         }
 
-        public async Task<ProjectModel> GetOne(int projectId)
+        public async Task<ProjectModel> FindById(int projectId)
         {
             var project = _projectRepository
                 .GetWithInclude(p => p.ProjectId == projectId, p => p.Images)
@@ -50,16 +49,16 @@ namespace InvestAdvisor.Services
                 Name = project.Name,
                 Description = project.Description,
                 Url = project.Url,
-                IsPaymentSystem = project.IsPaymentSystem,
-                IsInvestment = project.IsFavorite,
-                Marketing = project.Marketing,
-                Referral = project.Referral,
-                StartDate = project.StartDate,
-                Invested = project.Invested,
-                Review = project.Review,
-                Domain = project.Domain,
-                Hosting = project.Hosting,
-                Ssl = project.Ssl,
+                //IsPaymentSystem = project.IsPaymentSystem,
+                //IsInvestment = project.IsFavorite,
+                //Marketing = project.Marketing,
+                //Referral = project.Referral,
+                //StartDate = project.StartDate,
+                //Invested = project.Invested,
+                //Review = project.Review,
+                //Domain = project.Domain,
+                //Hosting = project.Hosting,
+                //Ssl = project.Ssl,
                 Images = project.Images.Select(i => new ImageModel
                 {
                     ImageId = i.ImageId,
@@ -75,8 +74,7 @@ namespace InvestAdvisor.Services
             _projectRepository.Create(new Project
             {
                 ProjectId = model.ProjectId,
-                Name = model.Name,
-                CreatedAt = DateTime.Now
+                Name = model.Name
             });
 
             await _projectRepository.SaveChangesAsync();
@@ -93,16 +91,16 @@ namespace InvestAdvisor.Services
             project.Name = model.Name;
             project.Description = model.Description;
             project.Url = model.Url;
-            project.IsPaymentSystem = model.IsPaymentSystem;
-            project.IsFavorite = model.IsInvestment;
-            project.Marketing = model.Marketing;
-            project.Referral = model.Referral;
-            project.StartDate = model.StartDate;
-            project.Invested = model.Invested;
-            project.Review = model.Review;
-            project.Domain = model.Domain;
-            project.Hosting = model.Hosting;
-            project.Ssl = model.Ssl;
+            //project.IsPaymentSystem = model.IsPaymentSystem;
+            //project.IsFavorite = model.IsInvestment;
+            //project.Marketing = model.Marketing;
+            //project.Referral = model.Referral;
+            //project.StartDate = model.StartDate;
+            //project.Invested = model.Invested;
+            //project.Review = model.Review;
+            //project.Domain = model.Domain;
+            //project.Hosting = model.Hosting;
+            //project.Ssl = model.Ssl;
 
             _projectRepository.Update(project);
             await _projectRepository.SaveChangesAsync();

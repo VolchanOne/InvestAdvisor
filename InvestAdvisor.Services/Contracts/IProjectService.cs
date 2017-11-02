@@ -8,7 +8,7 @@ namespace InvestAdvisor.Services.Contracts
     {
         Task<List<ProjectModel>> GetAll();
 
-        Task<ProjectModel> GetOne(int projectId);
+        Task<ProjectModel> FindById(int projectId);
 
         Task Create(ProjectModel model);
 

@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Image.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="ProjectAdditional.cs" />
+    <Compile Include="ProjectReview.cs" />
+    <Compile Include="ProjectTech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,45 +7,42 @@
 
 <div class="card">
     <div class="card-body">
-        <h2>Projects</h2>
+        <h4 class="card-title">Все проекты</h4>
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Создать новый", "Create")
         </p>
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>@Html.DisplayNameFor(model => model.Name)</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @{int i = 1;}
-                    @foreach (var project in Model)
-                    {
-                        <tr>
-                            <td>
-                                @i
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => project.Name)
-                            </td>
-                            <td>
+                @{int i = 1;}
+                @foreach (var project in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => project.Name)
+                        </td>
+                        <td>
 
-                                <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                    @Html.ActionLink("Edit", "Edit", new { id = project.ProjectId })
-                                </button> |
-                                <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                    @Html.ActionLink("Details", "Details", new { id = project.ProjectId })
-                                </button> |
-                                <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                    @Html.ActionLink("Delete", "Delete", new { id = project.ProjectId })
-                                </button>
-                            </td>
-                        </tr>
-                        i++;
-                    }
+                            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                @Html.ActionLink("Редактировать", "Edit", new {id = project.ProjectId})
+                            </button> |
+                            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                @Html.ActionLink("Удалить", "Delete", new {id = project.ProjectId})
+                            </button>
+                        </td>
+                    </tr>
+                    i++;
+                }
                 </tbody>
             </table>
         </div>

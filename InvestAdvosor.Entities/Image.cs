@@ -15,12 +15,5 @@ namespace InvestAdvosor.Entities
 
         public ImageType ImageType { get; set; }
 
-        public int? ProjectId { get; set; }
-
-        #region Navigation properties
-
-        public virtual Project Project { get; set; }
-
-        #endregion
     }
 }

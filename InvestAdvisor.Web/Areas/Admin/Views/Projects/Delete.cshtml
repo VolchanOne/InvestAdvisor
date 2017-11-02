@@ -8,20 +8,18 @@
     <div class="card-body">
         <h3>@Model.Name</h3>
         <p>
-            Are you sure you want to delete this project
+            Вы уверены что хотите удалить этот проект?
         </p>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             <div class="form-group">
-                <div>
-                    <input type="submit" value="Delete" class="btn btn-secondary" />
-                </div>
+                <button type="submit" class="btn waves-effect waves-light btn-outline-info">Удалить</button>
             </div>
         }
         <div>
-            <button type="button" class="btn waves-effect waves-light btn-secondary">@Html.ActionLink("Back to List", "Index")</button>
+            <button type="button" class="btn waves-effect waves-light btn-secondary">@Html.ActionLink("Назад к списку", "Index")</button>
         </div>
     </div>
 </div>

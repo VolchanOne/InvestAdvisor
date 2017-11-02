@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace InvestAdvisor.Model
@@ -10,32 +10,15 @@ namespace InvestAdvisor.Model
 
         [Required]
         [StringLength(128)]
+        [DisplayName("Название")]
         public string Name { get; set; }
 
         [StringLength(256)]
+        [DisplayName("Описание")]
         public string Description { get; set; }
 
+        [DisplayName("Ссылка")]
         public string Url { get; set; }
-
-        public bool IsPaymentSystem { get; set; }
-
-        public bool IsInvestment { get; set; }
-
-        public string Marketing { get; set; }
-
-        public string Referral { get; set; }
-
-        public DateTime? StartDate { get; set; }
-
-        public decimal? Invested { get; set; }
-
-        public string Review { get; set; }
-
-        public string Domain { get; set; }
-
-        public string Hosting { get; set; }
-
-        public string Ssl { get; set; }
 
         public List<ImageModel> Images { get; set; }
     }

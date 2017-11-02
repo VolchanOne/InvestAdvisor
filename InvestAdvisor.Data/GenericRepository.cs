@@ -16,7 +16,7 @@ namespace InvestAdvisor.Data
 
         public IQueryable<TEntity> Get()
         {
-            return _dbSet.AsNoTracking();
+            return _dbSet;
         }
 
         public IQueryable<TEntity> Get(Func<TEntity, bool> predicate)
@@ -71,7 +71,7 @@ namespace InvestAdvisor.Data
 
         private IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            IQueryable<TEntity> query =_dbSet.AsNoTracking();
+            IQueryable<TEntity> query =_dbSet;
             return includeProperties
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }

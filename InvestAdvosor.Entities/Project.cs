@@ -4,6 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InvestAdvosor.Entities
 {
+    //TODO:
+    //Deposits
+    //Withdrawal
+    //Refbacks
+    //Comments
+
     public class Project
     {
         public int ProjectId { get; set; }
@@ -17,34 +23,17 @@ namespace InvestAdvosor.Entities
 
         public string Url { get; set; }
 
-        public bool IsPaymentSystem { get; set; }
+        public DateTime? PublishedAt { get; set; }
 
-        public bool IsFavorite { get; set; }
-
-        public string Marketing { get; set; }
-
-        public string Referral { get; set; }
-
-        public DateTime? StartDate { get; set; }
-
-        public decimal? Invested { get; set; }
-
-        public string Review { get; set; }
-
-        public string Domain { get; set; }
-
-        public string Hosting { get; set; }
-
-        public string Ssl { get; set; }
-
-
-        public DateTime CreatedAt { get; set; }
-
+        public int? ProjectAdditionalId { get; set; }
+        public int? ProjectTechId { get; set; }
+        public int? ProjectReviewId { get; set; }
 
         #region Navigation properties
-
+        public virtual ProjectAdditional Additional { get; set; }
+        public virtual ProjectTech TechInfo { get; set; }
+        public virtual ProjectReview Review { get; set; }
         public virtual List<Image> Images { get; set; }
-
         #endregion
     }
 }

@@ -18,9 +18,9 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         // GET: Admin/Projects
         public async Task<ActionResult> Index()
         {
-            var projectShorts = await _projectService.GetAll();
+            var projects = await _projectService.GetAll();
 
-            return View(projectShorts);
+            return View(projects);
         }
 
         // GET: Admin/Projects/Create
@@ -50,7 +50,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var projectModel = await _projectService.GetOne(id.Value);
+            var projectModel = await _projectService.FindById(id.Value);
             if (projectModel == null)
             {
                 return HttpNotFound();
@@ -77,7 +77,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var project = await _projectService.GetOne(id.Value);
+            var project = await _projectService.FindById(id.Value);
             if (project == null)
             {
                 return HttpNotFound();
