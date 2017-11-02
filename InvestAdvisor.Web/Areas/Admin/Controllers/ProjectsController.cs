@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Net;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using InvestAdvisor.Common.Enums;
 using InvestAdvisor.Model;
 using InvestAdvisor.Services.Contracts;
 
@@ -92,6 +95,29 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         {
             await _projectService.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddImage(int projectId, int? imageType)
+        {
+            var imageUploaded = WebImage.GetImageFromRequest();
+            if (imageUploaded != null && imageType.HasValue && Enum.IsDefined(typeof(ImageType), imageType))
+            {
+                await _projectService.AddImage(projectId, new ImageModel
+                {
+                    Name = imageUploaded.FileName,
+                    Content = imageUploaded.GetBytes(),
+                    ImageType = (ImageType)imageType
+                });
+            }
+            return RedirectToAction("Edit", new { id = projectId });
+        }
+
+        public async Task<ActionResult> DeleteImage(int projectId, int imageId)
+        {
+            await _projectService.DeleteImage(imageId);
+            return RedirectToAction("Edit", new { id = projectId });
         }
     }
 }

@@ -49,16 +49,6 @@ namespace InvestAdvisor.Services
                 Name = project.Name,
                 Description = project.Description,
                 Url = project.Url,
-                //IsPaymentSystem = project.IsPaymentSystem,
-                //IsInvestment = project.IsFavorite,
-                //Marketing = project.Marketing,
-                //Referral = project.Referral,
-                //StartDate = project.StartDate,
-                //Invested = project.Invested,
-                //Review = project.Review,
-                //Domain = project.Domain,
-                //Hosting = project.Hosting,
-                //Ssl = project.Ssl,
                 Images = project.Images.Select(i => new ImageModel
                 {
                     ImageId = i.ImageId,
@@ -91,16 +81,6 @@ namespace InvestAdvisor.Services
             project.Name = model.Name;
             project.Description = model.Description;
             project.Url = model.Url;
-            //project.IsPaymentSystem = model.IsPaymentSystem;
-            //project.IsFavorite = model.IsInvestment;
-            //project.Marketing = model.Marketing;
-            //project.Referral = model.Referral;
-            //project.StartDate = model.StartDate;
-            //project.Invested = model.Invested;
-            //project.Review = model.Review;
-            //project.Domain = model.Domain;
-            //project.Hosting = model.Hosting;
-            //project.Ssl = model.Ssl;
 
             _projectRepository.Update(project);
             await _projectRepository.SaveChangesAsync();
@@ -118,6 +98,32 @@ namespace InvestAdvisor.Services
 
             _projectRepository.Remove(project);
             await _projectRepository.SaveChangesAsync();
+        }
+
+        public async Task AddImage(int projectId, ImageModel image)
+        {
+            var project = await _projectRepository.FindByIdAsync(projectId);
+
+            if (project == null)
+                return;
+
+            project.Images.Add(new Image
+            {
+                Name = image.Name,
+                Content = image.Content,
+                ImageType = image.ImageType
+            });
+            _projectRepository.Update(project);
+            await _projectRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteImage(int imageId)
+        {
+            var image = await _imageRepository.FindByIdAsync(imageId);
+            if (image == null)
+                return;
+            _imageRepository.Remove(image);
+            await _imageRepository.SaveChangesAsync();
         }
     }
 }

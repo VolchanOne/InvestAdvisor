@@ -712,6 +712,10 @@
     <Content Include="Views\Projects\ProjectsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">
+      <Project>{2ec6ce46-45ba-444b-92e7-6f7286bcacff}</Project>
+      <Name>InvestAdvisor.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InvestAdvisor.Data\InvestAdvisor.Data.csproj">
       <Project>{9d2ae960-4a25-4cba-922a-0f1e907286fd}</Project>
       <Name>InvestAdvisor.Data</Name>

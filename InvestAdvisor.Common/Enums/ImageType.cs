@@ -2,8 +2,7 @@
 {
     public enum ImageType
     {
-        Notdefined = 0,
-        Logo,
+        Logo = 1,
         Screen
     }
 }
