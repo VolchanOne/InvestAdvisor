@@ -68,9 +68,19 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _projectService.Update(model);
-                return RedirectToAction("Index");
             }
-            return View(model);
+            return RedirectToAction("Edit", new {id = model.ProjectId});
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAdditional(int projectId, ProjectAdditionalModel additional)
+        {
+            if (ModelState.IsValid)
+            {
+                await _projectService.UpdateAdditional(projectId, additional);
+            }
+            return RedirectToAction("Edit", new {id = projectId});
         }
 
         // GET: Admin/Projects/Delete/5
@@ -108,16 +118,16 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
                 {
                     Name = imageUploaded.FileName,
                     Content = imageUploaded.GetBytes(),
-                    ImageType = (ImageType)imageType
+                    ImageType = (ImageType) imageType
                 });
             }
-            return RedirectToAction("Edit", new { id = projectId });
+            return RedirectToAction("Edit", new {id = projectId});
         }
 
         public async Task<ActionResult> DeleteImage(int projectId, int imageId)
         {
             await _projectService.DeleteImage(imageId);
-            return RedirectToAction("Edit", new { id = projectId });
+            return RedirectToAction("Edit", new {id = projectId});
         }
     }
 }

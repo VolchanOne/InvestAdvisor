@@ -203,6 +203,7 @@
     <Content Include="Scripts\waves.js" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\blue.css" />
+    <Content Include="Styles\bootstrap-datepicker.min.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\icons\flag-icon-css\flag-icon.min.css" />
     <Content Include="Styles\icons\flag-icon-css\flags\ad.svg" />

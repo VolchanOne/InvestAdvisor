@@ -8,17 +8,16 @@ namespace InvestAdvisor.Model
     {
         public int ProjectId { get; set; }
 
-        [Required]
-        [StringLength(128)]
         [DisplayName("Название")]
         public string Name { get; set; }
 
-        [StringLength(256)]
         [DisplayName("Описание")]
         public string Description { get; set; }
 
         [DisplayName("Ссылка")]
         public string Url { get; set; }
+
+        public ProjectAdditionalModel Additional { get; set; }
 
         public List<ImageModel> Images { get; set; }
     }

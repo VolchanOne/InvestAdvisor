@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Model", "Inve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Services", "InvestAdvisor.Services\InvestAdvisor.Services.csproj", "{E0E77650-744B-4635-A2F2-AA0C7F4F963E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvosor.Entities", "InvestAdvosor.Entities\InvestAdvosor.Entities.csproj", "{E4747874-C719-476C-BC7D-579EB669C031}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Entities", "InvestAdvosor.Entities\InvestAdvisor.Entities.csproj", "{E4747874-C719-476C-BC7D-579EB669C031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Common", "InvestAdvisor.Common\InvestAdvisor.Common.csproj", "{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}"
 EndProject

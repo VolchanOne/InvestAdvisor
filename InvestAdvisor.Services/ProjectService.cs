@@ -37,7 +37,7 @@ namespace InvestAdvisor.Services
         public async Task<ProjectModel> FindById(int projectId)
         {
             var project = _projectRepository
-                .GetWithInclude(p => p.ProjectId == projectId, p => p.Images)
+                .GetWithInclude(p => p.ProjectId == projectId, p => p.Images, p => p.Additional)
                 .FirstOrDefault();
 
             if (project == null)
@@ -55,7 +55,15 @@ namespace InvestAdvisor.Services
                     Name = i.Name,
                     ImageType = i.ImageType,
                     Content = i.Content
-                }).ToList()
+                }).ToList(),
+                Additional = new ProjectAdditionalModel
+                {
+                    ProjectAdditionalId = project.Additional.ProjectAdditionalId,
+                    Legend = project.Additional.Legend,
+                    Marketing = project.Additional.Marketing,
+                    Referral = project.Additional.Referral,
+                    StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
+                }
             };
         }
 
@@ -81,6 +89,27 @@ namespace InvestAdvisor.Services
             project.Name = model.Name;
             project.Description = model.Description;
             project.Url = model.Url;
+
+            _projectRepository.Update(project);
+            await _projectRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateAdditional(int projectId, ProjectAdditionalModel model)
+        {
+            var project = await _projectRepository.FindByIdAsync(projectId);
+
+            if (project == null)
+                return;
+
+            var additional = new ProjectAdditional
+            {
+                Legend = model.Legend,
+                Marketing = model.Marketing,
+                Referral = model.Referral,
+                StartDate = !string.IsNullOrEmpty(model.StartDate) ? DateTime.Parse(model.StartDate) : default(DateTime?) 
+            };
+
+            project.Additional = additional;
 
             _projectRepository.Update(project);
             await _projectRepository.SaveChangesAsync();

@@ -68,9 +68,9 @@
       <Project>{72156e99-5957-42e8-b52a-83cd84983787}</Project>
       <Name>InvestAdvisor.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InvestAdvosor.Entities\InvestAdvosor.Entities.csproj">
+    <ProjectReference Include="..\InvestAdvosor.Entities\InvestAdvisor.Entities.csproj">
       <Project>{e4747874-c719-476c-bc7d-579eb669c031}</Project>
-      <Name>InvestAdvosor.Entities</Name>
+      <Name>InvestAdvisor.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

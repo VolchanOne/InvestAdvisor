@@ -16,6 +16,8 @@ namespace InvestAdvisor.Services.Contracts
 
         Task Delete(int projectId);
 
+        Task UpdateAdditional(int projectId, ProjectAdditionalModel model);
+
         Task AddImage(int projectId, ImageModel image);
 
         Task DeleteImage(int imageId);

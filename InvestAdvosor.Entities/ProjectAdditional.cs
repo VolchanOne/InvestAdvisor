@@ -12,6 +12,6 @@ namespace InvestAdvosor.Entities
 
         public string Referral { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
     }
 }
