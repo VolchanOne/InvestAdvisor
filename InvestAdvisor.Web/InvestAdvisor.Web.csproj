@@ -191,7 +191,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\logo.png" />
     <Content Include="Images\projectScreen.png" />
+    <Content Include="Images\projectScreen1.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\jquery.min.js" />
