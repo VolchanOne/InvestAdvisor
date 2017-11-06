@@ -10,173 +10,177 @@
     <link href="~/Styles/bootstrap-datepicker.min.css" rel="stylesheet" />
 }
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Редактирование проекта</h4>
-        <div class="row">
-            <div class="col-sm-12">
-                @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Редактирование проекта</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ProjectId)
-
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Name)
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Description)
-                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Url)
-                        @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
-                    </div>
-
-                    @*<div class="form-group">
-                        <div class="checkbox checkbox-success">
-                        <input data-val="true" data-val-required="The IsPaymentSystem field is required." id="IsPaymentSystem" name="IsPaymentSystem" type="checkbox" value="false" onclick="checkboxClick()">
-                        <label for="IsPaymentSystem">IsPaymentSystem</label>
-                        <input name="IsPaymentSystem" type="hidden" value="true">
-                        </div>
-                        </div>
-
-
-
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
 
                         <div class="form-group">
-                        <div class="checkbox checkbox-success">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1"> Remember me </label>
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                         </div>
-                        </div>*@
-
-                    <div class="form-group">
-                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
-                    </div>
-                }
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Url)
+                            @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Дополнительная информация</h4>
-        <div class="row">
-            <div class="col-sm-12">
-                @using (Html.BeginForm("EditAdditional", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Дополнительная информация</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditAdditional", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ProjectId)
-                    @Html.HiddenFor(model => model.Additional.ProjectAdditionalId)
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        @Html.HiddenFor(model => model.Additional.ProjectAdditionalId)
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Additional.Legend)
-                        @Html.TextBoxFor(m => m.Additional.Legend, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Additional.Marketing)
-                        @Html.TextBoxFor(m => m.Additional.Legend, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Additional.Referral)
-                        @Html.TextBoxFor(m => m.Additional.Legend, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Additional.StartDate)
-                        @Html.TextBoxFor(m => m.Additional.StartDate, new { @class = "form-control", @type = "date" })
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
-                    </div>
-                }
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Additional.Marketing)
+                            @Html.TextBoxFor(m => m.Additional.Marketing, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Additional.Referral)
+                            @Html.TextBoxFor(m => m.Additional.Referral, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Additional.StartDate)
+                            @Html.TextBoxFor(m => m.Additional.StartDate, new { @class = "form-control", @type = "date" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
+    
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Дополнительная информация</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditReview", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-12">
-                @using (Html.BeginForm("AddImage", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        @Html.HiddenFor(model => model.Review.ProjectReviewId)
 
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ProjectId)
-                    <h4>Добавить изображение</h4>
-                    <div class="form-group">
-                        <div>
-                            <input type="file" class="form-control" name="Image" aria-describedby="fileHelp">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Review.Review)
+                            @Html.TextBoxFor(m => m.Review.Review, new { @class = "form-control" })
                         </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.DropDownList("ImageType",
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("AddImage", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        <h4>Добавить изображение</h4>
+                        <div class="form-group">
+                            <div>
+                                <input type="file" class="form-control" name="Image" aria-describedby="fileHelp">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownList("ImageType",
                             EnumHelper.GetSelectList(typeof(ImageType)),
                             "Выберите тип",
                             new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
-                    </div>
-                }
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
-@if (Model.Images != null && Model.Images.Count > 0)
-{
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Изображения проекта</h4>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Изображение</th>
-                            <th>Тип</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{int i = 1;}
-                        @foreach (var image in Model.Images)
-                {
+    @if (Model.Images != null && Model.Images.Count > 0)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Изображения проекта</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    <img src="data:image;base64,@Convert.ToBase64String(image.Content)" width="150" />
-                                </td>
-                                <td>
-                                    @image.ImageType.ToString()
-                                </td>
-                                <td>
-                                    <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                        @Html.ActionLink("Удалить", "DeleteImage", new { projectId = Model.ProjectId, imageId = image.ImageId })
-                                    </button>
-                                </td>
+                                <th>#</th>
+                                <th>Изображение</th>
+                                <th>Тип</th>
+                                <th></th>
                             </tr>
-                            i++;
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var image in Model.Images)
+                {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        <img src="data:image;base64,@Convert.ToBase64String(image.Content)" width="150" />
+                                    </td>
+                                    <td>
+                                        @image.ImageType.ToString()
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                            @Html.ActionLink("Удалить", "DeleteImage", new { projectId = Model.ProjectId, imageId = image.ImageId })
+                                        </button>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-                            }
+                                }
 
-<button type="button" class="btn waves-effect waves-light btn-secondary">
-    @Html.ActionLink("Назад к списку", "Index")
-</button>
+    <button type="button" class="btn waves-effect waves-light btn-secondary">
+        @Html.ActionLink("Назад к списку", "Index")
+    </button>
 
-
+</div>

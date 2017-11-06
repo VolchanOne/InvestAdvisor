@@ -5,10 +5,7 @@ namespace InvestAdvisor.Model
 {
     public class ProjectAdditionalModel
     {
-        public int ProjectAdditionalId { get; set; }
-
-        [DisplayName("Легенда")]
-        public string Legend { get; set; }
+        public int? ProjectAdditionalId { get; set; }
 
         [DisplayName("Маркетинг")]
         public string Marketing { get; set; }

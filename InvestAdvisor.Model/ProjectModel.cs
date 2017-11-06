@@ -19,6 +19,8 @@ namespace InvestAdvisor.Model
 
         public ProjectAdditionalModel Additional { get; set; }
 
+        public ProjectReviewModel Review { get; set; }
+
         public List<ImageModel> Images { get; set; }
     }
 }

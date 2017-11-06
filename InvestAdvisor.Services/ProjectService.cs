@@ -23,47 +23,55 @@ namespace InvestAdvisor.Services
 
         public async Task<List<ProjectModel>> GetAll()
         {
-            var projects = await _projectRepository.Get().ToListAsync();
-            var projectModels = projects.Select(p => new ProjectModel
+            var projectModels = await _projectRepository.Get().Select(p => new ProjectModel
             {
                 ProjectId = p.ProjectId,
                 Name = p.Name,
                 Description = p.Description,
                 Url = p.Url
-            }).ToList();
+            }).ToListAsync();
+            
             return projectModels;
         }
 
         public async Task<ProjectModel> FindById(int projectId)
         {
-            var project = _projectRepository
-                .GetWithInclude(p => p.ProjectId == projectId, p => p.Images, p => p.Additional)
-                .FirstOrDefault();
+            var project = await _projectRepository.FindByIdAsync(projectId);
 
             if (project == null)
                 return null;
 
-            return new ProjectModel
+            var projectModel = new ProjectModel
             {
                 ProjectId = project.ProjectId,
                 Name = project.Name,
                 Description = project.Description,
-                Url = project.Url,
-                Images = project.Images.Select(i => new ImageModel
+                Url = project.Url
+            };
+            if (project.Images != null)
+                projectModel.Images = project.Images.Select(i => new ImageModel
                 {
                     ImageId = i.ImageId,
                     Name = i.Name,
                     ImageType = i.ImageType,
                     Content = i.Content
-                }).ToList(),
-                Additional = new ProjectAdditionalModel
+                }).ToList();
+            if (project.Additional != null)
+                projectModel.Additional = new ProjectAdditionalModel
                 {
                     ProjectAdditionalId = project.Additional.ProjectAdditionalId,
                     Marketing = project.Additional.Marketing,
                     Referral = project.Additional.Referral,
                     StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
-                }
-            };
+                };
+            if (project.Review != null)
+                projectModel.Review = new ProjectReviewModel
+                {
+                    ProjectReviewId = project.Review.ProjectReviewId,
+                    Review = project.Review.Review
+                };
+
+            return projectModel;
         }
 
         public async Task Create(ProjectModel model)
@@ -100,14 +108,48 @@ namespace InvestAdvisor.Services
             if (project == null)
                 return;
 
-            var additional = new ProjectAdditional
+            if (project.Additional == null)
             {
-                Marketing = model.Marketing,
-                Referral = model.Referral,
-                StartDate = !string.IsNullOrEmpty(model.StartDate) ? DateTime.Parse(model.StartDate) : default(DateTime?) 
-            };
+                project.Additional = new ProjectAdditional
+                {
+                    Marketing = model.Marketing,
+                    Referral = model.Referral,
+                    StartDate = !string.IsNullOrEmpty(model.StartDate)
+                        ? DateTime.Parse(model.StartDate)
+                        : default(DateTime?)
+                };
+            }
+            else
+            {
+                project.Additional.Marketing = model.Marketing;
+                project.Additional.Referral = model.Referral;
+                project.Additional.StartDate = !string.IsNullOrEmpty(model.StartDate)
+                    ? DateTime.Parse(model.StartDate)
+                    : default(DateTime?);
+            }
 
-            project.Additional = additional;
+            _projectRepository.Update(project);
+            await _projectRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateReview(int projectId, ProjectReviewModel model)
+        {
+            var project = await _projectRepository.FindByIdAsync(projectId);
+
+            if (project == null)
+                return;
+
+            if (project.Review == null)
+            {
+                project.Review = new ProjectReview
+                {
+                    Review = model.Review
+                };
+            }
+            else
+            {
+                project.Review.Review = model.Review;
+            }
 
             _projectRepository.Update(project);
             await _projectRepository.SaveChangesAsync();

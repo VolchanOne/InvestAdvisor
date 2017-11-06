@@ -83,6 +83,17 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             return RedirectToAction("Edit", new {id = projectId});
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditReview(int projectId, ProjectReviewModel review)
+        {
+            if (ModelState.IsValid)
+            {
+                await _projectService.UpdateReview(projectId, review);
+            }
+            return RedirectToAction("Edit", new { id = projectId });
+        }
+
         // GET: Admin/Projects/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

@@ -12,7 +12,7 @@ namespace InvestAdvisor.Web.Areas.Admin
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "InvestAdvisor.Web.Areas.Admin..Controllers" }
+                new[] { "InvestAdvisor.Web.Areas.Admin.Controllers" }
             );
         }
     }
