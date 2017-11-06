@@ -12,7 +12,7 @@ namespace InvestAdvisor.Web.Controllers
     {
         public ActionResult All()
         {
-            return View("ProjectsList",new BaseViewModel{ActiveMenuItem = MenuItem.Project});
+            return View(new BaseViewModel{ActiveMenuItem = MenuItem.Project});
         }
     }
 }

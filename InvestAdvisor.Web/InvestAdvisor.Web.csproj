@@ -499,7 +499,6 @@
     <Content Include="Styles\icons\weather-icons\less\css\variables-night.css" />
     <Content Include="Styles\icons\weather-icons\less\css\variables-time.css" />
     <Content Include="Styles\icons\weather-icons\less\css\variables-wind-names.css" />
-    <Content Include="Styles\megna-dark.css" />
     <Content Include="Styles\site.css" />
     <Content Include="Styles\spinners.css" />
     <Content Include="Styles\template.css" />
@@ -711,7 +710,7 @@
     <Content Include="Styles\icons\weather-icons\sass\weather-icons-wind.scss" />
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.scss" />
-    <Content Include="Views\Projects\ProjectsList.cshtml" />
+    <Content Include="Views\Projects\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">

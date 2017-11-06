@@ -59,7 +59,6 @@ namespace InvestAdvisor.Services
                 Additional = new ProjectAdditionalModel
                 {
                     ProjectAdditionalId = project.Additional.ProjectAdditionalId,
-                    Legend = project.Additional.Legend,
                     Marketing = project.Additional.Marketing,
                     Referral = project.Additional.Referral,
                     StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
@@ -103,7 +102,6 @@ namespace InvestAdvisor.Services
 
             var additional = new ProjectAdditional
             {
-                Legend = model.Legend,
                 Marketing = model.Marketing,
                 Referral = model.Referral,
                 StartDate = !string.IsNullOrEmpty(model.StartDate) ? DateTime.Parse(model.StartDate) : default(DateTime?) 
