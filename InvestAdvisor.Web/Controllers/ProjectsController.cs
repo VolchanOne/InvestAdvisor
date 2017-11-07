@@ -14,5 +14,10 @@ namespace InvestAdvisor.Web.Controllers
         {
             return View(new BaseViewModel{ActiveMenuItem = MenuItem.Project});
         }
+
+        public ActionResult GetProjectDetails()
+        {
+            return null;
+        }
     }
 }

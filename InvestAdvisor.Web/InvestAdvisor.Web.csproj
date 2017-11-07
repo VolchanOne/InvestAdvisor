@@ -711,6 +711,7 @@
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.scss" />
     <Content Include="Views\Projects\All.cshtml" />
+    <Content Include="Views\ProjectListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">
