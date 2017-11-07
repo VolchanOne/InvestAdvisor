@@ -23,7 +23,9 @@ namespace InvestAdvosor.Entities
 
         public string Url { get; set; }
 
-        public DateTime? PublishedAt { get; set; }
+        public bool IsActive { get; set; }
+
+        public bool InPortofolio { get; set; }
 
         public int? ProjectAdditionalId { get; set; }
         public int? ProjectTechId { get; set; }

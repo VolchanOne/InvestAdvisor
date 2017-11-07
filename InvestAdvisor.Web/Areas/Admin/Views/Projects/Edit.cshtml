@@ -78,10 +78,10 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Дополнительная информация</h4>
+            <h4 class="card-title">Обзор</h4>
             <div class="row">
                 <div class="col-sm-12">
                     @using (Html.BeginForm("EditReview", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
@@ -153,7 +153,7 @@
                         <tbody>
                             @{int i = 1;}
                             @foreach (var image in Model.Images)
-                {
+                            {
                                 <tr>
                                     <td>
                                         @i
@@ -179,8 +179,55 @@
         </div>
                                 }
 
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditActivity", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        <h4>Параметры</h4>
+                        <div class="form-group">
+                            <input type="checkbox" name="InPortfolio" id="InPortfolio" class="chk-col-blue" onclick="checkboxClick()" @(Model.InPortofolio ? "checked= \"\"" : string.Empty) >
+                            <label for="InPortfolio">В портфель</label>
+                            <input name="InPortfolio" type="hidden" value="@Model.InPortofolio.ToString()">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" name="IsActive" id="IsActive" class="chk-col-blue" onclick="checkboxClick()" @(Model.IsActive ? "checked= \"\"" : string.Empty)>
+                            <label for="IsActive">В портфель</label>
+                            <input name="IsActive" type="hidden" value="@Model.IsActive.ToString()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button type="button" class="btn waves-effect waves-light btn-secondary">
         @Html.ActionLink("Назад к списку", "Index")
     </button>
 
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        function checkboxClick() {
+            var target = event.target || event.srcElement;
+            if (target != null) {
+                var value = target.checked;
+                var inputs = $('input[name=' + target.name + ']');
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].value = value;
+                }
+            }
+        }
+    </script>
+}

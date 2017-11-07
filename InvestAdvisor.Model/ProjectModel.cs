@@ -17,6 +17,10 @@ namespace InvestAdvisor.Model
         [DisplayName("Ссылка")]
         public string Url { get; set; }
 
+        public bool IsActive { get; set; }
+
+        public bool InPortofolio { get; set; }
+
         public ProjectAdditionalModel Additional { get; set; }
 
         public ProjectReviewModel Review { get; set; }

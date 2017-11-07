@@ -46,7 +46,9 @@ namespace InvestAdvisor.Services
                 ProjectId = project.ProjectId,
                 Name = project.Name,
                 Description = project.Description,
-                Url = project.Url
+                Url = project.Url,
+                IsActive = project.IsActive,
+                InPortofolio = project.InPortofolio
             };
             if (project.Images != null)
                 projectModel.Images = project.Images.Select(i => new ImageModel
@@ -155,13 +157,26 @@ namespace InvestAdvisor.Services
             await _projectRepository.SaveChangesAsync();
         }
 
-        public async Task Delete(int projectId)
+        public async Task UpdateActivity(int projectId, bool inPortfolio, bool isActive)
         {
             var project = await _projectRepository.FindByIdAsync(projectId);
 
             if (project == null)
                 return;
 
+            project.InPortofolio = inPortfolio;
+            project.IsActive = isActive;
+
+            _projectRepository.Update(project);
+            await _projectRepository.SaveChangesAsync();
+        }
+
+        public async Task Delete(int projectId)
+        {
+            var project = await _projectRepository.FindByIdAsync(projectId);
+
+            if (project == null)
+                return;
 
             project.Images.ForEach(i => _imageRepository.Remove(i));
 
