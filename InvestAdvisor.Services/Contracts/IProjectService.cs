@@ -8,6 +8,8 @@ namespace InvestAdvisor.Services.Contracts
     {
         Task<List<ProjectModel>> GetAll();
 
+        Task<List<ProjectModel>> GetAllWithAdditional();
+
         Task<ProjectModel> FindById(int projectId);
 
         Task Create(ProjectModel model);
@@ -20,7 +22,7 @@ namespace InvestAdvisor.Services.Contracts
 
         Task UpdateReview(int projectId, ProjectReviewModel review);
 
-        Task UpdateActivity(int projectId, bool inPortfolio, bool isActive);
+        Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive);
 
         Task AddImage(int projectId, ImageModel image);
 

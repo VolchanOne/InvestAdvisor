@@ -1,17 +1,23 @@
-﻿using System.Web.Mvc;
-using InvestAdvisor.Web.Models;
-using InvestAdvisor.Web.Models.Enums;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using InvestAdvisor.Services.Contracts;
 
 namespace InvestAdvisor.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IViewModelService _viewService;
+
+        public HomeController(IViewModelService viewService)
         {
-            return View(new BaseViewModel
-            {
-                ActiveMenuItem = MenuItem.Home
-            });
+            _viewService = viewService;
+        }
+
+        public async Task <ActionResult> Index()
+        {
+            var model = await _viewService.GetHomeModel();
+
+            return View(model);
         }
     }
 }

@@ -18,6 +18,8 @@ namespace InvestAdvisor.Web
             container.RegisterType<IImageRepository, ImageRepository>();
             container.RegisterType<IProjectRepository, ProjectRepository>();
 
+            container.RegisterType<IViewModelService,ViewModelService>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

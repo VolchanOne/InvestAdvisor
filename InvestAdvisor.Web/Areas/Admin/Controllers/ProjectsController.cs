@@ -69,7 +69,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 await _projectService.Update(model);
             }
-            return RedirectToAction("Edit", new {id = model.ProjectId});
+            return RedirectToAction("Edit", new { id = model.ProjectId });
         }
 
         [HttpPost]
@@ -80,7 +80,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 await _projectService.UpdateAdditional(projectId, additional);
             }
-            return RedirectToAction("Edit", new {id = projectId});
+            return RedirectToAction("Edit", new { id = projectId });
         }
 
         [HttpPost]
@@ -96,12 +96,11 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditActivity(int projectId, bool inPortfolio, bool isActive)
+        public async Task<ActionResult> EditActivity(int projectId, bool? inPortfolio, bool? isActive)
         {
-            if (ModelState.IsValid)
-            {
+            if (inPortfolio.HasValue || isActive.HasValue)
                 await _projectService.UpdateActivity(projectId, inPortfolio, isActive);
-            }
+
             return RedirectToAction("Edit", new { id = projectId });
         }
 
@@ -140,16 +139,16 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
                 {
                     Name = imageUploaded.FileName,
                     Content = imageUploaded.GetBytes(),
-                    ImageType = (ImageType) imageType
+                    ImageType = (ImageType)imageType
                 });
             }
-            return RedirectToAction("Edit", new {id = projectId});
+            return RedirectToAction("Edit", new { id = projectId });
         }
 
         public async Task<ActionResult> DeleteImage(int projectId, int imageId)
         {
             await _projectService.DeleteImage(imageId);
-            return RedirectToAction("Edit", new {id = projectId});
+            return RedirectToAction("Edit", new { id = projectId });
         }
     }
 }

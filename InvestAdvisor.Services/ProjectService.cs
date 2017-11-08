@@ -28,9 +28,25 @@ namespace InvestAdvisor.Services
                 ProjectId = p.ProjectId,
                 Name = p.Name,
                 Description = p.Description,
-                Url = p.Url
+                Url = p.Url,
+                ActivatedAt = p.ActivatedAt,
+                InPortofolio = p.InPortofolio
             }).ToListAsync();
-            
+
+            return projectModels;
+        }
+
+        public async Task<List<ProjectModel>> GetAllWithAdditional()
+        {
+            var projectModels = new List<ProjectModel>();
+
+            var projects = _projectRepository.GetWithInclude(p => p.IsActive, p => p.Additional, p => p.Images);
+            foreach (var project in projects)
+            {
+                var projectModel = ProjectToProjectModel(project);
+                projectModels.Add(projectModel);
+            }
+
             return projectModels;
         }
 
@@ -41,37 +57,7 @@ namespace InvestAdvisor.Services
             if (project == null)
                 return null;
 
-            var projectModel = new ProjectModel
-            {
-                ProjectId = project.ProjectId,
-                Name = project.Name,
-                Description = project.Description,
-                Url = project.Url,
-                IsActive = project.IsActive,
-                InPortofolio = project.InPortofolio
-            };
-            if (project.Images != null)
-                projectModel.Images = project.Images.Select(i => new ImageModel
-                {
-                    ImageId = i.ImageId,
-                    Name = i.Name,
-                    ImageType = i.ImageType,
-                    Content = i.Content
-                }).ToList();
-            if (project.Additional != null)
-                projectModel.Additional = new ProjectAdditionalModel
-                {
-                    ProjectAdditionalId = project.Additional.ProjectAdditionalId,
-                    Marketing = project.Additional.Marketing,
-                    Referral = project.Additional.Referral,
-                    StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
-                };
-            if (project.Review != null)
-                projectModel.Review = new ProjectReviewModel
-                {
-                    ProjectReviewId = project.Review.ProjectReviewId,
-                    Review = project.Review.Review
-                };
+            var projectModel = ProjectToProjectModel(project);
 
             return projectModel;
         }
@@ -157,15 +143,21 @@ namespace InvestAdvisor.Services
             await _projectRepository.SaveChangesAsync();
         }
 
-        public async Task UpdateActivity(int projectId, bool inPortfolio, bool isActive)
+        public async Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive)
         {
             var project = await _projectRepository.FindByIdAsync(projectId);
 
             if (project == null)
                 return;
 
-            project.InPortofolio = inPortfolio;
-            project.IsActive = isActive;
+            if (inPortfolio.HasValue)
+                project.InPortofolio = inPortfolio.Value;
+            if (isActive.HasValue)
+            {
+                if (isActive.Value)
+                    project.ActivatedAt = DateTime.Now;
+                project.IsActive = isActive.Value;
+            }
 
             _projectRepository.Update(project);
             await _projectRepository.SaveChangesAsync();
@@ -208,6 +200,43 @@ namespace InvestAdvisor.Services
                 return;
             _imageRepository.Remove(image);
             await _imageRepository.SaveChangesAsync();
+        }
+
+        private static ProjectModel ProjectToProjectModel(Project project)
+        {
+            var projectModel = new ProjectModel
+            {
+                ProjectId = project.ProjectId,
+                Name = project.Name,
+                Description = project.Description,
+                Url = project.Url,
+                IsActive = project.IsActive,
+                ActivatedAt = project.ActivatedAt,
+                InPortofolio = project.InPortofolio
+            };
+            if (project.Images != null)
+                projectModel.Images = project.Images.Select(i => new ImageModel
+                {
+                    ImageId = i.ImageId,
+                    Name = i.Name,
+                    ImageType = i.ImageType,
+                    Content = i.Content
+                }).ToList();
+            if (project.Additional != null)
+                projectModel.Additional = new ProjectAdditionalModel
+                {
+                    ProjectAdditionalId = project.Additional.ProjectAdditionalId,
+                    Marketing = project.Additional.Marketing,
+                    Referral = project.Additional.Referral,
+                    StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
+                };
+            if (project.Review != null)
+                projectModel.Review = new ProjectReviewModel
+                {
+                    ProjectReviewId = project.Review.ProjectReviewId,
+                    Review = project.Review.Review
+                };
+            return projectModel;
         }
     }
 }

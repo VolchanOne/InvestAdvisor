@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using InvestAdvisor.Web.Models;
-using InvestAdvisor.Web.Models.Enums;
+﻿using System.Web.Mvc;
+using InvestAdvisor.Model.Views;
+using InvestAdvisor.Model.Views.Enums;
 
 namespace InvestAdvisor.Web.Controllers
 {
     public class ProjectsController : Controller
     {
-        public ActionResult All()
+        public ActionResult All(string orderBy)
         {
-            return View(new BaseViewModel{ActiveMenuItem = MenuItem.Project});
+            return View(new BaseViewModel(MenuItem.Project));
         }
 
         public ActionResult GetProjectDetails()

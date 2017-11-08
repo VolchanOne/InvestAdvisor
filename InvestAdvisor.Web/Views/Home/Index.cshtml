@@ -1,65 +1,46 @@
-﻿
+﻿@model InvestAdvisor.Model.Views.HomeViewModel
 
-<div class="row page-titles">
-    <div class="col-9 align-self-center">
-        <h3 class="text-themecolor">Новые проекты</h3>
-    </div>
-    <div class="col-3">
-        <a href="@Url.Action("All","Projects")" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все проекты">...</a>
-    </div>
+@{
+    var newProjects = Model.Projects.OrderByDescending(p => p.ActivatedAt).Take(4).ToList();
+}
+@if (Model.Projects.Count > 0)
+{
+    if (newProjects.Count > 0)
+    {
+        <div class="row page-titles">
+            <div class="col-9 align-self-center">
+                <h3 class="text-themecolor">Новые проекты</h3>
+            </div>
+            <div class="col-3">
+                <a href="@Url.Action("All", "Projects", new {orderBy = "StartDate"})" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все новые проекты">...</a>
+            </div>
+        </div>
 
-</div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    @Html.Partial("ProjectListItem", newProjects[0])
+                </div>
+                @if (newProjects.Count > 1)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        @Html.Partial("ProjectListItem", newProjects[1])
+                    </div>
+                }
+                @if (newProjects.Count > 2)
+                {
+                    <div class="col-lg-3 col-md-4 hidden-sm-down">
+                        @Html.Partial("ProjectListItem", newProjects[2])
+                    </div>
+                }
+                @if (newProjects.Count > 3)
+                {
+                    <div class="col-lg-3 hidden-md-down">
+                        @Html.Partial("ProjectListItem", newProjects[3])
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card text-center">
-                <div class="card-body">
-                    <div class="ribbon ribbon-bookmark ribbon-vertical-r ribbon-info"><i class="mdi mdi-briefcase-check"></i></div>
-                    <img src="~/Images/logo.png" class="img-circle border" width="150"/>
-                    <h4 class="card-title m-t-10">X-Traders</h4>
-                    <h6 class="card-subtitle">Доверительное управление на Forex</h6>
-                    <p>Доходность: до 17% в месяц</p>
-                    <p>Партнерская программа: 10% 5% 2%</p>
-                    <button href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-outline-info btn-md btn-rounded">Подробнее</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card text-center">
-                <div class="card-body">
-                    <img src="~/Images/coinreum-logo.png" class="img-circle border" width="150" />
-                    <h4 class="card-title m-t-10">X-Traders</h4>
-                    <h6 class="card-subtitle">Доверительное управление на Forex</h6>
-                    <p>Доходность: до 17% в месяц</p>
-                    <p>Партнерская программа: 10% 5% 2%</p>
-                    <button href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-info btn-md btn-rounded">Подробнее</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-4 hidden-sm-down">
-            <div class="card text-center">
-                <div class="card-body">
-                    <img src="~/Images/logo.png" class="img-circle border" width="150" />
-                    <h4 class="card-title m-t-10">X-Traders</h4>
-                    <h6 class="card-subtitle">Доверительное управление на Forex</h6>
-                    <p>Доходность: до 17% в месяц</p>
-                    <p>Партнерская программа: 10% 5% 2%</p>
-                    <button href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-info btn-md btn-rounded">Подробнее</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 hidden-md-down">
-            <div class="card text-center">
-                <div class="card-body">
-                    <img src="~/Images/coinreum-logo.png" class="img-circle border" width="150" />
-                    <h4 class="card-title m-t-10">X-Traders</h4>
-                    <h6 class="card-subtitle">Доверительное управление на Forex</h6>
-                    <p>Доходность: до 17% в месяц</p>
-                    <p>Партнерская программа: 10% 5% 2%</p>
-                    <button href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-info btn-md btn-rounded">Подробнее</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

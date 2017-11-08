@@ -15,5 +15,7 @@ namespace InvestAdvisor.Model
 
         [DisplayName("Дата старта")]
         public string StartDate { get; set; }
+
+        public string StartDateView => !string.IsNullOrEmpty(StartDate) ? DateTime.Parse(StartDate).ToString("dd.MM.yyyy") : null;
     }
 }

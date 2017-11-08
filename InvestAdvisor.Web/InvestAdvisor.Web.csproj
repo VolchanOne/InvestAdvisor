@@ -181,8 +181,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaseViewModel.cs" />
-    <Compile Include="Models\Enums\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +518,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\" />
     <Folder Include="fonts\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\web.config" />
@@ -711,7 +710,7 @@
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="Styles\icons\weather-icons\sass\weather-icons.scss" />
     <Content Include="Views\Projects\All.cshtml" />
-    <Content Include="Views\ProjectListItem.cshtml" />
+    <Content Include="Views\Shared\ProjectListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">
