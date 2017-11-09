@@ -18,7 +18,7 @@ namespace InvestAdvisor.Services
         {
             var model = new HomeViewModel(MenuItem.Home);
 
-            model.Projects = await _projectService.GetAllWithAdditional();
+            model.Projects = await _projectService.GetProjectsWithAdditional();
 
             return model;
         }

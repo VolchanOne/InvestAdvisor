@@ -49,14 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IImageRepository.cs" />
-    <Compile Include="Contracts\IProjectRepository.cs" />
-    <Compile Include="GenericRepository.cs" />
-    <Compile Include="Contracts\IGenericRepository.cs" />
-    <Compile Include="ImageRepository.cs" />
     <Compile Include="InvestAdvisorDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

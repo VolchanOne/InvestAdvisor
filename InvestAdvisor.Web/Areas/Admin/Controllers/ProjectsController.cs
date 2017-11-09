@@ -21,7 +21,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         // GET: Admin/Projects
         public async Task<ActionResult> Index()
         {
-            var projects = await _projectService.GetAll();
+            var projects = await _projectService.GetProjects();
 
             return View(projects);
         }

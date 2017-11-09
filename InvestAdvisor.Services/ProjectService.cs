@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using InvestAdvisor.Data.Contracts;
+using InvestAdvisor.Data;
 using InvestAdvisor.Model;
 using InvestAdvisor.Services.Contracts;
 using InvestAdvosor.Entities;
@@ -12,197 +12,205 @@ namespace InvestAdvisor.Services
 {
     public class ProjectService : IProjectService
     {
-        private readonly IProjectRepository _projectRepository;
-        private readonly IImageRepository _imageRepository;
-
-        public ProjectService(IProjectRepository projectRepository, IImageRepository imageRepository)
+        public async Task<List<ProjectModel>> GetProjects()
         {
-            _projectRepository = projectRepository;
-            _imageRepository = imageRepository;
-        }
-
-        public async Task<List<ProjectModel>> GetAll()
-        {
-            var projectModels = await _projectRepository.Get().Select(p => new ProjectModel
+            using (var db = new InvestAdvisorDbContext())
             {
-                ProjectId = p.ProjectId,
-                Name = p.Name,
-                Description = p.Description,
-                Url = p.Url,
-                ActivatedAt = p.ActivatedAt,
-                InPortofolio = p.InPortofolio
-            }).ToListAsync();
+                var projects = await db.Projects.ToListAsync();
 
-            return projectModels;
-        }
+                var projectModels = projects.Select(p => ProjectToProjectModel(p, false, false)).ToList();
 
-        public async Task<List<ProjectModel>> GetAllWithAdditional()
-        {
-            var projectModels = new List<ProjectModel>();
-
-            var projects = _projectRepository.GetWithInclude(p => p.IsActive, p => p.Additional, p => p.Images);
-            foreach (var project in projects)
-            {
-                var projectModel = ProjectToProjectModel(project);
-                projectModels.Add(projectModel);
+                return projectModels;
             }
+        }
 
-            return projectModels;
+        public async Task<List<ProjectModel>> GetProjectsWithAdditional()
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var projects = await db.Projects.ToListAsync();
+
+                var projectModels = projects.Select(p => ProjectToProjectModel(p, true, false)).ToList();
+
+                return projectModels;
+            }
         }
 
         public async Task<ProjectModel> FindById(int projectId)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return null;
+                var projectModel = ProjectToProjectModel(project, true, true);
 
-            if (project == null)
-                return null;
-
-            var projectModel = ProjectToProjectModel(project);
-
-            return projectModel;
+                return projectModel;
+            }
         }
 
         public async Task Create(ProjectModel model)
         {
-            _projectRepository.Create(new Project
+            using (var db = new InvestAdvisorDbContext())
             {
-                ProjectId = model.ProjectId,
-                Name = model.Name
-            });
-
-            await _projectRepository.SaveChangesAsync();
+                db.Projects.Add(new Project
+                {
+                    ProjectId = model.ProjectId,
+                    Name = model.Name
+                });
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task Update(ProjectModel model)
         {
-            var project = await _projectRepository.FindByIdAsync(model.ProjectId);
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var project = await db.Projects.FindAsync(model.ProjectId);
+                if (project == null)
+                    return;
 
-            if (project == null)
-                return;
+                project.ProjectId = model.ProjectId;
+                project.Name = model.Name;
+                project.Description = model.Description;
+                project.Url = model.Url;
 
-            project.ProjectId = model.ProjectId;
-            project.Name = model.Name;
-            project.Description = model.Description;
-            project.Url = model.Url;
-
-            _projectRepository.Update(project);
-            await _projectRepository.SaveChangesAsync();
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateAdditional(int projectId, ProjectAdditionalModel model)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
-
-            if (project == null)
-                return;
-
-            if (project.Additional == null)
+            using (var db = new InvestAdvisorDbContext())
             {
-                project.Additional = new ProjectAdditional
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                if (project.Additional == null)
                 {
-                    Marketing = model.Marketing,
-                    Referral = model.Referral,
-                    StartDate = !string.IsNullOrEmpty(model.StartDate)
+                    project.Additional = new ProjectAdditional
+                    {
+                        Marketing = model.Marketing,
+                        Referral = model.Referral,
+                        StartDate = !string.IsNullOrEmpty(model.StartDate)
+                            ? DateTime.Parse(model.StartDate)
+                            : default(DateTime?)
+                    };
+                }
+                else
+                {
+                    project.Additional.Marketing = model.Marketing;
+                    project.Additional.Referral = model.Referral;
+                    project.Additional.StartDate = !string.IsNullOrEmpty(model.StartDate)
                         ? DateTime.Parse(model.StartDate)
-                        : default(DateTime?)
-                };
-            }
-            else
-            {
-                project.Additional.Marketing = model.Marketing;
-                project.Additional.Referral = model.Referral;
-                project.Additional.StartDate = !string.IsNullOrEmpty(model.StartDate)
-                    ? DateTime.Parse(model.StartDate)
-                    : default(DateTime?);
-            }
+                        : default(DateTime?);
+                }
 
-            _projectRepository.Update(project);
-            await _projectRepository.SaveChangesAsync();
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateReview(int projectId, ProjectReviewModel model)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
-
-            if (project == null)
-                return;
-
-            if (project.Review == null)
+            using (var db = new InvestAdvisorDbContext())
             {
-                project.Review = new ProjectReview
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                if (project.Review == null)
                 {
-                    Review = model.Review
-                };
-            }
-            else
-            {
-                project.Review.Review = model.Review;
-            }
+                    project.Review = new ProjectReview
+                    {
+                        Review = model.Review
+                    };
+                }
+                else
+                {
+                    project.Review.Review = model.Review;
+                }
 
-            _projectRepository.Update(project);
-            await _projectRepository.SaveChangesAsync();
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
-
-            if (project == null)
-                return;
-
-            if (inPortfolio.HasValue)
-                project.InPortofolio = inPortfolio.Value;
-            if (isActive.HasValue)
+            using (var db = new InvestAdvisorDbContext())
             {
-                if (isActive.Value)
-                    project.ActivatedAt = DateTime.Now;
-                project.IsActive = isActive.Value;
-            }
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
 
-            _projectRepository.Update(project);
-            await _projectRepository.SaveChangesAsync();
+                if (inPortfolio.HasValue)
+                    project.InPortofolio = inPortfolio.Value;
+                if (isActive.HasValue)
+                {
+                    if (isActive.Value && !project.ActivatedAt.HasValue)
+                        project.ActivatedAt = DateTime.Now;
+                    project.IsActive = isActive.Value;
+                }
+
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task Delete(int projectId)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
 
-            if (project == null)
-                return;
+                project.Images?.ForEach(i => db.Images.Remove(i));
 
-            project.Images.ForEach(i => _imageRepository.Remove(i));
-
-            _projectRepository.Remove(project);
-            await _projectRepository.SaveChangesAsync();
+                db.Projects.Remove(project);
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task AddImage(int projectId, ImageModel image)
         {
-            var project = await _projectRepository.FindByIdAsync(projectId);
-
-            if (project == null)
-                return;
-
-            project.Images.Add(new Image
+            using (var db = new InvestAdvisorDbContext())
             {
-                Name = image.Name,
-                Content = image.Content,
-                ImageType = image.ImageType
-            });
-            _projectRepository.Update(project);
-            await _projectRepository.SaveChangesAsync();
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                project.Images.Add(new Image
+                {
+                    Name = image.Name,
+                    Content = image.Content,
+                    ImageType = image.ImageType
+                });
+
+                db.Entry(project).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteImage(int imageId)
         {
-            var image = await _imageRepository.FindByIdAsync(imageId);
-            if (image == null)
-                return;
-            _imageRepository.Remove(image);
-            await _imageRepository.SaveChangesAsync();
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var image = await db.Images.FindAsync(imageId);
+                if (image == null)
+                    return;
+
+                db.Images.Remove(image);
+
+                await db.SaveChangesAsync();
+            }
         }
 
-        private static ProjectModel ProjectToProjectModel(Project project)
+        private static ProjectModel ProjectToProjectModel(Project project, bool withAdditional, bool withReview)
         {
             var projectModel = new ProjectModel
             {
@@ -222,7 +230,7 @@ namespace InvestAdvisor.Services
                     ImageType = i.ImageType,
                     Content = i.Content
                 }).ToList();
-            if (project.Additional != null)
+            if (withAdditional && project.Additional != null)
                 projectModel.Additional = new ProjectAdditionalModel
                 {
                     ProjectAdditionalId = project.Additional.ProjectAdditionalId,
@@ -230,7 +238,7 @@ namespace InvestAdvisor.Services
                     Referral = project.Additional.Referral,
                     StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
                 };
-            if (project.Review != null)
+            if (withReview && project.Review != null)
                 projectModel.Review = new ProjectReviewModel
                 {
                     ProjectReviewId = project.Review.ProjectReviewId,

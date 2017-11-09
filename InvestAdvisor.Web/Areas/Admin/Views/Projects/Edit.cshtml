@@ -94,7 +94,7 @@
 
                         <div class="form-group">
                             @Html.LabelFor(m => m.Review.Review)
-                            @Html.TextBoxFor(m => m.Review.Review, new { @class = "form-control" })
+                            @Html.TextAreaFor(m => m.Review.Review, new { @class = "form-control", @rows = 5 })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>

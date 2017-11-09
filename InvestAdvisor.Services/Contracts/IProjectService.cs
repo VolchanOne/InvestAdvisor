@@ -6,11 +6,14 @@ namespace InvestAdvisor.Services.Contracts
 {
     public interface IProjectService
     {
-        Task<List<ProjectModel>> GetAll();
+        Task<List<ProjectModel>> GetProjects();
 
-        Task<List<ProjectModel>> GetAllWithAdditional();
+        Task<List<ProjectModel>> GetProjectsWithAdditional();
 
         Task<ProjectModel> FindById(int projectId);
+
+
+
 
         Task Create(ProjectModel model);
 
