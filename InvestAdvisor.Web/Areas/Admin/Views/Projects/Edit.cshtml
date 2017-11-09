@@ -181,6 +181,40 @@
 
     <div class="card">
         <div class="card-body">
+            <h4 class="card-title">Редактирование проекта</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditTechInfo", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        @Html.HiddenFor(model => model.TechInfo.ProjectTechId)
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TechInfo.Domain)
+                            @Html.TextBoxFor(m => m.TechInfo.Domain, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TechInfo.Hosting)
+                            @Html.TextBoxFor(m => m.TechInfo.Hosting, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TechInfo.Ssl)
+                            @Html.TextBoxFor(m => m.TechInfo.Ssl, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
                     @using (Html.BeginForm("EditActivity", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
@@ -191,7 +225,7 @@
                         @Html.HiddenFor(model => model.ProjectId)
                         <h4>Параметры</h4>
                         <div class="form-group">
-                            <input type="checkbox" name="InPortfolio" id="InPortfolio" class="chk-col-blue" onclick="checkboxClick()" @(Model.InPortofolio ? "checked= \"\"" : string.Empty) >
+                            <input type="checkbox" name="InPortfolio" id="InPortfolio" class="chk-col-blue" onclick="checkboxClick()" @(Model.InPortofolio ? "checked= \"\"" : string.Empty)>
                             <label for="InPortfolio">В портфель</label>
                             <input name="InPortfolio" type="hidden" value="@Model.InPortofolio.ToString().ToLower()">
                         </div>
@@ -201,7 +235,7 @@
                             <label for="IsActive">Активировать</label>
                             <input name="IsActive" type="hidden" value="@Model.IsActive.ToString().ToLower()">
                         </div>
-                        
+
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
                         </div>

@@ -46,6 +46,7 @@
     <Compile Include="ProjectAdditionalModel.cs" />
     <Compile Include="ProjectModel.cs" />
     <Compile Include="ProjectReviewModel.cs" />
+    <Compile Include="ProjectTechModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\BaseViewModel.cs" />
     <Compile Include="Views\Enums\MenuItem.cs" />

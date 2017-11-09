@@ -18,7 +18,7 @@ namespace InvestAdvisor.Services
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Select(p => ProjectToProjectModel(p, false, false)).ToList();
+                var projectModels = projects.Select(p => ProjectToProjectModel(p, false, false, false)).ToList();
 
                 return projectModels;
             }
@@ -30,7 +30,7 @@ namespace InvestAdvisor.Services
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Select(p => ProjectToProjectModel(p, true, false)).ToList();
+                var projectModels = projects.Select(p => ProjectToProjectModel(p, true, false, false)).ToList();
 
                 return projectModels;
             }
@@ -43,7 +43,7 @@ namespace InvestAdvisor.Services
                 var project = await db.Projects.FindAsync(projectId);
                 if (project == null)
                     return null;
-                var projectModel = ProjectToProjectModel(project, true, true);
+                var projectModel = ProjectToProjectModel(project, true, true, true);
 
                 return projectModel;
             }
@@ -138,6 +138,35 @@ namespace InvestAdvisor.Services
             }
         }
 
+        public async Task UpdateTechInfo(int projectId, ProjectTechModel techModel)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                if (project.TechInfo == null)
+                {
+                    project.TechInfo = new ProjectTech
+                    {
+                        Domain = techModel.Domain,
+                        Hosting = techModel.Hosting,
+                        Ssl = techModel.Ssl
+                    };
+                }
+                else
+                {
+                    project.TechInfo.Domain = techModel.Domain;
+                    project.TechInfo.Hosting = techModel.Hosting;
+                    project.TechInfo.Ssl = techModel.Ssl;
+                }
+
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
         public async Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive)
         {
             using (var db = new InvestAdvisorDbContext())
@@ -222,7 +251,7 @@ namespace InvestAdvisor.Services
             }
         }
 
-        private static ProjectModel ProjectToProjectModel(Project project, bool withAdditional, bool withReview)
+        private static ProjectModel ProjectToProjectModel(Project project, bool withAdditional, bool withReview, bool withTech)
         {
             var projectModel = new ProjectModel
             {
@@ -255,6 +284,13 @@ namespace InvestAdvisor.Services
                 {
                     ProjectReviewId = project.Review.ProjectReviewId,
                     Review = project.Review.Review
+                };
+            if (withTech && project.TechInfo != null)
+                projectModel.TechInfo = new ProjectTechModel
+                {
+                    Domain = project.TechInfo.Domain,
+                    Hosting = project.TechInfo.Hosting,
+                    Ssl = project.TechInfo.Ssl
                 };
             return projectModel;
         }

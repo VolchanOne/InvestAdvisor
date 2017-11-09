@@ -34,6 +34,8 @@ namespace InvestAdvisor.Model
 
         public ProjectReviewModel Review { get; set; }
 
+        public ProjectTechModel TechInfo { get; set; }
+
         public List<ImageModel> Images { get; set; }
     }
 }

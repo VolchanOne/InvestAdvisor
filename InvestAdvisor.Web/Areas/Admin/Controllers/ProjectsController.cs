@@ -96,6 +96,17 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditTechInfo(int projectId, ProjectTechModel techInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                await _projectService.UpdateTechInfo(projectId, techInfo);
+            }
+            return RedirectToAction("Edit", new { id = projectId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditActivity(int projectId, bool? inPortfolio, bool? isActive)
         {
             if (inPortfolio.HasValue || isActive.HasValue)

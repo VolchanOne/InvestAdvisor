@@ -12,9 +12,6 @@ namespace InvestAdvisor.Services.Contracts
 
         Task<ProjectModel> FindById(int projectId);
 
-
-
-
         Task Create(ProjectModel model);
 
         Task Update(ProjectModel model);
@@ -24,6 +21,8 @@ namespace InvestAdvisor.Services.Contracts
         Task UpdateAdditional(int projectId, ProjectAdditionalModel model);
 
         Task UpdateReview(int projectId, ProjectReviewModel review);
+
+        Task UpdateTechInfo(int projectId, ProjectTechModel techModel);
 
         Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive);
 
