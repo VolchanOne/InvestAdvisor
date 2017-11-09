@@ -15,8 +15,13 @@ namespace InvestAdvisor.Data
         }
 
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectAdditional> ProjectAdditionals { get; set; }
+        public virtual DbSet<ProjectReview> ProjectReviews { get; set; }
+        public virtual DbSet<ProjectTech> ProjectTechs { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
+        
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

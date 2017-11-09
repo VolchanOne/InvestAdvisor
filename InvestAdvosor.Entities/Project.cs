@@ -38,6 +38,7 @@ namespace InvestAdvosor.Entities
         public virtual ProjectTech TechInfo { get; set; }
         public virtual ProjectReview Review { get; set; }
         public virtual List<Image> Images { get; set; }
+        public virtual List<Comment> Comments { get; set; }
         #endregion
     }
 }

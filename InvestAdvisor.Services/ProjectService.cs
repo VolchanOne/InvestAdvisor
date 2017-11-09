@@ -167,8 +167,20 @@ namespace InvestAdvisor.Services
                 var project = await db.Projects.FindAsync(projectId);
                 if (project == null)
                     return;
+                if (project.Additional != null)
+                    db.ProjectAdditionals.Remove(project.Additional);
+                if (project.Review != null)
+                    db.ProjectReviews.Remove(project.Review);
+                if (project.TechInfo != null)
+                    db.ProjectTechs.Remove(project.TechInfo);
 
-                project.Images?.ForEach(i => db.Images.Remove(i));
+                if (project.Images != null)
+                {
+                    for (var i = project.Images.Count - 1; i >= 0; i--)
+                    {
+                        db.Images.Remove(project.Images[i]);
+                    }
+                }
 
                 db.Projects.Remove(project);
                 await db.SaveChangesAsync();

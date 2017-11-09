@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace InvestAdvosor.Entities
@@ -16,6 +17,12 @@ namespace InvestAdvosor.Entities
 
         public int? ProjectId { get; set; }
 
+        public int? ImageId { get; set; }
+
         public virtual Project Project { get; set; }
+
+        public virtual Image Image { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
     }
 }
