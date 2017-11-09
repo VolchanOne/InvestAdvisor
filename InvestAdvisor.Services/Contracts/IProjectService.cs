@@ -8,7 +8,7 @@ namespace InvestAdvisor.Services.Contracts
     {
         Task<List<ProjectModel>> GetProjects();
 
-        Task<List<ProjectModel>> GetProjectsWithAdditional();
+        Task<List<ProjectModel>> GetActiveProjectsWithAdditional(string orderBy = null, string orderDir = null);
 
         Task<ProjectModel> FindById(int projectId);
 

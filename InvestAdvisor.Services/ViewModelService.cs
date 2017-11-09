@@ -18,7 +18,16 @@ namespace InvestAdvisor.Services
         {
             var model = new HomeViewModel(MenuItem.Home);
 
-            model.Projects = await _projectService.GetProjectsWithAdditional();
+            model.Projects = await _projectService.GetActiveProjectsWithAdditional();
+
+            return model;
+        }
+
+        public async Task<ProjectsViewModel> GetProjectsModel(string orderBy = null, string orderDir = null)
+        {
+            var model = new ProjectsViewModel(MenuItem.Project);
+
+            model.Projects = await _projectService.GetActiveProjectsWithAdditional(orderBy, orderDir);
 
             return model;
         }

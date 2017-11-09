@@ -2,6 +2,7 @@
 
 @{
     var newProjects = Model.Projects.OrderByDescending(p => p.ActivatedAt).Take(4).ToList();
+    var startNewProjects = Model.Projects.OrderBy(p => p.Additional.StartDate).Take(4).ToList();
 }
 @if (Model.Projects.Count > 0)
 {
@@ -9,10 +10,10 @@
     {
         <div class="row page-titles">
             <div class="col-9 align-self-center">
-                <h3 class="text-themecolor">Новые проекты</h3>
+                <h3 class="text-themecolor">Новые проекты на блоге</h3>
             </div>
             <div class="col-3">
-                <a href="@Url.Action("All", "Projects", new {orderBy = "StartDate"})" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все новые проекты">...</a>
+                <a href="@Url.Action("All", "Projects", new {orderDir = "Desc"})" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все новые проекты на блоге">...</a>
             </div>
         </div>
 
@@ -37,6 +38,44 @@
                 {
                     <div class="col-lg-3 hidden-md-down">
                         @Html.Partial("ProjectListItem", newProjects[3])
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    if (startNewProjects.Count > 0)
+    {
+        <div class="row page-titles">
+            <div class="col-9 align-self-center">
+                <h3 class="text-themecolor">Новые проекты в работе</h3>
+            </div>
+            <div class="col-3">
+                <a href="@Url.Action("All", "Projects", new {orderBy = "StartDate"})" class="btn btn-secondary btn-circle pull-right" data-toggle="tooltip" data-placement="left" title="" data-original-title="Все новые проекты в работе">...</a>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    @Html.Partial("ProjectListItem", startNewProjects[0])
+                </div>
+                @if (startNewProjects.Count > 1)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        @Html.Partial("ProjectListItem", startNewProjects[1])
+                    </div>
+                }
+                @if (startNewProjects.Count > 2)
+                {
+                    <div class="col-lg-3 col-md-4 hidden-sm-down">
+                        @Html.Partial("ProjectListItem", startNewProjects[2])
+                    </div>
+                }
+                @if (startNewProjects.Count > 3)
+                {
+                    <div class="col-lg-3 hidden-md-down">
+                        @Html.Partial("ProjectListItem", startNewProjects[3])
                     </div>
                 }
             </div>

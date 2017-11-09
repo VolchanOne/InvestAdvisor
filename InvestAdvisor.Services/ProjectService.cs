@@ -24,15 +24,25 @@ namespace InvestAdvisor.Services
             }
         }
 
-        public async Task<List<ProjectModel>> GetProjectsWithAdditional()
+        public async Task<List<ProjectModel>> GetActiveProjectsWithAdditional(string orderBy = null, string orderDir = null)
         {
             using (var db = new InvestAdvisorDbContext())
             {
                 var projects = await db.Projects.ToListAsync();
 
                 var projectModels = projects.Select(p => ProjectToProjectModel(p, true, false, false)).ToList();
+                projectModels = orderDir == "Desc" ? projectModels.OrderByDescending(KeySelector(orderBy)).ToList() : projectModels.OrderBy(KeySelector(orderBy)).ToList();
 
                 return projectModels;
+            }
+        }
+
+        private static Func<ProjectModel, object> KeySelector(string orderBy)
+        {
+            switch (orderBy)
+            {
+                case "StartDate": return p => p.Additional.StartDate;
+                default: return p => p.ActivatedAt;
             }
         }
 

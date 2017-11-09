@@ -1,14 +1,23 @@
-﻿using System.Web.Mvc;
-using InvestAdvisor.Model.Views;
-using InvestAdvisor.Model.Views.Enums;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using InvestAdvisor.Services.Contracts;
 
 namespace InvestAdvisor.Web.Controllers
 {
     public class ProjectsController : Controller
     {
-        public ActionResult All(string orderBy)
+        private readonly IViewModelService _viewService;
+
+        public ProjectsController(IViewModelService viewService)
         {
-            return View(new BaseViewModel(MenuItem.Project));
+            _viewService = viewService;
+        }
+
+        public async Task<ActionResult> All(string orderBy, string orderDir)
+        {
+            var model = await _viewService.GetProjectsModel(orderBy,orderDir);
+
+            return View(model);
         }
 
         public ActionResult GetProjectDetails()
