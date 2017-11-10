@@ -5,8 +5,11 @@
         Home,
         News,
         Portfolio,
-        Project,
+        Projects,
         PaySystem,
-        CurrencyExchange
+        CurrencyExchange,
+
+        ProjectsActive,
+        ProjectsClosed
     }
 }

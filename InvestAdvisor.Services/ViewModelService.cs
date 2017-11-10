@@ -25,7 +25,8 @@ namespace InvestAdvisor.Services
 
         public async Task<ProjectsViewModel> GetProjectsModel(string orderBy = null, string orderDir = null)
         {
-            var model = new ProjectsViewModel(MenuItem.Project);
+            var model = new ProjectsViewModel(MenuItem.Projects);
+            model.ActiveSubMenuItem = MenuItem.ProjectsActive;
 
             model.Projects = await _projectService.GetActiveProjectsWithAdditional(orderBy, orderDir);
 
