@@ -1,0 +1,72 @@
+﻿@model InvestAdvisor.Model.NewsModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Редактирование новости</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.NewsId)
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title)
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Content)
+                            @Html.TextBoxFor(m => m.Content, new { @class = "form-control" })
+                        </div>
+                        if (!Model.IsPublished.HasValue || !Model.IsPublished.Value)
+                        {
+                            <div class="form-group">
+                                <input type="checkbox" name="IsPublished" id="IsPublished" class="chk-col-blue" onclick="checkboxClick()" @(Model.IsPublished.HasValue && Model.IsPublished.Value ? "checked= \"\"" : string.Empty)>
+                                <label for="IsPublished">Опубликовать</label>
+                                <input name="IsPublished" type="hidden" value="@(Model.IsPublished.HasValue ? Model.IsPublished.Value.ToString().ToLower() : "false")">
+                            </div>
+                        }
+                        <div class="form-group">
+                            @Html.DropDownList("SelectedProject", Model.ListProjects, "Выберите тип", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <button type="button" class="btn waves-effect waves-light btn-secondary">
+        @Html.ActionLink("Назад к списку", "Index")
+    </button>
+
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        function checkboxClick() {
+            var target = event.target || event.srcElement;
+            if (target != null) {
+                var value = target.checked;
+                var inputs = $('input[name=' + target.name + ']');
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].value = value;
+                }
+            }
+        }
+    </script>
+}
+
+
+
+

@@ -4,12 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InvestAdvosor.Entities
 {
-    //TODO:
-    //Deposits
-    //Withdrawal
-    //Refbacks
-    //Comments
-
     public class Project
     {
         public int ProjectId { get; set; }

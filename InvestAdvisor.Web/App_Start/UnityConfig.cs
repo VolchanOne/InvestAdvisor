@@ -13,7 +13,7 @@ namespace InvestAdvisor.Web
 			var container = new UnityContainer();
             
             container.RegisterType<IProjectService, ProjectService>();
-
+            container.RegisterType<INewsService, NewsService>();
             container.RegisterType<IViewModelService,ViewModelService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

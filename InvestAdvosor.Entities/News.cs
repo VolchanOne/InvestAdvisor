@@ -8,20 +8,16 @@ namespace InvestAdvosor.Entities
     {
         public int NewsId { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
-        [Required]
         public string Content { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? PublishedAt { get; set; }
 
         public int? ProjectId { get; set; }
 
-        public int? ImageId { get; set; }
-
         public virtual Project Project { get; set; }
-
-        public virtual Image Image { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
     }

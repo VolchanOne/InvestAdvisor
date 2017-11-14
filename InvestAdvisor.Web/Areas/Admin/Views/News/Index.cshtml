@@ -1,0 +1,50 @@
+﻿@model IEnumerable<InvestAdvisor.Model.NewsModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Все новости</h4>
+        <p>
+            @Html.ActionLink("Создать новость", "Create")
+        </p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>@Html.DisplayNameFor(model => model.Title)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i = 1;}
+                    @foreach (var news in Model)
+                    {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => news.Title)
+                            </td>
+                            <td>
+
+                                <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                    @Html.ActionLink("Редактировать", "Edit", new { id = news.NewsId })
+                                </button> |
+                                <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                    @Html.ActionLink("Удалить", "Delete", new { id = news.NewsId })
+                                </button>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

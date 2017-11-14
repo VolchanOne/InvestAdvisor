@@ -1,0 +1,31 @@
+﻿@model InvestAdvisor.Model.NewsModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Создание новости</h4>
+        @using (Html.BeginForm("Create", "News", FormMethod.Post, new { @class = "form-material m-t-40", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                Название
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+            </div>
+        }
+        <div>
+            <button type="button" class="btn waves-effect waves-light btn-secondary">@Html.ActionLink("Назад к списку", "Index")</button>
+        </div>
+    </div>
+</div>
+
+
+
