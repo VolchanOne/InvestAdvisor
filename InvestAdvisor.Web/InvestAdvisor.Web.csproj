@@ -189,8 +189,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\coinreum-logo.png" />
-    <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -518,6 +516,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\" />
     <Folder Include="fonts\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
