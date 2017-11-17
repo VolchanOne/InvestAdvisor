@@ -18,9 +18,9 @@ namespace InvestAdvisor.Services
             {
                 var news = await db.News.ToListAsync();
 
-                var projectModels = news.Select(n => NewsToNewsModel(n, false)).ToList();
+                var newsModels = news.Select(n => NewsToNewsModel(n, false)).ToList();
 
-                return projectModels;
+                return newsModels;
             }
         }
 
@@ -75,7 +75,10 @@ namespace InvestAdvisor.Services
                 {
                     var project = await db.Projects.FindAsync(model.SelectedProject);
                     if (project != null)
+                    {
                         news.Project = project;
+                        project.News.Add(news);
+                    }
                 }
 
                 db.Entry(news).State = EntityState.Modified;

@@ -24,6 +24,8 @@ namespace InvestAdvisor.Model
         [DisplayName("Ссылка")]
         public string Url { get; set; }
 
+        public string RouteName { get; set; }
+
         public bool IsActive { get; set; }
 
         public DateTime? ActivatedAt { get; set; }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using InvestAdvisor.Model;
+using InvestAdvosor.Entities;
+using System;
 
 namespace InvestAdvisor.Services.Contracts
 {
@@ -8,9 +10,11 @@ namespace InvestAdvisor.Services.Contracts
     {
         Task<List<ProjectModel>> GetProjects();
 
-        Task<List<ProjectModel>> GetActiveProjectsWithAdditional(string orderBy = null, string orderDir = null);
+        Task<List<ProjectModel>> GetProjectsWithAdditional(bool isActive, string orderBy = null, string orderDir = null);
 
         Task<ProjectModel> FindById(int projectId);
+
+        Task<ProjectModel> FindByRouteProjectName(string urlProjectName);
 
         Task Create(ProjectModel model);
 

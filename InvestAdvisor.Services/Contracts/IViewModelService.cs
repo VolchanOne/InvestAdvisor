@@ -7,6 +7,8 @@ namespace InvestAdvisor.Services.Contracts
     {
         Task<HomeViewModel> GetHomeModel();
 
-        Task<ProjectsViewModel> GetProjectsModel(string orderBy = null, string orderDir = null);
+        Task<ProjectsViewModel> GetProjectsModel(bool isActive, string orderBy = null, string orderDir = null);
+
+        Task<ProjectViewModel> GetProjectModel(string urlProjectName);
     }
 }

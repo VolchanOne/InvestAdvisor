@@ -7,6 +7,8 @@ using InvestAdvisor.Data;
 using InvestAdvisor.Model;
 using InvestAdvisor.Services.Contracts;
 using InvestAdvosor.Entities;
+using System.Text.RegularExpressions;
+using InvestAdvisor.Common.Extensions;
 
 namespace InvestAdvisor.Services
 {
@@ -24,13 +26,13 @@ namespace InvestAdvisor.Services
             }
         }
 
-        public async Task<List<ProjectModel>> GetActiveProjectsWithAdditional(string orderBy = null, string orderDir = null)
+        public async Task<List<ProjectModel>> GetProjectsWithAdditional(bool isActive, string orderBy = null, string orderDir = null)
         {
             using (var db = new InvestAdvisorDbContext())
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Select(p => ProjectToProjectModel(p, true, false, false)).ToList();
+                var projectModels = projects.Where(p => (isActive ? p.ActivatedAt.HasValue : !p.ActivatedAt.HasValue)).Select(p => ProjectToProjectModel(p, true, false, false)).ToList();
                 projectModels = orderDir == "Desc" ? projectModels.OrderByDescending(KeySelector(orderBy)).ToList() : projectModels.OrderBy(KeySelector(orderBy)).ToList();
 
                 return projectModels;
@@ -59,6 +61,19 @@ namespace InvestAdvisor.Services
             }
         }
 
+        public async Task<ProjectModel> FindByRouteProjectName(string routeProjectName)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var project = await db.Projects.FirstOrDefaultAsync(p => p.RouteName == routeProjectName);
+                if (project == null)
+                    return null;
+                var projectModel = ProjectToProjectModel(project, true, true, true);
+
+                return projectModel;
+            }
+        }
+
         public async Task Create(ProjectModel model)
         {
             using (var db = new InvestAdvisorDbContext())
@@ -66,7 +81,8 @@ namespace InvestAdvisor.Services
                 db.Projects.Add(new Project
                 {
                     ProjectId = model.ProjectId,
-                    Name = model.Name
+                    Name = model.Name,
+                    RouteName = model.Name.RemoveNonAlphaNumericChars()
                 });
                 await db.SaveChangesAsync();
             }
@@ -82,6 +98,7 @@ namespace InvestAdvisor.Services
 
                 project.ProjectId = model.ProjectId;
                 project.Name = model.Name;
+                project.RouteName = model.Name.RemoveNonAlphaNumericChars();
                 project.Description = model.Description;
                 project.Url = model.Url;
 
@@ -221,6 +238,14 @@ namespace InvestAdvisor.Services
                     }
                 }
 
+                if (project.News != null)
+                {
+                    for (var i = project.News.Count - 1; i >= 0; i--)
+                    {
+                        db.News.Remove(project.News[i]);
+                    }
+                }
+
                 db.Projects.Remove(project);
                 await db.SaveChangesAsync();
             }
@@ -271,7 +296,8 @@ namespace InvestAdvisor.Services
                 Url = project.Url,
                 IsActive = project.IsActive,
                 ActivatedAt = project.ActivatedAt,
-                InPortofolio = project.InPortofolio
+                InPortofolio = project.InPortofolio,
+                RouteName = project.RouteName
             };
             if (project.Images != null)
                 projectModel.Images = project.Images.Select(i => new ImageModel

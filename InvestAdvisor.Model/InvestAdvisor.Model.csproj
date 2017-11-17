@@ -73,6 +73,7 @@
     <Compile Include="Views\Enums\MenuItem.cs" />
     <Compile Include="Views\HomeViewModel.cs" />
     <Compile Include="Views\ProjectsViewModel.cs" />
+    <Compile Include="Views\ProjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">

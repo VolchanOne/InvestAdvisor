@@ -16,6 +16,8 @@ namespace InvestAdvosor.Entities
         public string Description { get; set; }
 
         public string Url { get; set; }
+        
+        public string RouteName { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -33,6 +35,7 @@ namespace InvestAdvosor.Entities
         public virtual ProjectReview Review { get; set; }
         public virtual List<Image> Images { get; set; }
         public virtual List<Comment> Comments { get; set; }
+        public virtual List<News> News { get; set; }
         #endregion
     }
 }
