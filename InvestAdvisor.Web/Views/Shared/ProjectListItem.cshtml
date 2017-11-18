@@ -19,6 +19,8 @@
         }
         <h4 class="card-title m-t-10">@Model.Name</h4>
         <h6 class="card-subtitle">@Model.Description</h6>
+
+        <p>Адрес: <a href="@Model.Url">@Model.Address</a></p>
         @if (!string.IsNullOrEmpty(Model.Additional.StartDateView))
         {
             <p>Старт работы: @Model.Additional.StartDateView</p>
@@ -31,6 +33,9 @@
         {
             <p>Партнерская программа: @Model.Additional.Referral</p>
         }
-        <a href="/Projects/Details/@Model.RouteName" class="m-t-10 waves-effect waves-dark btn btn-info btn-md btn-rounded">Подробнее</a>
+        @if (ViewBag.IsList == null || ViewBag.IsList)
+        {
+            <a href="/Projects/Details/@Model.RouteName" class="m-t-10 waves-effect waves-dark btn btn-info btn-md btn-rounded">Подробнее</a>
+        }
     </div>
 </div>

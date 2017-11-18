@@ -191,6 +191,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -200,9 +201,11 @@
     <Content Include="Scripts\sidebarmenu.js" />
     <Content Include="Scripts\sticky-kit.min.js" />
     <Content Include="Scripts\waves.js" />
+    <Content Include="Scripts\wysihtml5-0.3.0.js" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\blue.css" />
     <Content Include="Styles\bootstrap-datepicker.min.css" />
+    <Content Include="Styles\bootstrap-wysihtml5.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\icons\flag-icon-css\flag-icon.min.css" />
     <Content Include="Styles\icons\flag-icon-css\flags\ad.svg" />

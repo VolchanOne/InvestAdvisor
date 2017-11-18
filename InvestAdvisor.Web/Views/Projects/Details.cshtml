@@ -1,8 +1,52 @@
-﻿
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@using InvestAdvisor.Model.Views.Enums
+@model InvestAdvisor.Model.Views.ProjectViewModel
 
-<h2>Details</h2>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">@Model.Project.Name</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb m-b-10">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Главная</a></li>
+            <li class="breadcrumb-item">
+                @if (Model.ActiveSubMenuItem == MenuItem.ProjectsActive)
+                {
+                    <a href="@Url.Action("", "Projects")">Активные проекты</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("","Projects", new { @isActive = false})">Закрытые проекты</a>
+                }
+            </li>
+        </ol>
+    </div>
+</div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-sm-12">
+            @Html.Partial("ProjectListItem", Model.Project)
+        </div>
+        <div class="col-lg-8 col-md-7">
+            <div class="card">
+                <div class="card-body p-b-0">
+                    <ul class="nav nav-tabs customtab2" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#review" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Обзор</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Комментарии</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Тех. инфо</span></a> </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane p-20 active" id="review" role="tabpanel" aria-expanded="false">
+                            
+                                <p>@Html.Raw(Model.Project.Review.Review)</p>
+                            
+                        </div>
+                        <div class="tab-pane p-20" id="profile7" role="tabpanel" aria-expanded="true">2</div>
+                        <div class="tab-pane p-20" id="messages7" role="tabpanel">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

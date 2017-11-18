@@ -84,6 +84,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditReview(int projectId, ProjectReviewModel review)
         {

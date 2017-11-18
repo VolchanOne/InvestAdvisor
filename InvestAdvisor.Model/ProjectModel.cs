@@ -39,5 +39,20 @@ namespace InvestAdvisor.Model
         public ProjectTechModel TechInfo { get; set; }
 
         public List<ImageModel> Images { get; set; }
+
+        public string Address
+        {
+            get
+            {
+                try
+                {
+                    return new Uri(Url).Host;
+                }
+                catch (Exception)
+                {
+                    return Url;
+                }                
+            }
+        }
     }
 }

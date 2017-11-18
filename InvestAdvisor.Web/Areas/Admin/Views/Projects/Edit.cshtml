@@ -8,6 +8,7 @@
 @section styles
 {
     <link href="~/Styles/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-wysihtml5.css" rel="stylesheet" />
 }
 
 <div class="container-fluid">
@@ -93,8 +94,7 @@
                         @Html.HiddenFor(model => model.Review.ProjectReviewId)
 
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Review.Review)
-                            @Html.TextAreaFor(m => m.Review.Review, new { @class = "form-control", @rows = 5 })
+                            @Html.TextAreaFor(m => m.Review.Review, new { @class = "textarea_editor form-control", @rows = 15 })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
@@ -252,6 +252,9 @@
 </div>
 
 @section scripts {
+    <script src="~/Scripts/wysihtml5-0.3.0.js"></script>
+    <script src="~/Scripts/bootstrap-wysihtml5.js"></script>
+
     <script type="text/javascript">
         function checkboxClick() {
             var target = event.target || event.srcElement;
@@ -263,5 +266,9 @@
                 }
             }
         }
+
+        $(document).ready(function () {
+            $('.textarea_editor').wysihtml5();
+        });
     </script>
 }
