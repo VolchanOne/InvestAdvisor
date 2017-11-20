@@ -1,4 +1,4 @@
-﻿namespace InvestAdvisor.Model.Views.Enums
+﻿namespace InvestAdvisor.Model.ViewModels.Enums
 {
     public enum MenuItem
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace InvestAdvosor.Entities
+namespace InvestAdvisor.Model
 {
-    public class Comment
+    public class CommentModel
     {
         public int CommentId { get; set; }
 

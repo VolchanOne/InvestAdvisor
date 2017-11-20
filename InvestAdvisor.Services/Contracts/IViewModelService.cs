@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using InvestAdvisor.Model.Views;
+using InvestAdvisor.Model.ViewModels;
 
 namespace InvestAdvisor.Services.Contracts
 {

@@ -200,6 +200,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sidebarmenu.js" />
     <Content Include="Scripts\sticky-kit.min.js" />
+    <Content Include="Scripts\validation.js" />
     <Content Include="Scripts\waves.js" />
     <Content Include="Scripts\wysihtml5-0.3.0.js" />
     <Content Include="Styles\animate.css" />

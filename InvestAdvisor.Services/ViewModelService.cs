@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using InvestAdvisor.Model.Views;
-using InvestAdvisor.Model.Views.Enums;
+using InvestAdvisor.Model.ViewModels;
+using InvestAdvisor.Model.ViewModels.Enums;
 using InvestAdvisor.Services.Contracts;
 using System.Text.RegularExpressions;
 

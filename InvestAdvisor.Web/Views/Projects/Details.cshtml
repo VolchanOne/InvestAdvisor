@@ -37,12 +37,47 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane p-20 active" id="review" role="tabpanel" aria-expanded="false">
-                            
-                                <p>@Html.Raw(Model.Project.Review.Review)</p>
-                            
+                        <div class="tab-pane p-20 active" id="review" role="tabpanel" aria-expanded="true">
+                            <p>@Html.Raw(Model.Project.Review.Review)</p>
                         </div>
-                        <div class="tab-pane p-20" id="profile7" role="tabpanel" aria-expanded="true">2</div>
+                        <div class="tab-pane p-20" id="profile7" role="tabpanel" aria-expanded="false">
+                            <div class="p-20 border">
+                                <h5 class="text-primary">Новый комментарий</h5>
+                                @using (Html.BeginForm("AddComment", "Projects", FormMethod.Post, new { @class = "m-t-40", enctype = "multipart/form-data", @novalidate = "" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.HiddenFor(model => model.Project.ProjectId)
+
+                                    <div class="form-group">
+                                        <h5>Имя <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="Name" class="form-control" required="" data-validation-required-message="Обязательное поле">
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Email<span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="Email" class="form-control" data-validation-required-message="Обязательное поле" data-validation-regex-regex="([a-z0-9_\.-]+)@@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Введите верный email" aria-invalid="false" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Сообщение <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <textarea name="Message" id="textarea" class="form-control" required="" data-validation-required-message="Обязательное поле" aria-invalid="false"></textarea>
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                         <div class="tab-pane p-20" id="messages7" role="tabpanel">3</div>
                     </div>
                 </div>
@@ -50,3 +85,17 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/validation.js"></script>
+    <script>
+        ! function (window, document, $) {
+            "use strict";
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        }(window, document, jQuery);
+
+        //$('input[required]').on('invalid', function () {
+        //    this.setCustomValidity($(this).data("data-validation-required-message"));
+        //});
+    </script>
+}
