@@ -40,6 +40,8 @@ namespace InvestAdvisor.Model
 
         public List<ImageModel> Images { get; set; }
 
+        public List<CommentModel> Comments { get; set; }
+
         public string Address
         {
             get

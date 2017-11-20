@@ -24,6 +24,17 @@ namespace InvestAdvisor.Services
             return model;
         }
 
+        public async Task<ProjectViewModel> GetProjectModel(int projectId)
+        {
+            var project = await _projectService.FindById(projectId);
+
+            return new ProjectViewModel(MenuItem.Projects)
+            {
+                Project = project,
+                ActiveSubMenuItem = project.IsActive ? MenuItem.ProjectsActive : MenuItem.ProjectsClosed
+            };
+        }
+
         public async Task<ProjectViewModel> GetProjectModel(string routeProjectName)
         {
             var project = await _projectService.FindByRouteProjectName(routeProjectName);

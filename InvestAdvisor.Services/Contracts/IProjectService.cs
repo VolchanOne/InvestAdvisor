@@ -33,5 +33,7 @@ namespace InvestAdvisor.Services.Contracts
         Task AddImage(int projectId, ImageModel image);
 
         Task DeleteImage(int imageId);
+
+        Task AddComment(int projectId, CommentModel model);
     }
 }

@@ -22,16 +22,6 @@ namespace InvestAdvisor.Web.Controllers
             ViewBag.IsList = true;
 
             return View(model);
-        }
-
-        public async Task<ActionResult> Details([FromUri]string id)
-        {
-            if (string.IsNullOrEmpty(id))
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var model = await _viewService.GetProjectModel(id);
-            ViewBag.IsList = false;
-            return View(model);
-        }
+        }        
     }
 }

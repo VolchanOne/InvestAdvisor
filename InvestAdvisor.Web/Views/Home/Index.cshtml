@@ -1,4 +1,4 @@
-﻿@model InvestAdvisor.Model.Views.HomeViewModel
+﻿@model InvestAdvisor.Model.ViewModels.HomeViewModel
 
 @{
     var newProjects = Model.Projects.OrderByDescending(p => p.ActivatedAt).Take(4).ToList();

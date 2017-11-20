@@ -10,5 +10,7 @@ namespace InvestAdvisor.Services.Contracts
         Task<ProjectsViewModel> GetProjectsModel(bool isActive, string orderBy = null, string orderDir = null);
 
         Task<ProjectViewModel> GetProjectModel(string urlProjectName);
+
+        Task<ProjectViewModel> GetProjectModel(int projectId);
     }
 }

@@ -1,5 +1,5 @@
-﻿@using InvestAdvisor.Model.Views.Enums
-@model InvestAdvisor.Model.Views.ProjectViewModel
+﻿@using InvestAdvisor.Model.ViewModels.Enums
+@model InvestAdvisor.Model.ViewModels.ProjectViewModel
 
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -41,18 +41,32 @@
                             <p>@Html.Raw(Model.Project.Review.Review)</p>
                         </div>
                         <div class="tab-pane p-20" id="profile7" role="tabpanel" aria-expanded="false">
+                            @if (Model.Project.Comments != null)
+                            {
+                                <div class="comment-widgets m-b-20">
+                                    @for (var i = 0; i < Model.Project.Comments.Count; i++)
+                                    {
+                                        <div class="d-flex flex-row comment-row">
+                                            <div class="comment-text w-100">
+                                                <h5 class="text-primary">@Model.Project.Comments[i].UserName</h5>
+                                                <p class="m-b-5 m-t-10">@Model.Project.Comments[i].Message</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
                             <div class="p-20 border">
                                 <h5 class="text-primary">Новый комментарий</h5>
-                                @using (Html.BeginForm("AddComment", "Projects", FormMethod.Post, new { @class = "m-t-40", enctype = "multipart/form-data", @novalidate = "" }))
+                                @using (Html.BeginForm("AddComment", "Project", FormMethod.Post, new { @class = "m-t-40", enctype = "multipart/form-data", @novalidate = "" }))
                                 {
                                     @Html.AntiForgeryToken()
 
-                                    @Html.HiddenFor(model => model.Project.ProjectId)
+                                    <input type="hidden" name="ProjectId" value="@Model.Project.ProjectId" />
 
                                     <div class="form-group">
                                         <h5>Имя <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="Name" class="form-control" required="" data-validation-required-message="Обязательное поле">
+                                            <input type="text" name="UserName" class="form-control" required="" data-validation-required-message="Обязательное поле">
                                             <div class="help-block"></div>
                                         </div>
                                     </div>
@@ -65,7 +79,7 @@
                                     <div class="form-group">
                                         <h5>Сообщение <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <textarea name="Message" id="textarea" class="form-control" required="" data-validation-required-message="Обязательное поле" aria-invalid="false"></textarea>
+                                            <textarea name="Message" id="textarea" class="form-control" required="" data-validation-required-message="Обязательное поле" aria-invalid="false" rows="5"></textarea>
                                             <div class="help-block"></div>
                                         </div>
                                     </div>
@@ -94,8 +108,8 @@
             $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
         }(window, document, jQuery);
 
-        //$('input[required]').on('invalid', function () {
-        //    this.setCustomValidity($(this).data("data-validation-required-message"));
-        //});
+         
+
+         
     </script>
 }
