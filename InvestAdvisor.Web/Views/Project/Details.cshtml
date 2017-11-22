@@ -1,4 +1,5 @@
 ﻿@using InvestAdvisor.Model.ViewModels.Enums
+@using System.Globalization
 @model InvestAdvisor.Model.ViewModels.ProjectViewModel
 
 <div class="row page-titles">
@@ -24,13 +25,13 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 col-md-5 col-sm-12">
+        <div class="col-lg-5 col-md-5 col-sm-12">
             @Html.Partial("ProjectListItem", Model.Project)
         </div>
-        <div class="col-lg-8 col-md-7">
+        <div class="col-lg-7 col-md-7">
             <div class="card">
                 <div class="card-body p-b-0">
-                    <ul class="nav nav-tabs customtab2" role="tablist">
+                    <ul class="nav nav-tabs customtab" role="tablist">
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#review" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Обзор</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Комментарии</span></a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Тех. инфо</span></a> </li>
@@ -47,12 +48,17 @@
                                     @for (var i = 0; i < Model.Project.Comments.Count; i++)
                                     {
                                         <div class="d-flex flex-row comment-row">
+                                            <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
                                             <div class="comment-text w-100">
-                                                <h5 class="text-primary">@Model.Project.Comments[i].UserName</h5>
+                                                <h5>@Model.Project.Comments[i].UserName</h5>
+                                                <div class="comment-footer">
+                                                    <span class="date">@Model.Project.Comments[i].CreatedAt.ToString("dd MMMM, yyyy", new CultureInfo("ru-RU"))</span>
+                                                </div>
                                                 <p class="m-b-5 m-t-10">@Model.Project.Comments[i].Message</p>
                                             </div>
                                         </div>
                                     }
+                                    >
                                 </div>
                             }
                             <div class="p-20 border">
