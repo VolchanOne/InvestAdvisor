@@ -8,6 +8,8 @@ namespace InvestAdvisor.Model.ViewModels
         {
         }
 
-        public ProjectModel Project { get; set; }    
+        public ProjectModel Project { get; set; }
+
+        public TabItem TabItem { get; set; }
     }
 }

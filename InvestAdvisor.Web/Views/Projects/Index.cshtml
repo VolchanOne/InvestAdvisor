@@ -2,10 +2,8 @@
 @model InvestAdvisor.Model.ViewModels.ProjectsViewModel
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">@(Model.ActiveSubMenuItem == MenuItem.ProjectsActive ? "Активные" : "Закрытые") Проекты</h3>
-    </div>
-    <div class="col-md-7 align-self-center">
+    <div class="align-self-center">
+        <h3 class="text-themecolor">@(Model.ActiveSubMenuItem == SubMenuItem.ProjectsActive ? "Активные" : "Закрытые") инвестиционные проекты</h3>
     </div>
 </div>
 
@@ -13,7 +11,7 @@
     <div class="row">
         @foreach (var project in Model.Projects)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-xlg-3 col-md-6 col-sm-6">
                 @Html.Partial("ProjectListItem", project)
             </div>
         }

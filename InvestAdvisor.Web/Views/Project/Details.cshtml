@@ -2,15 +2,18 @@
 @using System.Globalization
 @model InvestAdvisor.Model.ViewModels.ProjectViewModel
 
+@{
+    var tabActive = (TabItem?)ViewBag.ActiveTabItem;
+}
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">@Model.Project.Name</h3>
+    <div class="col-md-9 align-self-center">
+        <h3 class="text-themecolor">Обзор инвестиционного проекта @Model.Project.Name</h3>
     </div>
-    <div class="col-md-7 align-self-center">
+    <div class="col-md-3 align-self-center">
         <ol class="breadcrumb m-b-10">
             <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Главная</a></li>
             <li class="breadcrumb-item">
-                @if (Model.ActiveSubMenuItem == MenuItem.ProjectsActive)
+                @if (Model.ActiveSubMenuItem == SubMenuItem.ProjectsActive)
                 {
                     <a href="@Url.Action("", "Projects")">Активные проекты</a>
                 }
@@ -25,23 +28,41 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-12">
+        <div class="col-lg-4 col-xlg-3 col-md-5 cols-sm-12">
             @Html.Partial("ProjectListItem", Model.Project)
         </div>
-        <div class="col-lg-7 col-md-7">
+        <div class="col-lg-8 col-xlg-3 col-md-7">
             <div class="card">
                 <div class="card-body p-b-0">
                     <ul class="nav nav-tabs customtab" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#review" role="tab" aria-expanded="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Обзор</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile7" role="tab" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Комментарии</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages7" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Тех. инфо</span></a> </li>
+                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" data-toggle="tab" href="#review" role="tab" aria-expanded="@(!tabActive.HasValue || tabActive == TabItem.Comments ? "true" : "false")">
+                                    <span>Обзор</span>
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" data-toggle="tab" href="#comments" role="tab" aria-expanded="@(tabActive == TabItem.Comments ? "true" : "false")">
+                                <span>Комментарии</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(tabActive == TabItem.News ? "active" : string.Empty)" d data-toggle="tab" href="#news" role="tab" aria-expanded="@(tabActive == TabItem.News ? "true" : "false")">
+                                <span>Новости</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane p-20 active" id="review" role="tabpanel" aria-expanded="true">
-                            <p>@Html.Raw(Model.Project.Review.Review)</p>
-                        </div>
-                        <div class="tab-pane p-20" id="profile7" role="tabpanel" aria-expanded="false">
+                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
+                        {
+                            <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
+                                <p>@Html.Raw(Model.Project.Review.Review)</p>
+                            </div>
+                        }
+                        <div class="tab-pane p-20 @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" id="comments" role="tabpanel" aria-expanded="false">
                             @if (Model.Project.Comments != null)
                             {
                                 <div class="comment-widgets m-b-20">
@@ -50,15 +71,15 @@
                                         <div class="d-flex flex-row comment-row">
                                             <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
                                             <div class="comment-text w-100">
+                                                @Html.HiddenFor(model => Model.Project.Comments[i].CommentId)
                                                 <h5>@Model.Project.Comments[i].UserName</h5>
-                                                <div class="comment-footer">
-                                                    <span class="date">@Model.Project.Comments[i].CreatedAt.ToString("dd MMMM, yyyy", new CultureInfo("ru-RU"))</span>
-                                                </div>
-                                                <p class="m-b-5 m-t-10">@Model.Project.Comments[i].Message</p>
+                                                @*<div class="comment-footer">
+                                                        <span class="date">@Model.Project.Comments[i].CreatedAt.ToString("dd MMMM, yyyy", new CultureInfo("ru-RU"))</span>
+                                                    </div>*@
+                                                <p class="m-b-5 m-t-10">@Html.Raw(Model.Project.Comments[i].Message.Replace("\n", "<br />"))</p>
                                             </div>
                                         </div>
                                     }
-                                    >
                                 </div>
                             }
                             <div class="p-20 border">
@@ -98,7 +119,7 @@
                                 }
                             </div>
                         </div>
-                        <div class="tab-pane p-20" id="messages7" role="tabpanel">3</div>
+                        <div class="tab-pane p-20 @(tabActive == TabItem.News ? "active" : string.Empty)" id="news" role="tabpanel">3</div>
                     </div>
                 </div>
             </div>
@@ -114,8 +135,8 @@
             $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
         }(window, document, jQuery);
 
-         
 
-         
+
+
     </script>
 }

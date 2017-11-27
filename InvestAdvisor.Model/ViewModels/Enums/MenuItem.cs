@@ -7,9 +7,6 @@
         Portfolio,
         Projects,
         PaySystem,
-        CurrencyExchange,
-
-        ProjectsActive,
-        ProjectsClosed
+        CurrencyExchange
     }
 }

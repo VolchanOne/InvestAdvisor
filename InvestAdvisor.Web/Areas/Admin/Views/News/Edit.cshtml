@@ -3,6 +3,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+@section styles
+{
+    <link href="~/Styles/bootstrap-wysihtml5.css" rel="stylesheet" />
+}
+
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
@@ -22,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Content)
-                            @Html.TextBoxFor(m => m.Content, new { @class = "form-control" })
+                            @Html.TextAreaFor(m => m.Content, new { @class = "textarea_editor form-control", @rows = 5 })
                         </div>
                         if (!Model.IsPublished.HasValue || !Model.IsPublished.Value)
                         {
@@ -33,7 +38,7 @@
                             </div>
                         }
                         <div class="form-group">
-                            @Html.DropDownList("SelectedProject", Model.ListProjects, "Выберите тип", new { @class = "form-control" })
+                            @Html.DropDownList("SelectedProject", Model.ListProjects, "Выберите проект", new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
@@ -64,6 +69,10 @@
                 }
             }
         }
+
+        $(document).ready(function () {
+            $('.textarea_editor').wysihtml5();
+        });
     </script>
 }
 

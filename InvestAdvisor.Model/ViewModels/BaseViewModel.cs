@@ -6,7 +6,7 @@ namespace InvestAdvisor.Model.ViewModels
     {
         public MenuItem ActiveMenuItem { get;  }
 
-        public MenuItem? ActiveSubMenuItem { get; set; }
+        public SubMenuItem? ActiveSubMenuItem { get; set; }
 
         public BaseViewModel(MenuItem activeMenuItem)
         {
