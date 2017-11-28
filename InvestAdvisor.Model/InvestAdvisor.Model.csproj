@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\Enums\SubMenuItem.cs" />
     <Compile Include="ViewModels\Enums\TabItem.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\ProjectsViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
   </ItemGroup>

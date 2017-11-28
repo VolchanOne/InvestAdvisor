@@ -62,6 +62,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(NewsModel model)
         {
