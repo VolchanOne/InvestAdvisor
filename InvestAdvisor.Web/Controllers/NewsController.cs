@@ -1,15 +1,24 @@
-﻿using InvestAdvisor.Model.ViewModels;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using InvestAdvisor.Services.Contracts;
 
 namespace InvestAdvisor.Web.Controllers
 {
     public class NewsController : Controller
     {
-        // GET: News
-        public ActionResult Index()
+        private readonly IViewModelService _viewService;
+
+        public NewsController(IViewModelService viewService)
         {
-            return View();
+            _viewService = viewService;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var model = await _viewService.GetNewsModel();
+            ViewBag.IsList = true;
+
+            return View(model);
         }
     }
 }

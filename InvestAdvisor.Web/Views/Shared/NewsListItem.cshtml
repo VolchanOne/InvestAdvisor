@@ -1,0 +1,18 @@
+﻿@using InvestAdvisor.Common.Enums
+@model InvestAdvisor.Model.NewsModel
+
+@{
+    var logoImage = Model.Project.Images.FirstOrDefault(i => i.ImageType == ImageType.Logo);
+}
+
+<div class="card">
+    <div class="card-body text-center">
+        @if (logoImage != null)
+        {
+            <img src="data:image;base64,@Convert.ToBase64String(logoImage.Content)" class="img-circle border" width="150" />
+        }
+        <h4 class="card-title m-t-10">@Model.Project.Name</h4>
+        <p>@Model.Content</p>
+        <a href="/Project/Details/@Model.Project.RouteName" class="m-t-10 waves-effect waves-light">Подробнее о проекте</a>
+    </div>
+</div>

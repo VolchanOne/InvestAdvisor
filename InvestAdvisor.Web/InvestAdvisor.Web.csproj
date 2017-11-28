@@ -725,6 +725,7 @@
     <Content Include="Views\Shared\ProjectListItem.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Shared\NewsListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvestAdvisor.Common\InvestAdvisor.Common.csproj">

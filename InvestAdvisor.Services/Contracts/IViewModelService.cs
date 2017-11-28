@@ -12,5 +12,7 @@ namespace InvestAdvisor.Services.Contracts
         Task<ProjectViewModel> GetProjectModel(string urlProjectName);
 
         Task<ProjectViewModel> GetProjectModel(int projectId);
+
+        Task<NewsViewModel> GetNewsModel();
     }
 }

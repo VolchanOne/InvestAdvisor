@@ -4,7 +4,6 @@
     {
         Home,
         News,
-        Portfolio,
         Projects,
         PaySystem,
         CurrencyExchange

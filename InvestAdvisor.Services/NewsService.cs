@@ -7,6 +7,7 @@ using System.Data.Entity;
 using InvestAdvosor.Entities;
 using System.Linq;
 using System;
+using InvestAdvisor.Services.Converters;
 
 namespace InvestAdvisor.Services
 {
@@ -16,32 +17,12 @@ namespace InvestAdvisor.Services
         {
             using (var db = new InvestAdvisorDbContext())
             {
-                var news = await db.News.ToListAsync();
+                var news = await db.News.OrderBy(n => n.PublishedAt).Take(20).ToListAsync();
 
-                var newsModels = news.Select(n => NewsToNewsModel(n, false)).ToList();
+                var newsModels = news.Select(n => n.ToNewsModel(true)).ToList();
 
                 return newsModels;
             }
-        }
-
-        private static NewsModel NewsToNewsModel(News news, bool withProject)
-        {
-            var newsModel = new NewsModel
-            {
-                NewsId = news.NewsId,
-                Title = news.Title,
-                Content = news.Content,
-                IsPublished = news.PublishedAt.HasValue
-            };
-            if (withProject && news.Project != null)
-            {
-                newsModel.Project = new ProjectModel
-                {
-                    ProjectId = news.Project.ProjectId,
-                    Name = news.Project.Name
-                };
-            }
-            return newsModel;
         }
 
         public async Task Create(NewsModel model)
@@ -93,7 +74,7 @@ namespace InvestAdvisor.Services
                 var news = await db.News.FindAsync(newsId);
                 if (news == null)
                     return null;
-                var newsModel = NewsToNewsModel(news, true);
+                var newsModel = news.ToNewsModel(true);
 
                 return newsModel;
             }
@@ -106,7 +87,7 @@ namespace InvestAdvisor.Services
                 var news = await db.News.FindAsync(newsId);
                 if (news == null)
                     return;
-               
+
                 db.News.Remove(news);
                 await db.SaveChangesAsync();
             }

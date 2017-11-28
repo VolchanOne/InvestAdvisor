@@ -2,7 +2,6 @@
 using InvestAdvisor.Model.ViewModels;
 using InvestAdvisor.Model.ViewModels.Enums;
 using InvestAdvisor.Services.Contracts;
-using System.Text.RegularExpressions;
 using InvestAdvisor.Model;
 
 namespace InvestAdvisor.Services
@@ -10,10 +9,12 @@ namespace InvestAdvisor.Services
     public class ViewModelService : IViewModelService
     {
         private readonly IProjectService _projectService;
+        private readonly INewsService _newsService;
 
-        public ViewModelService(IProjectService projectService)
+        public ViewModelService(IProjectService projectService, INewsService newsService)
         {
             _projectService = projectService;
+            _newsService = newsService;
         }
 
         public async Task<HomeViewModel> GetHomeModel()
@@ -29,6 +30,16 @@ namespace InvestAdvisor.Services
         {
             var project = await _projectService.FindById(projectId);
             return GetProjectViewModel(project);
+        }
+
+        public async Task<NewsViewModel> GetNewsModel()
+        {
+            var newsViewModel = new NewsViewModel(MenuItem.News)
+            {
+                News = await _newsService.GetNews()
+            };
+
+            return newsViewModel;
         }
 
         private static ProjectViewModel GetProjectViewModel(ProjectModel project)

@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Contracts\INewsService.cs" />
     <Compile Include="Contracts\IViewModelService.cs" />
+    <Compile Include="Converters\NewsConverter.cs" />
+    <Compile Include="Converters\ProjectConverter.cs" />
     <Compile Include="NewsService.cs" />
     <Compile Include="ProjectService.cs" />
     <Compile Include="Contracts\IProjectService.cs" />

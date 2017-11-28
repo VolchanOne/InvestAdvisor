@@ -59,8 +59,8 @@
                 </div>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-light" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-light" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                     </ul>
                 </div>
             </nav>
@@ -72,33 +72,22 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li @(Model.ActiveMenuItem == MenuItem.Home ? "class=active" : string.Empty)>
-                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Home")"><i class="mdi mdi-home"></i><span class="hide-menu">Главная</span></a>
+                            <a class="waves-effect waves-light" href="@Url.Action("Index","Home")"><i class="mdi mdi-home"></i><span class="hide-menu">Главная</span></a>
                         </li>
                         <li class="nav-small-cap">ИНВЕСТИЦИИ</li>
                         <li @(Model.ActiveMenuItem == MenuItem.News ? "class=active" : string.Empty)>
-                            <a class="waves-effect waves-dark" href="#"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Новости</span></a>
-                        </li>
-                        <li @(Model.ActiveMenuItem == MenuItem.Portfolio ? "class=active" : string.Empty)>
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-briefcase-check"></i><span class="hide-menu">Портфель</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="app-calendar.html">Calendar</a></li>
-                                <li><a href="app-chat.html">Chat app</a></li>
-                                <li><a href="app-ticket.html">Support Ticket</a></li>
-                                <li><a href="app-contact.html">Contact / Employee</a></li>
-                                <li><a href="app-contact2.html">Contact Grid</a></li>
-                                <li><a href="app-contact-detail.html">Contact Detail</a></li>
-                            </ul>
+                            <a class="waves-effect waves-light" href="@Url.Action("Index","News")"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Новости</span></a>
                         </li>
                         <li @(Model.ActiveMenuItem == MenuItem.Projects ? "class=active" : string.Empty)>
-                            <a class="has-arrow waves-effect waves-dark" href="@Url.Action("All","Projects")" aria-expanded="false"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">Проекты</span></a>
+                            <a class="has-arrow waves-effect waves-light" href="#" aria-expanded="false"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">Проекты</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="@Url.Action("","Projects")" @(Model.ActiveSubMenuItem == SubMenuItem.ProjectsActive ? "class=active" : string.Empty)>Активные</a></li>
                                 <li><a href="@Url.Action("","Projects", new { @isActive = false})" @(Model.ActiveSubMenuItem == SubMenuItem.ProjectsClosed ? "class=active" : string.Empty)>Закрытые</a></li>
                             </ul>
                         </li>
-                        <li class="nav-small-cap">ДЕНЬГИ</li>
+                        @*<li class="nav-small-cap">ДЕНЬГИ</li>
                         <li @(Model.ActiveMenuItem == MenuItem.PaySystem ? "class=active" : string.Empty)>
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">Платежные системы</span></a>
+                            <a class="has-arrow waves-effect waves-light" href="#" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">Платежные системы</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="form-basic.html">Basic Forms</a></li>
                                 <li><a href="form-layout.html">Form Layouts</a></li>
@@ -121,7 +110,7 @@
                             </ul>
                         </li>
                         <li @(Model.ActiveMenuItem == MenuItem.CurrencyExchange ? "class=active" : string.Empty)>
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-exchange"></i><span class="hide-menu">Обмен валют</span></a>
+                            <a class="has-arrow waves-effect waves-light" href="#" aria-expanded="false"><i class="fa fa-exchange"></i><span class="hide-menu">Обмен валют</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="table-basic.html">Basic Tables</a></li>
                                 <li><a href="table-layout.html">Table Layouts</a></li>
@@ -132,7 +121,7 @@
                                 <li><a href="table-bootstrap.html">Bootstrap Tables</a></li>
                                 <li><a href="table-editable-table.html">Editable Table</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                     </ul>
                 </nav>
             </div>

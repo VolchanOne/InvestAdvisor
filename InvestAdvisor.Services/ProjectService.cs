@@ -7,8 +7,8 @@ using InvestAdvisor.Data;
 using InvestAdvisor.Model;
 using InvestAdvisor.Services.Contracts;
 using InvestAdvosor.Entities;
-using System.Text.RegularExpressions;
 using InvestAdvisor.Common.Extensions;
+using InvestAdvisor.Services.Converters;
 
 namespace InvestAdvisor.Services
 {
@@ -20,7 +20,7 @@ namespace InvestAdvisor.Services
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Select(p => ProjectToProjectModel(p, false, false, false, false)).ToList();
+                var projectModels = projects.Select(p => p.ToProjectModel()).ToList();
 
                 return projectModels;
             }
@@ -32,7 +32,7 @@ namespace InvestAdvisor.Services
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Where(p => (isActive ? p.ActivatedAt.HasValue : !p.ActivatedAt.HasValue)).Select(p => ProjectToProjectModel(p, true, false, false, false)).ToList();
+                var projectModels = projects.Where(p => (isActive ? p.ActivatedAt.HasValue : !p.ActivatedAt.HasValue)).Select(p => p.ToProjectModel(true)).ToList();
                 projectModels = orderDir == "Desc" ? projectModels.OrderByDescending(KeySelector(orderBy)).ToList() : projectModels.OrderBy(KeySelector(orderBy)).ToList();
 
                 return projectModels;
@@ -53,9 +53,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var project = await db.Projects.FindAsync(projectId);
-                if (project == null)
-                    return null;
-                var projectModel = ProjectToProjectModel(project, true, true, true, true);
+                var projectModel = project?.ToProjectModel(true, true, true, true);
 
                 return projectModel;
             }
@@ -66,9 +64,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var project = await db.Projects.FirstOrDefaultAsync(p => p.RouteName == routeProjectName);
-                if (project == null)
-                    return null;
-                var projectModel = ProjectToProjectModel(project, true, true, true, true);
+                var projectModel = project?.ToProjectModel(true, true, true, true);
 
                 return projectModel;
             }
@@ -286,90 +282,25 @@ namespace InvestAdvisor.Services
             }
         }
 
-        private static ProjectModel ProjectToProjectModel(Project project, bool withAdditional, bool withReview, bool withTech, bool withComments)
-        {
-            var projectModel = new ProjectModel
-            {
-                ProjectId = project.ProjectId,
-                Name = project.Name,
-                Description = project.Description,
-                Url = project.Url,
-                IsActive = project.IsActive,
-                ActivatedAt = project.ActivatedAt,
-                InPortofolio = project.InPortofolio,
-                RouteName = project.RouteName
-            };
-            if (project.Images != null)
-                projectModel.Images = project.Images.Select(i => new ImageModel
-                {
-                    ImageId = i.ImageId,
-                    Name = i.Name,
-                    ImageType = i.ImageType,
-                    Content = i.Content
-                }).ToList();
-            if (withAdditional && project.Additional != null)
-                projectModel.Additional = new ProjectAdditionalModel
-                {
-                    ProjectAdditionalId = project.Additional.ProjectAdditionalId,
-                    Marketing = project.Additional.Marketing,
-                    Referral = project.Additional.Referral,
-                    StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
-                };
-            if (withReview && project.Review != null)
-                projectModel.Review = new ProjectReviewModel
-                {
-                    ProjectReviewId = project.Review.ProjectReviewId,
-                    Review = project.Review.Review
-                };
-            if (withTech && project.TechInfo != null)
-                projectModel.TechInfo = new ProjectTechModel
-                {
-                    Domain = project.TechInfo.Domain,
-                    Hosting = project.TechInfo.Hosting,
-                    Ssl = project.TechInfo.Ssl
-                };
-            if(withComments && project.Comments != null)
-            {
-                projectModel.Comments = project.Comments.Select(c => new CommentModel
-                {
-                    CommentId = c.CommentId,
-                    UserName = c.UserName,
-                    Email = c.Email,
-                    Message = c.Message,
-                    CreatedAt = c.CreatedAt
-                }).ToList();
-            }
-            return projectModel;
-        }
-
         public async Task AddComment(int projectId, CommentModel model)
         {
-            try
+            using (var db = new InvestAdvisorDbContext())
             {
-                using (var db = new InvestAdvisorDbContext())
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                project.Comments.Add(new Comment
                 {
-                    var project = await db.Projects.FindAsync(projectId);
-                    if (project == null)
-                        return;
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Message = model.Message,
+                    CreatedAt = DateTime.Now
+                });
 
-                    project.Comments.Add(new Comment
-                    {
-                        UserName = model.UserName,
-                        Email = model.Email,
-                        Message = model.Message,
-                        CreatedAt = DateTime.Now
-                    });
-
-                    db.Entry(project).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-                }
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
             }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-                         
         }
     }
 }
