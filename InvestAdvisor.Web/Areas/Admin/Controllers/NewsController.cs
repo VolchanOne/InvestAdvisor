@@ -19,7 +19,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var news = await _newsService.GetNews();
+            var news = await _newsService.GetNews(100);
             return View(news);
         }
 

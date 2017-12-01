@@ -19,9 +19,11 @@ namespace InvestAdvisor.Services
 
         public async Task<HomeViewModel> GetHomeModel()
         {
-            var model = new HomeViewModel(MenuItem.Home);
-
-            model.Projects = await _projectService.GetProjectsWithAdditional(true);
+            var model = new HomeViewModel(MenuItem.Home)
+            {
+                Projects = await _projectService.GetProjectsWithAdditional(true),
+                News = await _newsService.GetNews(8)
+            };
 
             return model;
         }
@@ -36,7 +38,7 @@ namespace InvestAdvisor.Services
         {
             var newsViewModel = new NewsViewModel(MenuItem.News)
             {
-                News = await _newsService.GetNews()
+                News = await _newsService.GetNews(20)
             };
 
             return newsViewModel;
@@ -60,10 +62,12 @@ namespace InvestAdvisor.Services
 
         public async Task<ProjectsViewModel> GetProjectsModel(bool isActive, string orderBy = null, string orderDir = null)
         {
-            var model = new ProjectsViewModel(MenuItem.Projects);
-            model.ActiveSubMenuItem = isActive ? SubMenuItem.ProjectsActive : SubMenuItem.ProjectsClosed;
+            var model = new ProjectsViewModel(MenuItem.Projects)
+            {
+                ActiveSubMenuItem = isActive ? SubMenuItem.ProjectsActive : SubMenuItem.ProjectsClosed,
+                Projects = await _projectService.GetProjectsWithAdditional(isActive, orderBy: orderBy, orderDir: orderDir)
+            };
 
-            model.Projects = await _projectService.GetProjectsWithAdditional(isActive, orderBy, orderDir);
 
             return model;
         }

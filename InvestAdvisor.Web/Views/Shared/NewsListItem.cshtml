@@ -5,14 +5,17 @@
     var logoImage = Model.Project.Images.FirstOrDefault(i => i.ImageType == ImageType.Logo);
 }
 
-<div class="card">
-    <div class="card-body text-center">
-        @if (logoImage != null)
-        {
-            <img src="data:image;base64,@Convert.ToBase64String(logoImage.Content)" class="img-circle border" width="150" />
-        }
-        <h4 class="card-title m-t-10">@Model.Project.Name</h4>
-        <p>@Model.Content</p>
-        <a href="/Project/Details/@Model.Project.RouteName" class="m-t-10 waves-effect waves-light">Подробнее о проекте</a>
+<div class="card card-body">
+    <div class="row">
+        <div class="hidden-md-up col-sm-4"></div>
+        <div class="col-md-4 col-lg-3 col-sm-4 text-center">
+            <a href="/Project/Details/@Model.Project.RouteName"><img src="data:image;base64,@Convert.ToBase64String(logoImage.Content)" alt="@Model.Project.Name" class="img-circle border img-responsive" width="150"></a>
+        </div>
+        <div class="col-md-8 col-lg-9 text-lg-left text-sm-center">
+            <h3 class="box-title m-b-0">@Model.Project.Name</h3> <small>@Model.Title</small>
+            <br/>
+            <p>@Model.Content</p>
+            <a href="/Project/Details/@Model.Project.RouteName" class="m-t-10 waves-effect waves-light">Подробнее о проекте</a>
+        </div>
     </div>
 </div>

@@ -42,6 +42,8 @@ namespace InvestAdvisor.Model
 
         public List<CommentModel> Comments { get; set; }
 
+        public List<NewsModel> News { get; set; }
+
         public string Address
         {
             get

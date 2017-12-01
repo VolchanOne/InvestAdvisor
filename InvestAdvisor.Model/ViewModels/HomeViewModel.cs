@@ -10,5 +10,7 @@ namespace InvestAdvisor.Model.ViewModels
         }
 
         public List<ProjectModel> Projects { get; set; }
+
+        public List<NewsModel> News { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace InvestAdvisor.Services
 {
     public class NewsService : INewsService
     {
-        public async Task<List<NewsModel>> GetNews()
+        public async Task<List<NewsModel>> GetNews(int take)
         {
             using (var db = new InvestAdvisorDbContext())
             {
-                var news = await db.News.OrderBy(n => n.PublishedAt).Take(20).ToListAsync();
+                var news = await db.News.OrderBy(n => n.PublishedAt).Take(take).ToListAsync();
 
                 var newsModels = news.Select(n => n.ToNewsModel(true)).ToList();
 

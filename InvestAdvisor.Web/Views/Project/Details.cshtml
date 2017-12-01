@@ -5,6 +5,7 @@
 @{
     var tabActive = (TabItem?)ViewBag.ActiveTabItem;
 }
+
 <div class="row page-titles">
     <div class="col-md-9 align-self-center">
         <h3 class="text-themecolor">Обзор инвестиционного проекта @Model.Project.Name</h3>
@@ -48,11 +49,11 @@
                                 <span>Комментарии</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link @(tabActive == TabItem.News ? "active" : string.Empty)" d data-toggle="tab" href="#news" role="tab" aria-expanded="@(tabActive == TabItem.News ? "true" : "false")">
                                 <span>Новости</span>
                             </a>
-                        </li>
+                        </li>*@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -119,7 +120,7 @@
                                 }
                             </div>
                         </div>
-                        <div class="tab-pane p-20 @(tabActive == TabItem.News ? "active" : string.Empty)" id="news" role="tabpanel">3</div>
+                        @*<div class="tab-pane p-20 @(tabActive == TabItem.News ? "active" : string.Empty)" id="news" role="tabpanel">3</div>*@
                     </div>
                 </div>
             </div>

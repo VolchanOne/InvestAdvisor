@@ -6,7 +6,7 @@ namespace InvestAdvisor.Services.Contracts
 {
     public interface INewsService
     {
-        Task<List<NewsModel>> GetNews();
+        Task<List<NewsModel>> GetNews(int take);
 
         Task Create(NewsModel model);
 

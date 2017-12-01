@@ -75,9 +75,9 @@
                             <a class="waves-effect waves-light" href="@Url.Action("Index","Home")"><i class="mdi mdi-home"></i><span class="hide-menu">Главная</span></a>
                         </li>
                         <li class="nav-small-cap">ИНВЕСТИЦИИ</li>
-                        <li @(Model.ActiveMenuItem == MenuItem.News ? "class=active" : string.Empty)>
+                        @*<li @(Model.ActiveMenuItem == MenuItem.News ? "class=active" : string.Empty)>
                             <a class="waves-effect waves-light" href="@Url.Action("Index","News")"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Новости</span></a>
-                        </li>
+                        </li>*@
                         <li @(Model.ActiveMenuItem == MenuItem.Projects ? "class=active" : string.Empty)>
                             <a class="has-arrow waves-effect waves-light" href="#" aria-expanded="false"><i class="mdi mdi-folder-multiple-outline"></i><span class="hide-menu">Проекты</span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -133,7 +133,7 @@
 
             
             <footer class="footer">
-                © 2017 Admin Press Admin by themedesigner.in
+                © 2017 InvestAdvisor
             </footer>
         </div>
      </div>
