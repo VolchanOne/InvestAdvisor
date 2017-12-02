@@ -61,6 +61,7 @@
                         {
                             <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
                                 <p>@Html.Raw(Model.Project.Review.Review)</p>
+                                <a href="@Model.Project.Url" class="m-t-10 waves-effect waves-light btn btn-info btn-md btn-rounded">Регистрация в проекте</a>
                             </div>
                         }
                         <div class="tab-pane p-20 @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" id="comments" role="tabpanel" aria-expanded="false">
