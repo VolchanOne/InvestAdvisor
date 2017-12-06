@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Web", "InvestAdvisor.Web\InvestAdvisor.Web.csproj", "{708E1E10-991C-40A6-8BFA-DA18778E6C77}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Entities", "InvestAdvosor.Entities\InvestAdvisor.Entities.csproj", "{E4747874-C719-476C-BC7D-579EB669C031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Common", "InvestAdvisor.Common\InvestAdvisor.Common.csproj", "{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestAdvisor.Web.Landing", "InvestAdvisor.Web.Landing\InvestAdvisor.Web.Landing.csproj", "{8030CD1B-8D27-4F18-8572-FF24D99D3947}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC6CE46-45BA-444B-92E7-6F7286BCACFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8030CD1B-8D27-4F18-8572-FF24D99D3947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8030CD1B-8D27-4F18-8572-FF24D99D3947}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8030CD1B-8D27-4F18-8572-FF24D99D3947}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8030CD1B-8D27-4F18-8572-FF24D99D3947}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
