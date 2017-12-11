@@ -14,6 +14,8 @@ namespace InvestAdvisor.Web
             
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<INewsService, NewsService>();
+            container.RegisterType<IPaymentSystemService, PaymentSystemService>();
+
             container.RegisterType<IViewModelService,ViewModelService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

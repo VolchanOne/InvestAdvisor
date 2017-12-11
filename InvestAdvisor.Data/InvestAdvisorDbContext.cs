@@ -21,6 +21,7 @@ namespace InvestAdvisor.Data
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<PaymentSystem> PaymentSystems { get; set; }
         
 
 

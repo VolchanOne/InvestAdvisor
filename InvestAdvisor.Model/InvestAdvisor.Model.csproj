@@ -65,6 +65,7 @@
     <Compile Include="CommentModel.cs" />
     <Compile Include="ImageModel.cs" />
     <Compile Include="NewsModel.cs" />
+    <Compile Include="PaymentSystemModel.cs" />
     <Compile Include="ProjectAdditionalModel.cs" />
     <Compile Include="ProjectModel.cs" />
     <Compile Include="ProjectReviewModel.cs" />

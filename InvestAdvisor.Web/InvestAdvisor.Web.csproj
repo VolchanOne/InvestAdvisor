@@ -173,6 +173,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaymentSystemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -537,6 +538,10 @@
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Projects\Comments.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentSystems\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentSystems\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentSystems\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentSystems\Delete.cshtml" />
     <None Include="packages.config" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.ttf" />

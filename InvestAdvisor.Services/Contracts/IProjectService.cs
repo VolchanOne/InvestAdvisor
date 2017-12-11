@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using InvestAdvisor.Model;
-using InvestAdvosor.Entities;
-using System;
 
 namespace InvestAdvisor.Services.Contracts
 {

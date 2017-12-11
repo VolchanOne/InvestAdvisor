@@ -40,13 +40,7 @@ namespace InvestAdvisor.Services.Converters
                 RouteName = project.RouteName
             };
             if (project.Images != null)
-                projectModel.Images = project.Images.Select(i => new ImageModel
-                {
-                    ImageId = i.ImageId,
-                    Name = i.Name,
-                    ImageType = i.ImageType,
-                    Content = i.Content
-                }).ToList();
+                projectModel.Images = project.Images.Select(i => i.ToImageModel()).ToList();
             if (withAdditional && project.Additional != null)
                 projectModel.Additional = new ProjectAdditionalModel
                 {

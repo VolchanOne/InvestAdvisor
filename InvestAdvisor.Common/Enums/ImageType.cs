@@ -3,6 +3,7 @@
     public enum ImageType
     {
         Logo = 1,
-        Screen
+        Screen,
+        Icon
     }
 }
