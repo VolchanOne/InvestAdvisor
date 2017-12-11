@@ -1,0 +1,67 @@
+﻿@using InvestAdvisor.Model
+@model InvestAdvisor.Model.ProjectModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row page-titles">
+    <div class="align-self-center">
+        <h3 class="text-themecolor">Комментарии</h3>
+    </div>
+</div>
+
+@if (Model.Comments != null)
+{
+    foreach (CommentModel comment in Model.Comments)
+    {
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("EditComment", "Projects", FormMethod.Post, new { @class = "m-t-40", enctype = "multipart/form-data", @novalidate = "" }))
+    {
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="ProjectId" value="@Model.ProjectId" />
+            <input type="hidden" name="CommentId" value="@comment.CommentId" />
+
+            <div class="form-group">
+                <h5>Имя <span class="text-danger">*</span></h5>
+                <div class="controls">
+                    <input type="text" name="UserName" value="@comment.UserName" class="form-control" required="" data-validation-required-message="Обязательное поле">
+                    <div class="help-block"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h5>Email<span class="text-danger">*</span></h5>
+                <div class="controls">
+                    <input type="text" name="Email" value="@comment.Email" class="form-control" data-validation-required-message="Обязательное поле" data-validation-regex-regex="([a-z0-9_\.-]+)@@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Введите верный email" aria-invalid="false" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <h5>Сообщение <span class="text-danger">*</span></h5>
+                <div class="controls">
+                    <textarea name="Message" id="textarea" class="form-control" required="" data-validation-required-message="Обязательное поле" aria-invalid="false" rows="5">@comment.Message</textarea>
+                    <div class="help-block"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button></td>
+                        <td>
+                            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                @Html.ActionLink("Удалить", "DeleteComment", new { projectId = Model.ProjectId, commentId = comment.CommentId })
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+}
+            </div>
+        </div>
+    }
+}
+
+<button type="button" class="btn waves-effect waves-light btn-secondary">
+    @Html.ActionLink("Назад к проекту", "Edit", new { id = Model.ProjectId })
+</button>

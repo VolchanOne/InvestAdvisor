@@ -9,6 +9,7 @@
 {
     <link href="~/Styles/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="~/Styles/bootstrap-wysihtml5.css" rel="stylesheet" />
+    <link href="~/Styles/wysiwyg-color.css" rel="stylesheet" />
 }
 
 <div class="container-fluid">
@@ -123,9 +124,9 @@
                         </div>
                         <div class="form-group">
                             @Html.DropDownList("ImageType",
-                            EnumHelper.GetSelectList(typeof(ImageType)),
-                            "Выберите тип",
-                            new { @class = "form-control" })
+                                      EnumHelper.GetSelectList(typeof(ImageType)),
+                                      "Выберите тип",
+                                      new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
@@ -177,7 +178,7 @@
                 </div>
             </div>
         </div>
-                                }
+    }
 
     <div class="card">
         <div class="card-body">
@@ -249,49 +250,7 @@
     {
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Комментарии</h4>
-                <div class="comment-widgets m-b-20">
-                    @for (var i = 0; i < Model.Comments.Count; i++)
-                    {
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @using (Html.BeginForm("                    ", "Projects", FormMethod.Post, new { @class = "form-material border", enctype = "multipart/form-data" }))
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.ProjectId)
-                                    @Html.HiddenFor(model => model.Comments[i].CommentId)
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.Comments[i].UserName)
-                                        @Html.TextBoxFor(m => m.Comments[i].UserName, new { @class = "form-control" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.Comments[i].Email)
-                                        @Html.TextBoxFor(m => m.Comments[i].Email, new { @class = "form-control" })
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.Comments[i].Message)
-                                        @Html.TextBoxFor(m => m.Comments[i].Message, new { @class = "form-control" })
-                                    </div>
-                                    <div class="form-group">
-                                        <table>
-                                            <tr>
-                                                <td><button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button></td>
-                                                <td>
-                                                    <button type="button" class="btn waves-effect waves-light btn-secondary">
-                                                        @Html.ActionLink("Удалить", "DeleteComment", new { projectId = Model.ProjectId, commentId = Model.Comments[i].CommentId })
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
-                </div>
+                <h4>@Html.ActionLink("Комментарии", "Comments", new { id = Model.ProjectId })</h4>
             </div>
         </div>
     }

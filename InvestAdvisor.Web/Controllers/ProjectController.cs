@@ -43,6 +43,7 @@ namespace InvestAdvisor.Web.Controllers
 
         public async Task<ActionResult> AddComment(int projectId, CommentModel comment)
         {
+            comment.Message = comment.Message.Replace("\n", "<br />");
             await _projectService.AddComment(projectId, comment);
             var model = await _viewService.GetProjectModel(projectId);
 

@@ -504,6 +504,7 @@
     <Content Include="Styles\spinners.css" />
     <Content Include="Styles\template.css" />
     <Content Include="Static\Error.html" />
+    <Content Include="Styles\wysiwyg-color.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -535,6 +536,7 @@
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Comments.cshtml" />
     <None Include="packages.config" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.ttf" />

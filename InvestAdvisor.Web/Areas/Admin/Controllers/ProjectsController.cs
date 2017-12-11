@@ -166,7 +166,7 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteComment(int projectId, int commentId)
         {
             await _projectService.DeleteComment(commentId);
-            return RedirectToAction("Edit", new { id = projectId });
+            return RedirectToAction("Comments", new { id = projectId });
         }
 
         [HttpPost]
@@ -175,7 +175,18 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         {
             await _projectService.UpdateComment(comment);
 
-            return RedirectToAction("Edit", new { id = projectId });
+            return RedirectToAction("Comments", new { id = projectId });
+        }
+
+        public async Task<ActionResult> Comments(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var project = await _projectService.FindById(id.Value);
+            return View(project);
         }
     }
 }
