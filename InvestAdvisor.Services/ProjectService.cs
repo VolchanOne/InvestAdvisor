@@ -282,6 +282,20 @@ namespace InvestAdvisor.Services
             }
         }
 
+        public async Task DeleteComment(int commentId)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var comment = await db.Comments.FindAsync(commentId);
+                if (comment == null)
+                    return;
+
+                db.Comments.Remove(comment);
+
+                await db.SaveChangesAsync();
+            }
+        }
+
         public async Task AddComment(int projectId, CommentModel model)
         {
             using (var db = new InvestAdvisorDbContext())
@@ -299,6 +313,21 @@ namespace InvestAdvisor.Services
                 });
 
                 db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdateComment(CommentModel commentModel)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var comment = await db.Comments.FindAsync(commentModel.CommentId);
+                if (comment == null)
+                    return;
+                comment.UserName = commentModel.UserName;
+                comment.Email = commentModel.Email;
+                comment.Message = commentModel.Message;
+                db.Entry(comment).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
         }

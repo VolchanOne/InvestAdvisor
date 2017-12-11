@@ -20,6 +20,7 @@ namespace InvestAdvisor.Data
         public virtual DbSet<ProjectTech> ProjectTechs { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         
 
 

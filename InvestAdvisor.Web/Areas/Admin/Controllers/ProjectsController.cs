@@ -162,5 +162,20 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             await _projectService.DeleteImage(imageId);
             return RedirectToAction("Edit", new { id = projectId });
         }
+
+        public async Task<ActionResult> DeleteComment(int projectId, int commentId)
+        {
+            await _projectService.DeleteComment(commentId);
+            return RedirectToAction("Edit", new { id = projectId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditComment(int projectId, CommentModel comment)
+        {
+            await _projectService.UpdateComment(comment);
+
+            return RedirectToAction("Edit", new { id = projectId });
+        }
     }
 }
