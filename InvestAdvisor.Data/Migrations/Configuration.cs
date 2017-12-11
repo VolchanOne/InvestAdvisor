@@ -7,7 +7,7 @@ namespace InvestAdvisor.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(InvestAdvisorDbContext context)
