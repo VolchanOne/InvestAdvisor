@@ -28,6 +28,9 @@ namespace InvestAdvisor.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            Database.SetInitializer<InvestAdvisorDbContext>(null);
+            base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges()
