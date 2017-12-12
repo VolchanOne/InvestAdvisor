@@ -13,6 +13,7 @@ namespace InvestAdvisor.Services.Converters
                 PaymentSystemId = paymentSystem.PaymentSystemId,
                 Name = paymentSystem.Name,
                 ShortName = paymentSystem.ShortName,
+                RouteName = paymentSystem.RouteName,
                 Url = paymentSystem.Url
             };
             if (paymentSystem.Images != null)

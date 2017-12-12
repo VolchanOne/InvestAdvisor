@@ -53,7 +53,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var project = await db.Projects.FindAsync(projectId);
-                var projectModel = project?.ToProjectModel(true, true, true, true);
+                var projectModel = project?.ToProjectModel(true, true);
 
                 return projectModel;
             }
@@ -64,7 +64,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var project = await db.Projects.FirstOrDefaultAsync(p => p.RouteName == routeProjectName);
-                var projectModel = project?.ToProjectModel(true, true, true, true);
+                var projectModel = project?.ToProjectModel(true, true);
 
                 return projectModel;
             }
@@ -183,6 +183,31 @@ namespace InvestAdvisor.Services
                     project.TechInfo.Domain = techModel.Domain;
                     project.TechInfo.Hosting = techModel.Hosting;
                     project.TechInfo.Ssl = techModel.Ssl;
+                }
+
+                db.Entry(project).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdatePaymentSystems(int projectId, int[] paymentSystemIds)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                if (paymentSystemIds == null || paymentSystemIds.Length == 0)
+                    return;
+
+                var project = await db.Projects.FindAsync(projectId);
+                if (project == null)
+                    return;
+
+                project.PaymentSystems.Clear();
+
+                foreach (var paymentSystemId in paymentSystemIds)
+                {
+                    var paymentSystem = await db.PaymentSystems.FindAsync(paymentSystemId);
+                    if (paymentSystem != null)
+                        project.PaymentSystems.Add(paymentSystem);
                 }
 
                 db.Entry(project).State = EntityState.Modified;

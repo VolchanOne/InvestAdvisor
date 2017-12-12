@@ -18,5 +18,7 @@ namespace InvestAdvosor.Entities
         public string Url { get; set; }
 
         public string RouteName { get; set; }
+
+        public virtual List<Project> Projects { get; set; }
     }
 }

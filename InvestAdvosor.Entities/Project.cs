@@ -36,6 +36,7 @@ namespace InvestAdvosor.Entities
         public virtual List<Image> Images { get; set; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<News> News { get; set; }
+        public virtual List<PaymentSystem> PaymentSystems { get; set; }
         #endregion
     }
 }

@@ -191,6 +191,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\logo.png" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.min.js" />
@@ -206,6 +207,7 @@
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\blue.css" />
     <Content Include="Styles\bootstrap-datepicker.min.css" />
+    <Content Include="Styles\bootstrap-select.min.css" />
     <Content Include="Styles\bootstrap-wysihtml5.css" />
     <Content Include="Styles\bootstrap.min.css" />
     <Content Include="Styles\icons\flag-icon-css\flag-icon.min.css" />

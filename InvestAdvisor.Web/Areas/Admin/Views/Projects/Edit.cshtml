@@ -1,8 +1,11 @@
 ﻿@using InvestAdvisor.Common.Enums
+@using InvestAdvisor.Model
 @model InvestAdvisor.Model.ProjectModel
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var paymentSystems = (List<PaymentSystemModel>)ViewBag.PaymentSystems;
 }
 
 @section styles
@@ -10,6 +13,7 @@
     <link href="~/Styles/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="~/Styles/bootstrap-wysihtml5.css" rel="stylesheet" />
     <link href="~/Styles/wysiwyg-color.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-select.min.css" rel="stylesheet" />
 }
 
 <div class="container-fluid">
@@ -124,9 +128,9 @@
                         </div>
                         <div class="form-group">
                             @Html.DropDownList("ImageType",
-                                      EnumHelper.GetSelectList(typeof(ImageType)),
-                                      "Выберите тип",
-                                      new { @class = "form-control" })
+                                                                         EnumHelper.GetSelectList(typeof(ImageType)),
+                                                                         "Выберите тип",
+                                                                         new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
@@ -246,6 +250,35 @@
         </div>
     </div>
 
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Платежные системы</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditPaymentSystems", "Projects", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProjectId)
+                        <select name="PaymentSystems[]" class="selectpicker" multiple data-style="form-control btn-secondary">
+                            @if (paymentSystems != null)
+                            {
+                                foreach (var paymentSystem in paymentSystems)
+                                {
+                                    <option value="@paymentSystem.PaymentSystemId" @(Model.PaymentSystems.Any(p => p.PaymentSystemId == paymentSystem.PaymentSystemId) ? "selected" : string.Empty)>@paymentSystem.Name</option>
+                                }
+                            }
+                        </select>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if (Model.Comments != null)
     {
         <div class="card">
@@ -268,6 +301,7 @@
 @section scripts {
     <script src="~/Scripts/wysihtml5-0.3.0.js"></script>
     <script src="~/Scripts/bootstrap-wysihtml5.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
 
     <script type="text/javascript">
         function checkboxClick() {

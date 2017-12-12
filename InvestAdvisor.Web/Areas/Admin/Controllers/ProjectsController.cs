@@ -12,10 +12,12 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
     public class ProjectsController : Controller
     {
         private readonly IProjectService _projectService;
+        private readonly IPaymentSystemService _paymentSystemService;
 
-        public ProjectsController(IProjectService projectService)
+        public ProjectsController(IProjectService projectService, IPaymentSystemService paymentSystemService)
         {
             _projectService = projectService;
+            _paymentSystemService = paymentSystemService;
         }
 
         // GET: Admin/Projects
@@ -58,6 +60,10 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+            var paymentSystems = await _paymentSystemService.GetPaymentSystems();
+            ViewBag.PaymentSystems = paymentSystems;
+
             return View(projectModel);
         }
 
@@ -103,6 +109,14 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 await _projectService.UpdateTechInfo(projectId, techInfo);
             }
+            return RedirectToAction("Edit", new { id = projectId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPaymentSystems(int projectId, int[] paymentSystems)
+        {
+            await _projectService.UpdatePaymentSystems(projectId, paymentSystems);
             return RedirectToAction("Edit", new { id = projectId });
         }
 

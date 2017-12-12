@@ -44,6 +44,8 @@ namespace InvestAdvisor.Model
 
         public List<NewsModel> News { get; set; }
 
+        public List<PaymentSystemModel> PaymentSystems { get; set; }
+
         public string Address
         {
             get

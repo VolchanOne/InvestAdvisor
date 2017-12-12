@@ -8,25 +8,15 @@ namespace InvestAdvisor.Services.Converters
     {
         public static ProjectModel ToProjectModel(this Project project)
         {
-            return project.ToProjectModel(false);
+            return project.ToProjectModel(false, false);
         }
 
-        public static ProjectModel ToProjectModel(this Project project, bool withAdditional)
+        public static ProjectModel ToProjectModel(this Project project, bool withAditional)
         {
-            return project.ToProjectModel(withAdditional, false);
+            return project.ToProjectModel(true, false);
         }
 
-        public static ProjectModel ToProjectModel(this Project project, bool withAdditional, bool withReview)
-        {
-            return project.ToProjectModel(withAdditional, withReview, false);
-        }
-
-        public static ProjectModel ToProjectModel(this Project project, bool withAdditional, bool withReview, bool withTech)
-        {
-            return project.ToProjectModel(withAdditional, withReview, withTech, false);
-        }
-
-        public static ProjectModel ToProjectModel(this Project project, bool withAdditional, bool withReview, bool withTech, bool withComments)
+        public static ProjectModel ToProjectModel(this Project project, bool withAdditional, bool allInfo)
         {
             var projectModel = new ProjectModel
             {
@@ -49,29 +39,36 @@ namespace InvestAdvisor.Services.Converters
                     Referral = project.Additional.Referral,
                     StartDate = project.Additional.StartDate?.ToString("yyyy-MM-dd")
                 };
-            if (withReview && project.Review != null)
-                projectModel.Review = new ProjectReviewModel
-                {
-                    ProjectReviewId = project.Review.ProjectReviewId,
-                    Review = project.Review.Review
-                };
-            if (withTech && project.TechInfo != null)
-                projectModel.TechInfo = new ProjectTechModel
-                {
-                    Domain = project.TechInfo.Domain,
-                    Hosting = project.TechInfo.Hosting,
-                    Ssl = project.TechInfo.Ssl
-                };
-            if (withComments && project.Comments != null)
+            if (allInfo)
             {
-                projectModel.Comments = project.Comments.Select(c => new CommentModel
+                if (project.Review != null)
+                    projectModel.Review = new ProjectReviewModel
+                    {
+                        ProjectReviewId = project.Review.ProjectReviewId,
+                        Review = project.Review.Review
+                    };
+                if (project.TechInfo != null)
+                    projectModel.TechInfo = new ProjectTechModel
+                    {
+                        Domain = project.TechInfo.Domain,
+                        Hosting = project.TechInfo.Hosting,
+                        Ssl = project.TechInfo.Ssl
+                    };
+                if (project.Comments != null)
                 {
-                    CommentId = c.CommentId,
-                    UserName = c.UserName,
-                    Email = c.Email,
-                    Message = c.Message,
-                    CreatedAt = c.CreatedAt
-                }).ToList();
+                    projectModel.Comments = project.Comments.Select(c => new CommentModel
+                    {
+                        CommentId = c.CommentId,
+                        UserName = c.UserName,
+                        Email = c.Email,
+                        Message = c.Message,
+                        CreatedAt = c.CreatedAt
+                    }).ToList();
+                }
+                if (project.PaymentSystems != null)
+                {
+                    projectModel.PaymentSystems = project.PaymentSystems.Select(p => p.ToPaymentSystemModel()).ToList();
+                }
             }
             return projectModel;
         }
