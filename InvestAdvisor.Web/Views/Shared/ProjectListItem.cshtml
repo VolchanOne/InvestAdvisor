@@ -46,7 +46,7 @@
             {
                 <div>
                     Платежные системы:
-                    <ul>
+                    <ul style="display:inline; padding:0">
                         @foreach (var paymentSystem in Model.PaymentSystems)
                         {
                             var logo = paymentSystem.Images.FirstOrDefault(i => i.ImageType == ImageType.Icon);
