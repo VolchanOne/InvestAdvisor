@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommentModel.cs" />
+    <Compile Include="CurrencyModel.cs" />
     <Compile Include="ImageModel.cs" />
     <Compile Include="NewsModel.cs" />
     <Compile Include="PaymentSystemModel.cs" />

@@ -8,8 +8,13 @@
     <title>InvestAdvisor - панель администратора</title>
 
     <link href="~/Styles/bootstrap.min.css" rel="stylesheet">
-    
+
     @RenderSection("styles", required: false)
+
+    <link href="~/Styles/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-wysihtml5.css" rel="stylesheet" />
+    <link href="~/Styles/wysiwyg-color.css" rel="stylesheet" />
+    <link href="~/Styles/bootstrap-select.min.css" rel="stylesheet" />
 
     <link href="~/Styles/template.css" rel="stylesheet">
     <link href="~/Styles/blue.css" rel="stylesheet">
@@ -80,6 +85,9 @@
                         <li>
                             <a class="waves-effect waves-dark" href="@Url.Action("Index","PaymentSystems")"><i class="mdi mdi-cash-usd"></i><span class="hide-menu">Платежные системы</span></a>
                         </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index","Currencies")"><i class="mdi mdi-cash-usd"></i><span class="hide-menu">Валюты</span></a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -88,7 +96,7 @@
 
 
             @RenderBody()
-            
+
         </div>
     </div>
 
@@ -111,6 +119,27 @@
     <script src="~/Scripts/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="~/Scripts/custom.min.js"></script>
+
+    <script src="~/Scripts/wysihtml5-0.3.0.js"></script>
+    <script src="~/Scripts/bootstrap-wysihtml5.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+
+    <script type="text/javascript">
+        function checkboxClick() {
+            var target = event.target || event.srcElement;
+            if (target != null) {
+                var value = target.checked;
+                var inputs = $('input[name=' + target.name + ']');
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].value = value;
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $('.textarea_editor').wysihtml5();
+        });
+    </script>
 
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")

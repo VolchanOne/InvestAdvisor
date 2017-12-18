@@ -1,0 +1,30 @@
+﻿@using InvestAdvisor.Common.Enums
+@model InvestAdvisor.Model.CurrencyModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Создание валюты</h4>
+        @using (Html.BeginForm("Create", "Currencies", FormMethod.Post, new { @class = "form-material m-t-40", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.DropDownList("CurrencyAbbreviation",
+                    EnumHelper.GetSelectList(typeof(CurrencyAbbreviation)),
+                    "Выберите тип",
+                    new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+            </div>
+        }
+        <div>
+            <button type="button" class="btn waves-effect waves-light btn-secondary">@Html.ActionLink("Назад к списку", "Index")</button>
+        </div>
+    </div>
+</div>
+

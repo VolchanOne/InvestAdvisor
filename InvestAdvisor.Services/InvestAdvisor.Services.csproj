@@ -47,13 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICurrencyService.cs" />
     <Compile Include="Contracts\INewsService.cs" />
     <Compile Include="Contracts\IPaymentSystemService.cs" />
     <Compile Include="Contracts\IViewModelService.cs" />
+    <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="Converters\NewsConverter.cs" />
     <Compile Include="Converters\PaymentSystemConverter.cs" />
     <Compile Include="Converters\ProjectConverter.cs" />
+    <Compile Include="CurrencyService.cs" />
     <Compile Include="NewsService.cs" />
     <Compile Include="PaymentSystemService.cs" />
     <Compile Include="ProjectService.cs" />

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<InvestAdvisor.Model.CurrencyModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Валюты</h4>
+        <p>
+            @Html.ActionLink("Создать", "Create")
+        </p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@Html.DisplayNameFor(model => model.Abbreviation)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @{int i = 1;}
+                @foreach (var currency in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => currency.Abbreviation)
+                        </td>
+                        <td>
+                            <button type="button" class="btn waves-effect waves-light btn-secondary">
+                                @Html.ActionLink("Удалить", "Delete", new { id = currency.CurrencyId })
+                            </button>
+                        </td>
+                    </tr>
+                    i++;
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

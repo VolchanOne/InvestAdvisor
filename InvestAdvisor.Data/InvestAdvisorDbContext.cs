@@ -22,7 +22,8 @@ namespace InvestAdvisor.Data
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<PaymentSystem> PaymentSystems { get; set; }
-        
+        public virtual DbSet<Currency> Currencies { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

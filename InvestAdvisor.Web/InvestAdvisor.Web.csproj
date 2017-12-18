@@ -171,6 +171,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CurrenciesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentSystemsController.cs" />
@@ -544,6 +545,9 @@
     <Content Include="Areas\Admin\Views\PaymentSystems\Create.cshtml" />
     <Content Include="Areas\Admin\Views\PaymentSystems\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\PaymentSystems\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Currencies\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Currencies\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Currencies\Delete.cshtml" />
     <None Include="packages.config" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Styles\icons\font-awesome\fonts\fontawesome-webfont.ttf" />

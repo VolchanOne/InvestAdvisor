@@ -15,6 +15,7 @@ namespace InvestAdvisor.Web
             container.RegisterType<IProjectService, ProjectService>();
             container.RegisterType<INewsService, NewsService>();
             container.RegisterType<IPaymentSystemService, PaymentSystemService>();
+            container.RegisterType<ICurrencyService, CurrencyService>();
 
             container.RegisterType<IViewModelService,ViewModelService>();
 
