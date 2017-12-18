@@ -125,5 +125,30 @@ namespace InvestAdvisor.Services
                 await db.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateCurrencies(int paymentSystemId, int[] currencyIds)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                if (currencyIds == null || currencyIds.Length == 0)
+                    return;
+
+                var paymentSystem = await db.PaymentSystems.FindAsync(paymentSystemId);
+                if (paymentSystem == null)
+                    return;
+
+                paymentSystem.Currencies.Clear();
+
+                foreach (var currencyId in currencyIds)
+                {
+                    var currency = await db.Currencies.FindAsync(currencyId);
+                    if (currency != null)
+                        paymentSystem.Currencies.Add(currency);
+                }
+
+                db.Entry(paymentSystem).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

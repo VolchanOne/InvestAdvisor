@@ -8,6 +8,7 @@ namespace InvestAdvisor.Model
         public PaymentSystemModel()
         {
             Images = new List<ImageModel>();
+            Currencies = new List<CurrencyModel>();
         }
         public int PaymentSystemId { get; set; }
 
@@ -18,6 +19,8 @@ namespace InvestAdvisor.Model
         public string ShortName { get; set; }
 
         public List<ImageModel> Images { get; set; }
+
+        public List<CurrencyModel> Currencies { get; set; }
 
         [DisplayName("Ссылка")]
         public string Url { get; set; }

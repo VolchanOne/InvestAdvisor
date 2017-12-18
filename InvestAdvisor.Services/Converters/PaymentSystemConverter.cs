@@ -18,6 +18,8 @@ namespace InvestAdvisor.Services.Converters
             };
             if (paymentSystem.Images != null)
                 paymentSystemModel.Images = paymentSystem.Images.Select(i => i.ToImageModel()).ToList();
+            if (paymentSystem.Currencies != null)
+                paymentSystemModel.Currencies = paymentSystem.Currencies.Select(i => i.ToCurrencyModel()).ToList();
             return paymentSystemModel;
         }
     }

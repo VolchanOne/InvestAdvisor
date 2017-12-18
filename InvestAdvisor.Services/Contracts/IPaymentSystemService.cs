@@ -19,5 +19,7 @@ namespace InvestAdvisor.Services.Contracts
         Task AddImage(int paymentSystemId, ImageModel image);
 
         Task DeleteImage(int imageId);
+
+        Task UpdateCurrencies(int paymentSystemId, int[] currencyIds);
     }
 }

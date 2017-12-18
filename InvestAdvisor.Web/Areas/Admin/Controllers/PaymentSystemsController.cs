@@ -12,10 +12,12 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
     public class PaymentSystemsController : Controller
     {
         private readonly IPaymentSystemService _paymentSystemService;
+        private readonly ICurrencyService _currencyService;
 
-        public PaymentSystemsController(IPaymentSystemService paymentSystemService)
+        public PaymentSystemsController(IPaymentSystemService paymentSystemService, ICurrencyService currencyService)
         {
             _paymentSystemService = paymentSystemService;
+            _currencyService = currencyService;
         }
 
         public async Task<ActionResult> Index()
@@ -54,6 +56,9 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Currencies = await _currencyService.GetCurrencies();
+
             return View(paySystemModel);
         }
 
@@ -111,6 +116,14 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteImage(int paymentSystemId, int imageId)
         {
             await _paymentSystemService.DeleteImage(imageId);
+            return RedirectToAction("Edit", new { id = paymentSystemId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditCurrencies(int paymentSystemId, int[] currencies)
+        {
+            await _paymentSystemService.UpdateCurrencies(paymentSystemId, currencies);
             return RedirectToAction("Edit", new { id = paymentSystemId });
         }
     }

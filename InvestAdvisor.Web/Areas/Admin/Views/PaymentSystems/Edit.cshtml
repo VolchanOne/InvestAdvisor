@@ -1,7 +1,9 @@
 ﻿@using InvestAdvisor.Common.Enums
+@using InvestAdvisor.Model
 @model InvestAdvisor.Model.PaymentSystemModel
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var currencies = (List<CurrencyModel>) ViewBag.Currencies;
 }
 
 <div class="container-fluid">
@@ -56,9 +58,9 @@
                         </div>
                         <div class="form-group">
                             @Html.DropDownList("ImageType",
-                                           EnumHelper.GetSelectList(typeof(ImageType)),
-                                           "Выберите тип",
-                                           new { @class = "form-control" })
+                                                EnumHelper.GetSelectList(typeof(ImageType)),
+                                                "Выберите тип",
+                                                new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
@@ -111,6 +113,35 @@
             </div>
         </div>
     }
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Валюты</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("EditCurrencies", "PaymentSystems", FormMethod.Post, new { @class = "form-material", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PaymentSystemId)
+                        <select name="Currencies[]" class="selectpicker" multiple data-style="form-control btn-secondary">
+                            @if (currencies != null)
+                            {
+                                foreach (var currency in currencies)
+                                {
+                                    <option value="@currency.CurrencyId" @(Model.Currencies.Any(p => p.CurrencyId == currency.CurrencyId) ? "selected" : string.Empty)>@currency.Abbreviation.ToString()</option>
+                                }
+                            }
+                        </select>
+                        <div class="form-group">
+                            <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 
     <button type="button" class="btn waves-effect waves-light btn-secondary">
         @Html.ActionLink("Назад к списку", "Index")
