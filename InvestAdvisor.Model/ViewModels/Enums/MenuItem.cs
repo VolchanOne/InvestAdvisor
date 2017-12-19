@@ -5,7 +5,7 @@
         Home,
         News,
         Projects,
-        PaySystem,
+        PaymentSystem,
         CurrencyExchange
     }
 }

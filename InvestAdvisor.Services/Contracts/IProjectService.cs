@@ -12,7 +12,7 @@ namespace InvestAdvisor.Services.Contracts
 
         Task<ProjectModel> FindById(int projectId);
 
-        Task<ProjectModel> FindByRouteProjectName(string urlProjectName);
+        Task<ProjectModel> FindByRouteProjectName(string routeProjectName);
 
         Task Create(ProjectModel model);
 

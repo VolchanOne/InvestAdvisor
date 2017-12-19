@@ -150,5 +150,16 @@ namespace InvestAdvisor.Services
                 await db.SaveChangesAsync();
             }
         }
+
+        public async Task<PaymentSystemModel> FindByRoutePaymentSystemName(string routePaymentSystemName)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var paymentSystem = await db.PaymentSystems.FirstOrDefaultAsync(p => p.RouteName == routePaymentSystemName);
+                var paymentSystemModel = paymentSystem?.ToPaymentSystemModel();
+
+                return paymentSystemModel;
+            }
+        }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using InvestAdvisor.Services.Contracts;
-using System.Net;
-using System.Web.Http;
 
 namespace InvestAdvisor.Web.Controllers
 {

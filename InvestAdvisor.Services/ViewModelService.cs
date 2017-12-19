@@ -9,12 +9,14 @@ namespace InvestAdvisor.Services
     public class ViewModelService : IViewModelService
     {
         private readonly IProjectService _projectService;
+        private readonly IPaymentSystemService _paymentSystemService;
         private readonly INewsService _newsService;
 
-        public ViewModelService(IProjectService projectService, INewsService newsService)
+        public ViewModelService(IProjectService projectService, INewsService newsService, IPaymentSystemService paymentSystemService)
         {
             _projectService = projectService;
             _newsService = newsService;
+            _paymentSystemService = paymentSystemService;
         }
 
         public async Task<HomeViewModel> GetHomeModel()
@@ -44,6 +46,26 @@ namespace InvestAdvisor.Services
             return newsViewModel;
         }
 
+        public async Task<PaymentSystemsViewModel> GetPaymentSystemsModel()
+        {
+            var paymentSystemsViewModel = new PaymentSystemsViewModel(MenuItem.PaymentSystem)
+            {
+                PaymentSystems = await _paymentSystemService.GetPaymentSystems()
+            };
+
+            return paymentSystemsViewModel;
+        }
+
+        public async Task<PaymentSystemViewModel> GetPaymentSystemModel(string routePaymentSystemName)
+        {
+            var paymentSystem = await _paymentSystemService.FindByRoutePaymentSystemName(routePaymentSystemName);
+
+            return new PaymentSystemViewModel(MenuItem.PaymentSystem)
+            {
+                PaymentSystem = paymentSystem
+            };
+        }
+
         private static ProjectViewModel GetProjectViewModel(ProjectModel project)
         {
             return new ProjectViewModel(MenuItem.Projects)
@@ -67,7 +89,6 @@ namespace InvestAdvisor.Services
                 ActiveSubMenuItem = isActive ? SubMenuItem.ProjectsActive : SubMenuItem.ProjectsClosed,
                 Projects = await _projectService.GetProjectsWithAdditional(isActive, orderBy: orderBy, orderDir: orderDir)
             };
-
 
             return model;
         }

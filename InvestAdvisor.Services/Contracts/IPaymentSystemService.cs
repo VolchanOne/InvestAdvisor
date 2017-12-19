@@ -21,5 +21,7 @@ namespace InvestAdvisor.Services.Contracts
         Task DeleteImage(int imageId);
 
         Task UpdateCurrencies(int paymentSystemId, int[] currencyIds);
+
+        Task<PaymentSystemModel> FindByRoutePaymentSystemName(string routePaymentSystemName);
     }
 }

@@ -2,12 +2,8 @@
 using InvestAdvisor.Model.ViewModels;
 using InvestAdvisor.Model.ViewModels.Enums;
 using InvestAdvisor.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 

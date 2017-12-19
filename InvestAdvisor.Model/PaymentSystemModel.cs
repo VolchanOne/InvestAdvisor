@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace InvestAdvisor.Model
@@ -26,5 +27,20 @@ namespace InvestAdvisor.Model
         public string Url { get; set; }
 
         public string RouteName { get; set; }
+
+        public string Address
+        {
+            get
+            {
+                try
+                {
+                    return new Uri(Url).Host;
+                }
+                catch (Exception)
+                {
+                    return Url;
+                }
+            }
+        }
     }
 }
