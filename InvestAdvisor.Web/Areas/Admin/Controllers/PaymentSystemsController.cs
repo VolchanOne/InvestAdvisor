@@ -73,18 +73,30 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
             return RedirectToAction("Edit", new { id = model.PaymentSystemId });
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditReview(int paymentSystemId, ProjectReviewModel review)
+        {
+            if (ModelState.IsValid)
+            {
+                await _paymentSystemService.UpdateReview(paymentSystemId, review);
+            }
+            return RedirectToAction("Edit", new { id = paymentSystemId });
+        }
+
         public async Task<ActionResult> Delete(int? id)
         {
             if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var project = await _paymentSystemService.FindById(id.Value);
-            if (project == null)
+            var paySystemModel = await _paymentSystemService.FindById(id.Value);
+            if (paySystemModel == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
+            return View(paySystemModel);
         }
 
         // POST: Admin/Projects/Delete/5

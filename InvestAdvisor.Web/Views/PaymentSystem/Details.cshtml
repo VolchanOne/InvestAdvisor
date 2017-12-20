@@ -1,5 +1,4 @@
 ﻿@using InvestAdvisor.Model.ViewModels.Enums
-@using System.Globalization
 @model InvestAdvisor.Model.ViewModels.PaymentSystemViewModel
 
 @{
@@ -25,95 +24,25 @@
         <div class="col-lg-6 col-xlg-4 col-md-6 col-sm-12">
             @Html.Partial("PaymentSystemListItem", Model.PaymentSystem)
         </div>
-        @*<div class="col-lg-6 col-xlg-8 col-md-6">
+        <div class="col-lg-6 col-xlg-8 col-md-6">
             <div class="card">
                 <div class="card-body p-b-0">
                     <ul class="nav nav-tabs customtab" role="tablist">
-                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" data-toggle="tab" href="#review" role="tab" aria-expanded="@(!tabActive.HasValue || tabActive == TabItem.Comments ? "true" : "false")">
-                                    <span>Обзор</span>
-                                </a>
-                            </li>
-                        }
                         <li class="nav-item">
-                            <a class="nav-link @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" data-toggle="tab" href="#comments" role="tab" aria-expanded="@(tabActive == TabItem.Comments ? "true" : "false")">
-                                <span>Комментарии</span>
+                            <a class="nav-link @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" data-toggle="tab" href="#review" role="tab" aria-expanded="@(!tabActive.HasValue || tabActive == TabItem.Comments ? "true" : "false")">
+                                <span>Обзор</span>
                             </a>
                         </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
-                        {
-                            <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
-                                <p>@Html.Raw(Model.Project.Review.Review)</p>
-                                @if (Model.Project.IsActive)
-                                {
-                                    <a href="@Model.Project.Url" class="m-t-10 waves-effect waves-light btn btn-info btn-md btn-rounded">Регистрация в проекте</a>
-                                }
-                            </div>
-                        }
-                        <div class="tab-pane p-20 @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" id="comments" role="tabpanel" aria-expanded="false">
-                            @if (Model.Project.Comments != null)
-                            {
-                                <div class="comment-widgets m-b-20">
-                                    @for (var i = 0; i < Model.Project.Comments.Count; i++)
-                                    {
-                                        <div class="d-flex flex-row comment-row">
-                                            <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
-                                            <div class="comment-text w-100">
-                                                @Html.HiddenFor(model => Model.Project.Comments[i].CommentId)
-                                                <h5>@Model.Project.Comments[i].UserName</h5>
-                                                
-                                                <p class="m-b-5 m-t-10">@Html.Raw(Model.Project.Comments[i].Message.Replace("\n", "<br />"))</p>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                            <div class="p-20 border">
-                                <h5 class="text-primary">Новый комментарий</h5>
-                                @using (Html.BeginForm("AddComment", "Project", FormMethod.Post, new { @class = "m-t-40", enctype = "multipart/form-data", @novalidate = "" }))
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    <input type="hidden" name="ProjectId" value="@Model.Project.ProjectId" />
-
-                                    <div class="form-group">
-                                        <h5>Имя <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="UserName" class="form-control" required="" data-validation-required-message="Обязательное поле">
-                                            <div class="help-block"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h5>Email<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="Email" class="form-control" data-validation-required-message="Обязательное поле" data-validation-regex-regex="([a-z0-9_\.-]+)@@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Введите верный email" aria-invalid="false" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h5>Сообщение <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <textarea name="Message" id="textarea" class="form-control" required="" data-validation-required-message="Обязательное поле" aria-invalid="false" rows="5"></textarea>
-                                            <div class="help-block"></div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn waves-effect waves-light btn-outline-info">Сохранить</button>
-                                    </div>
-                                }
-                            </div>
+                        <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
+                            <p>@Html.Raw(Model.PaymentSystem.Review.Review)</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>*@
+        </div>
     </div>
 </div>
 

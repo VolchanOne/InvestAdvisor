@@ -14,6 +14,8 @@ namespace InvestAdvisor.Services.Contracts
 
         Task Update(PaymentSystemModel model);
 
+        Task UpdateReview(int paymentSystemId, ProjectReviewModel review);
+
         Task Delete(int paymentSystemId);
 
         Task AddImage(int paymentSystemId, ImageModel image);

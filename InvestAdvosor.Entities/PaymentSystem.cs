@@ -19,8 +19,12 @@ namespace InvestAdvosor.Entities
 
         public string RouteName { get; set; }
 
+        public int? ProjectReviewId { get; set; }
+
         public virtual List<Project> Projects { get; set; }
 
         public virtual List<Currency> Currencies { get; set; }
+
+        public virtual ProjectReview Review { get; set; }
     }
 }

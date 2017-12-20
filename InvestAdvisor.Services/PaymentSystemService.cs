@@ -20,7 +20,7 @@ namespace InvestAdvisor.Services
             {
                 var paySystems = await db.PaymentSystems.ToListAsync();
 
-                var paySystemModels = paySystems.Select(p => p.ToPaymentSystemModel()).ToList();
+                var paySystemModels = paySystems.Select(p => p.ToPaymentSystemModel(false)).ToList();
 
                 return paySystemModels;
             }
@@ -45,7 +45,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var paymentSystem = await db.PaymentSystems.FindAsync(paymentSystemId);
-                var paymentSystemModel = paymentSystem?.ToPaymentSystemModel();
+                var paymentSystemModel = paymentSystem?.ToPaymentSystemModel(true);
 
                 return paymentSystemModel;
             }
@@ -70,6 +70,31 @@ namespace InvestAdvisor.Services
             }
         }
 
+        public async Task UpdateReview(int paymentSystemId, ProjectReviewModel model)
+        {
+            using (var db = new InvestAdvisorDbContext())
+            {
+                var paymentSystem = await db.PaymentSystems.FindAsync(paymentSystemId);
+                if (paymentSystem == null)
+                    return;
+
+                if (paymentSystem.Review == null)
+                {
+                    paymentSystem.Review = new ProjectReview
+                    {
+                        Review = model.Review
+                    };
+                }
+                else
+                {
+                    paymentSystem.Review.Review = model.Review;
+                }
+
+                db.Entry(paymentSystem).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+        }
+
         public async Task Delete(int paymentSystemId)
         {
             using (var db = new InvestAdvisorDbContext())
@@ -85,6 +110,9 @@ namespace InvestAdvisor.Services
                         db.Images.Remove(paymentSystem.Images[i]);
                     }
                 }
+
+                if (paymentSystem.Review != null)
+                    db.ProjectReviews.Remove(paymentSystem.Review);
 
                 db.PaymentSystems.Remove(paymentSystem);
                 await db.SaveChangesAsync();
@@ -156,7 +184,7 @@ namespace InvestAdvisor.Services
             using (var db = new InvestAdvisorDbContext())
             {
                 var paymentSystem = await db.PaymentSystems.FirstOrDefaultAsync(p => p.RouteName == routePaymentSystemName);
-                var paymentSystemModel = paymentSystem?.ToPaymentSystemModel();
+                var paymentSystemModel = paymentSystem?.ToPaymentSystemModel(true);
 
                 return paymentSystemModel;
             }

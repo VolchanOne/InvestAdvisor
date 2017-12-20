@@ -67,7 +67,7 @@ namespace InvestAdvisor.Services.Converters
                 }
                 if (project.PaymentSystems != null)
                 {
-                    projectModel.PaymentSystems = project.PaymentSystems.Select(p => p.ToPaymentSystemModel()).ToList();
+                    projectModel.PaymentSystems = project.PaymentSystems.Select(p => p.ToPaymentSystemModel(false)).ToList();
                 }
             }
             return projectModel;

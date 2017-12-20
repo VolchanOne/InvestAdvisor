@@ -42,5 +42,7 @@ namespace InvestAdvisor.Model
                 }
             }
         }
+
+        public ProjectReviewModel Review { get; set; }
     }
 }

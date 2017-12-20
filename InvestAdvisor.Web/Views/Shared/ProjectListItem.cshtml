@@ -4,6 +4,7 @@
 
 @{
     var logoImage = Model.Images.FirstOrDefault(i => i.ImageType == ImageType.Logo);
+    var isList = ViewBag.IsList == null || ViewBag.IsList;
 }
 
 <div class="card text-center">
@@ -23,25 +24,31 @@
         {
             <h6 class="card-subtitle"><a href="@Model.Url">@Model.Address</a></h6>
         }
-        <p>Легенда: @Model.Description</p>
-        @if (!string.IsNullOrEmpty(Model.Additional.StartDateView))
+
+        @if (!isList)
         {
-            <p>Старт работы: @Model.Additional.StartDateView</p>
+            <p>Легенда: @Model.Description</p>
+            if (!string.IsNullOrEmpty(Model.Additional.StartDateView))
+            {
+                <p>Старт работы: @Model.Additional.StartDateView</p>
+            }
         }
         @if (!string.IsNullOrEmpty(Model.Additional.Marketing))
         {
             <p>Доходность: @Model.Additional.Marketing</p>
         }
-        @if (!string.IsNullOrEmpty(Model.Additional.Referral))
-        {
-            <p>Партнерская программа: @Model.Additional.Referral</p>
-        }
-        @if (ViewBag.IsList == null || ViewBag.IsList)
+
+        @if (isList)
         {
             <a href="/Project/Details/@Model.RouteName" class="m-t-10 waves-effect waves-light btn btn-info btn-md btn-rounded">Подробнее</a>
         }
         else
         {
+            if (!string.IsNullOrEmpty(Model.Additional.Referral))
+            {
+                <p>Партнерская программа: @Model.Additional.Referral</p>
+            }
+
             if (Model.PaymentSystems != null && Model.PaymentSystems.Count > 0)
             {
                 <div>
@@ -54,7 +61,7 @@
                             {
                                 <li style="list-style-type: none; display: inline">
                                     <a href="@paymentSystem.Url">
-                                        <img alt="@paymentSystem.ShortName" src="data:image;base64,@Convert.ToBase64String(logo.Content)" class="img-circle border" width="30"  data-toggle="tooltip" data-placement="top" title="" data-original-title="@paymentSystem.Name"/>
+                                        <img alt="@paymentSystem.ShortName" src="data:image;base64,@Convert.ToBase64String(logo.Content)" class="img-circle border" width="30" data-toggle="tooltip" data-placement="top" title="" data-original-title="@paymentSystem.Name" />
                                     </a>
                                 </li>
                             }

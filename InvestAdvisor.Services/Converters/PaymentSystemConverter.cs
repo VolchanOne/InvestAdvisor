@@ -6,7 +6,7 @@ namespace InvestAdvisor.Services.Converters
 {
     public static class PaymentSystemConverter
     {
-        public static PaymentSystemModel ToPaymentSystemModel(this PaymentSystem paymentSystem)
+        public static PaymentSystemModel ToPaymentSystemModel(this PaymentSystem paymentSystem, bool allInfo)
         {
             var paymentSystemModel = new PaymentSystemModel
             {
@@ -18,8 +18,17 @@ namespace InvestAdvisor.Services.Converters
             };
             if (paymentSystem.Images != null)
                 paymentSystemModel.Images = paymentSystem.Images.Select(i => i.ToImageModel()).ToList();
-            if (paymentSystem.Currencies != null)
-                paymentSystemModel.Currencies = paymentSystem.Currencies.Select(i => i.ToCurrencyModel()).ToList();
+            if (allInfo)
+            {
+                if (paymentSystem.Currencies != null)
+                    paymentSystemModel.Currencies = paymentSystem.Currencies.Select(i => i.ToCurrencyModel()).ToList();
+                if (paymentSystem.Review != null)
+                    paymentSystemModel.Review = new ProjectReviewModel
+                    {
+                        ProjectReviewId = paymentSystem.Review.ProjectReviewId,
+                        Review = paymentSystem.Review.Review
+                    };
+            }
             return paymentSystemModel;
         }
     }
