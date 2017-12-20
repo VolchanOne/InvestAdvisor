@@ -37,7 +37,10 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
-                            <p>@Html.Raw(Model.PaymentSystem.Review.Review)</p>
+                            @if (Model.PaymentSystem.Review != null && !string.IsNullOrEmpty(Model.PaymentSystem.Review.Review))
+                            {
+                                <p>@Html.Raw(Model.PaymentSystem.Review.Review)</p>
+                            }
                         </div>
                     </div>
                 </div>
