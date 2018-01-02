@@ -3,12 +3,12 @@
 @model InvestAdvisor.Model.ViewModels.ProjectViewModel
 
 @{
-    var tabActive = (TabItem?)ViewBag.ActiveTabItem;
+    var tabActive = (TabItem?)ViewBag.ActiveTabItem ?? TabItem.Comments;
 }
 
 <div class="row page-titles">
     <div class="col-md-9 align-self-center">
-        <h3 class="text-themecolor">Обзор проекта @Model.Project.Name</h3>
+        <h3 class="text-themecolor">@Model.Project.Name - @Model.Project.Address</h3>
     </div>
     <div class="col-md-3 align-self-center">
         <ol class="breadcrumb m-b-10">
@@ -36,16 +36,16 @@
             <div class="card">
                 <div class="card-body p-b-0">
                     <ul class="nav nav-tabs customtab" role="tablist">
-                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
+                        @*@if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
                         {
                             <li class="nav-item">
                                 <a class="nav-link @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" data-toggle="tab" href="#review" role="tab" aria-expanded="@(!tabActive.HasValue || tabActive == TabItem.Comments ? "true" : "false")">
-                                    <span>Обзор</span>
+                                    <span>Отзыв</span>
                                 </a>
                             </li>
-                        }
+                        }*@
                         <li class="nav-item">
-                            <a class="nav-link @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" data-toggle="tab" href="#comments" role="tab" aria-expanded="@(tabActive == TabItem.Comments ? "true" : "false")">
+                            <a class="nav-link @(tabActive == TabItem.Comments ? "active" : string.Empty)" data-toggle="tab" href="#comments" role="tab" aria-expanded="@(tabActive == TabItem.Comments ? "true" : "false")">
                                 <span>Комментарии</span>
                             </a>
                         </li>
@@ -57,16 +57,12 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        @if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
+                        @*@if (Model.Project.Review != null && !string.IsNullOrEmpty(Model.Project.Review.Review))
                         {
                             <div class="tab-pane p-20 @(!tabActive.HasValue || tabActive == TabItem.Review ? "active" : string.Empty)" id="review" role="tabpanel" aria-expanded="true">
                                 <p>@Html.Raw(Model.Project.Review.Review)</p>
-                                @if (Model.Project.IsActive)
-                                {
-                                    <a href="@Model.Project.Url" class="m-t-10 waves-effect waves-light btn btn-info btn-md btn-rounded">Регистрация в проекте</a>
-                                }
                             </div>
-                        }
+                        }*@
                         <div class="tab-pane p-20 @(tabActive == TabItem.Comments || (Model.Project.Review == null || string.IsNullOrEmpty(Model.Project.Review.Review)) ? "active" : string.Empty)" id="comments" role="tabpanel" aria-expanded="false">
                             @if (Model.Project.Comments != null)
                             {
@@ -74,7 +70,7 @@
                                     @for (var i = 0; i < Model.Project.Comments.Count; i++)
                                     {
                                         <div class="d-flex flex-row comment-row">
-                                            <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
+                                            <div class="p-2"><span class="round"><img src="~/Images/logoSmall.png" alt="user" width="45"></span></div>
                                             <div class="comment-text w-100">
                                                 @Html.HiddenFor(model => Model.Project.Comments[i].CommentId)
                                                 <h5>@Model.Project.Comments[i].UserName</h5>
