@@ -32,7 +32,7 @@ namespace InvestAdvisor.Services
             {
                 var projects = await db.Projects.ToListAsync();
 
-                var projectModels = projects.Where(p => (isActive ? p.ActivatedAt.HasValue : !p.ActivatedAt.HasValue)).Select(p => p.ToProjectModel(true)).ToList();
+                var projectModels = projects.Where(p => isActive == p.IsActive).Select(p => p.ToProjectModel(true)).ToList();
                 projectModels = orderDir == "Desc" ? projectModels.OrderByDescending(KeySelector(orderBy)).ToList() : projectModels.OrderBy(KeySelector(orderBy)).ToList();
 
                 return projectModels;
@@ -215,7 +215,7 @@ namespace InvestAdvisor.Services
             }
         }
 
-        public async Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive)
+        public async Task UpdateActivity(int projectId, bool? isActive)
         {
             using (var db = new InvestAdvisorDbContext())
             {
@@ -223,8 +223,6 @@ namespace InvestAdvisor.Services
                 if (project == null)
                     return;
 
-                if (inPortfolio.HasValue)
-                    project.InPortofolio = inPortfolio.Value;
                 if (isActive.HasValue)
                 {
                     if (isActive.Value && !project.ActivatedAt.HasValue)

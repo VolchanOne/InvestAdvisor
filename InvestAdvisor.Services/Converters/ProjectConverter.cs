@@ -26,7 +26,6 @@ namespace InvestAdvisor.Services.Converters
                 Url = project.Url,
                 IsActive = project.IsActive,
                 ActivatedAt = project.ActivatedAt,
-                InPortofolio = project.InPortofolio,
                 RouteName = project.RouteName
             };
             if (project.Images != null)

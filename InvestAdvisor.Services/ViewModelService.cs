@@ -84,6 +84,9 @@ namespace InvestAdvisor.Services
 
         public async Task<ProjectsViewModel> GetProjectsModel(bool isActive, string orderBy = null, string orderDir = null)
         {
+            if (string.IsNullOrEmpty(orderDir))
+                orderDir = "Desc";
+
             var model = new ProjectsViewModel(MenuItem.Projects)
             {
                 ActiveSubMenuItem = isActive ? SubMenuItem.ProjectsActive : SubMenuItem.ProjectsClosed,

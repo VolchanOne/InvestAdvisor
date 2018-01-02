@@ -28,7 +28,7 @@ namespace InvestAdvisor.Services.Contracts
 
         Task UpdatePaymentSystems(int projectId, int[]paymentSystemIds);
 
-        Task UpdateActivity(int projectId, bool? inPortfolio, bool? isActive);
+        Task UpdateActivity(int projectId, bool? isActive);
 
         Task AddImage(int projectId, ImageModel image);
 

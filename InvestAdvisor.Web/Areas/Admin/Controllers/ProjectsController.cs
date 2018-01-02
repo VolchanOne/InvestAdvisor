@@ -122,10 +122,10 @@ namespace InvestAdvisor.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditActivity(int projectId, bool? inPortfolio, bool? isActive)
+        public async Task<ActionResult> EditActivity(int projectId, bool? isActive)
         {
-            if (inPortfolio.HasValue || isActive.HasValue)
-                await _projectService.UpdateActivity(projectId, inPortfolio, isActive);
+            if (isActive.HasValue)
+                await _projectService.UpdateActivity(projectId, isActive);
 
             return RedirectToAction("Edit", new { id = projectId });
         }

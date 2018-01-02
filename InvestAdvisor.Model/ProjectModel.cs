@@ -30,8 +30,6 @@ namespace InvestAdvisor.Model
 
         public DateTime? ActivatedAt { get; set; }
 
-        public bool InPortofolio { get; set; }
-
         public ProjectAdditionalModel Additional { get; set; }
 
         public ProjectReviewModel Review { get; set; }

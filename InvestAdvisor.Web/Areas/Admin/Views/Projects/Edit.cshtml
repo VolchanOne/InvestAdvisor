@@ -222,12 +222,6 @@
                         @Html.HiddenFor(model => model.ProjectId)
                         <h4>Параметры</h4>
                         <div class="form-group">
-                            <input type="checkbox" name="InPortfolio" id="InPortfolio" class="chk-col-blue" onclick="checkboxClick()" @(Model.InPortofolio ? "checked= \"\"" : string.Empty)>
-                            <label for="InPortfolio">В портфель</label>
-                            <input name="InPortfolio" type="hidden" value="@Model.InPortofolio.ToString().ToLower()">
-                        </div>
-
-                        <div class="form-group">
                             <input type="checkbox" name="IsActive" id="IsActive" class="chk-col-blue" onclick="checkboxClick()" @(Model.IsActive ? "checked= \"\"" : string.Empty)>
                             <label for="IsActive">Активировать</label>
                             <input name="IsActive" type="hidden" value="@Model.IsActive.ToString().ToLower()">
